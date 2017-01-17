@@ -2,5 +2,22 @@
   "name": "drupal/contacts_theme",
   "description": "Theme used for the contacts dashboard.",
   "type": "drupal-theme",
-  "license": "GPL-2.0+"
+  "license": "GPL-2.0",
+  "homepage": "http://drupal.org/project/bootstrap",
+  "authors": [
+    {
+      "name": "Yan Loetzer (yanniboi)",
+      "homepage": "https://www.drupal.org/u/yanniboi",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Andrew Belcher (andrewbelcher)",
+      "homepage": "https://www.drupal.org/u/andrewbelcher",
+      "role": "Co-maintainer"
+    }
+  ],
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/contacts_theme",
+    "source": "http://cgit.drupalcode.org/contacts_theme"
+  }
 }
