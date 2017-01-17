@@ -1,0 +1,95 @@
+* {
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+
+/* General flex setup */
+.flex-container,
+.flex-child-container > * {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+
+  margin: 0 !important;
+}
+
+.flex-container-rows {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.flex-container > * {
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.flex-container .flex-fill,
+.flex-child-fill > *,
+.flex-content-fill > .content,
+.flex-content-fill > .view-content {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+/* General left/right spacing */
+.logo,
+.layout-sidebar-first {
+  min-width: 200px;
+  max-width: 400px;
+  flex-grow: 1;
+  flex-basis: 0px;
+}
+.branding-main,
+.layout-content {
+  min-width: 700px;
+  flex-grow: 10;
+  flex-basis: 700px;
+}
+
+.branding-main {
+  padding: 1em;
+}
+.layout-sidebar-first,
+.layout-content {
+  padding: 1em;
+  overflow-y: auto;
+}
+
+/* Header */
+.logo {
+  max-height: 75px;
+  text-align: center;
+}
+
+/* Sidebar */
+.layout-sidebar-first {
+  overflow-y: auto;
+}
+
+/* Content */
+.layout-content {
+  overflow-y: auto;
+}
+
+/* Contacts dashboard */
+.view-contacts-dashboard .view-content,
+.view-contacts-dashboard .view-empty {
+  min-height: 400px;
+  overflow-y: scroll;
+}

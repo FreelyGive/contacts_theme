@@ -1,0 +1,116 @@
+/* General styling */
+body {
+  background-color: #F3F3F3;
+}
+
+select {
+  color: #595959;
+}
+
+.layout-sidebar-first ul.tips,
+.layout-sidebar-first div.description,
+.layout-sidebar-first .form-item .description {
+  color: #F3F3F3;
+  text-decoration: none;
+}
+
+/* Header */
+.logo img {
+  max-height: 100%;
+}
+
+.branding-main {
+  background-color: #E1E1E1;
+}
+
+.page-title {
+  font-size: 2em;
+}
+
+/* Sidebar */
+.layout-sidebar-first {
+  border-top: 1.5rem solid #E1E1E1;
+  background-color: #7B7B7B;
+  color: #fff;
+}
+.layout-sidebar-first > .block {
+  margin-top: 1em;
+}
+.layout-sidebar-first > .block:first-child {
+  margin-top: 0;
+}
+
+.layout-sidebar-first .highlight {
+  background: #83D4E3;
+  margin-left: -1em;
+  margin-right: -1em;
+  padding: 1em;
+  margin-top: 0;
+}.layout-sidebar-first .highlight:first-child {
+   margin-top: -1em;
+}
+
+.layout-sidebar-first .highlight + .highlight {
+  padding-top: 0;
+}
+
+/* Contacts dashboard */
+.view-contacts-dashboard .view-content,
+.view-contacts-dashboard .view-empty {
+  background: #fff;
+  border: 1px solid #D5D5D5;
+}
+.view-contacts-dashboard .view-empty {
+  padding: 1em;
+}
+
+/* Tabs */
+.block-tabscontacts-dashboard,
+.ui-tabs {
+  margin-top: 1em !important;
+  border: none;
+  padding: 0;
+  background-color: #fff;
+
+  -webkit-box-shadow: 2px 2px 2px 0px #D5D5D5;
+  box-shadow: 2px 2px 2px 0px #D5D5D5;
+}
+ul.contacts-ajax-tabs,
+.ui-tabs .ui-tabs-nav {
+  border: none;
+  padding: 0;
+  margin: 0 !important;
+  background: #E1E1E1;
+
+  -webkit-box-shadow: inset 2px 2px 2px 2px #D5D5D5;
+  box-shadow: inset 2px 2px 2px 2px #D5D5D5;
+}
+.contacts-ajax-tabs li,
+.ui-tabs .ui-tabs-nav li {
+  margin-right: 3px;
+}
+.contacts-ajax-tabs li a,
+.ui-tabs .ui-tabs-nav li a {
+  color: #656565;
+  padding: 0.8em 1em;
+
+  /* Reset border radius */
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.contacts-ajax-tabs li a:hover,
+.ui-tabs .ui-tabs-nav li a:hover {
+  background-color: inherit;
+}
+.contacts-ajax-tabs li.is-active a,
+.ui-tabs .ui-tabs-nav li.ui-tabs-active a {
+  background: #fff;
+  margin-top: -5px;
+  border-top: 5px solid #fff;
+  color: #363636;
+  font-weight: bold;
+}
+.contacts-tabs-content,
+.ui-tabs .ui-tabs-panel {
+  padding: 1em;
+}

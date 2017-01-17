@@ -1,0 +1,100 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the contacts_theme theme.
+ */
+
+use Drupal\Core\Render\Element;
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function contacts_theme_preprocess_html(array &$variables) {
+  /* Add class to html tag */
+  $variables['attributes']['class'][] = 'flex-container';
+}
+
+/**
+ * Implements hook_preprocess_page() for page.html.twig.
+ */
+function contacts_theme_preprocess_page(array &$variables) {
+  $variables['logo'] = 'data:image/png;base64,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';
+}
+
+function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
+  $in_dashboard_page = &drupal_static('contacts_theme_dashboard');
+  $in_dashboard_page = TRUE;
+
+  foreach (Element::children($variables['content']) as $region) {
+    unset($variables['content'][$region]['#prefix']);
+    unset($variables['content'][$region]['#suffix']);
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function contacts_theme_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if (in_array($hook, ['page', 'region', 'block'])) {
+    // Only make the alteration for the main system block.
+    if ($hook == 'block') {
+      if ($variables['elements']['#plugin_id'] != 'system_main_block') {
+        return;
+      }
+    }
+
+    // If we are in the contacts admin dashboard, add a suggestion.
+    if (drupal_static('contacts_theme_dashboard')) {
+      $suggestions[] = $hook . '__contacts_dashboard';
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Implements hook_preprocess_HOOK() for block.
+ */
+function contacts_theme_preprocess_block(array &$variables) {
+  $classes = [
+    'views_exposed_filter_block:contacts_dashboard-full' => ['highlight'],
+    'custom_text' => ['highlight'],
+    'views_block:contacts_dashboard-simple' => [
+      'flex-container',
+      'flex-fill',
+      'flex-child-container',
+      'flex-child-fill',
+    ],
+    'views_block:contacts_dashboard-full' => [
+      'flex-container',
+      'flex-fill',
+      'flex-child-container',
+      'flex-child-fill',
+    ],
+    'tabs:contacts_dashboard' => [
+      'flex-container',
+      'flex-fill',
+    ],
+  ];
+  if (isset($classes[$variables['plugin_id']])) {
+    if (!isset($variables['attributes']['class'])) {
+      $variables['attributes']['class'] = $classes[$variables['plugin_id']];
+    }
+    else {
+      $variables['attributes']['class'] = array_merge($variables['attributes']['class'], $classes[$variables['plugin_id']]);
+    }
+  }
+}
