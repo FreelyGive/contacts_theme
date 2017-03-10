@@ -55,13 +55,19 @@ select {
 }
 
 /* Contacts dashboard */
-.view-contacts-dashboard .view-content,
-.view-contacts-dashboard .view-empty {
+.view-contacts-dashboard-indexed .view-content,
+.view-contacts-dashboard-indexed .view-empty {
   background: #fff;
   border: 1px solid #D5D5D5;
 }
-.view-contacts-dashboard .view-empty {
+.view-contacts-dashboard-indexed .view-empty {
   padding: 1em;
+}
+.layout-sidebar-first .view-contacts-dashboard-indexed {
+  margin-top: 1em !important;
+}
+.layout-sidebar-first .view-contacts-dashboard-indexed .view-content {
+  color: #000;
 }
 
 /* Tabs */

@@ -62,23 +62,20 @@ function contacts_theme_theme_suggestions_alter(array &$suggestions, array $vari
 
 
 
-
-
-
 /**
  * Implements hook_preprocess_HOOK() for block.
  */
 function contacts_theme_preprocess_block(array &$variables) {
   $classes = [
-    'views_exposed_filter_block:contacts_dashboard-full' => ['highlight'],
+    'views_exposed_filter_block:contacts_dashboard_indexed-full' => ['highlight'],
     'custom_text' => ['highlight'],
-    'views_block:contacts_dashboard-simple' => [
+    'views_block:contacts_dashboard_indexed-simple' => [
       'flex-container',
       'flex-fill',
       'flex-child-container',
       'flex-child-fill',
     ],
-    'views_block:contacts_dashboard-full' => [
+    'views_block:contacts_dashboard_indexed-full' => [
       'flex-container',
       'flex-fill',
       'flex-child-container',

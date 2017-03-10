@@ -87,9 +87,14 @@ body {
   overflow-y: auto;
 }
 
+/* General styling for specific bits. */
+.view .pager {
+  margin: 0.25em 0;
+}
+
 /* Contacts dashboard */
-.view-contacts-dashboard .view-content,
-.view-contacts-dashboard .view-empty {
+.view-contacts-dashboard-indexed .view-content,
+.view-contacts-dashboard-indexed .view-empty {
   min-height: 400px;
   overflow-y: scroll;
 }
