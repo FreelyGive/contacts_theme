@@ -14,5 +14,6 @@ regions:
   pre_content: 'Pre-content'
   content: 'Content'
   sidebar_first: 'Sidebar'
+
 regions_hidden:
   - highlighted

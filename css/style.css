@@ -46,8 +46,9 @@ select {
   margin-right: -1em;
   padding: 1em;
   margin-top: 0;
-}.layout-sidebar-first .highlight:first-child {
-   margin-top: -1em;
+}
+.layout-sidebar-first .highlight:first-child {
+  margin-top: -1em;
 }
 
 .layout-sidebar-first .highlight + .highlight {
