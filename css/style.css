@@ -95,6 +95,7 @@ ul.contacts-ajax-tabs,
 .contacts-ajax-tabs li,
 .ui-tabs .ui-tabs-nav li {
   margin-right: 3px;
+  position: relative;
 }
 .contacts-ajax-tabs li a,
 .ui-tabs .ui-tabs-nav li a {
@@ -120,4 +121,11 @@ ul.contacts-ajax-tabs,
 .contacts-tabs-content,
 .ui-tabs .ui-tabs-panel {
   padding: 1em;
+}
+
+.contacts-ajax-tabs .ajax-progress {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.75em;
+  right: 0;
 }
