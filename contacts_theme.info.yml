@@ -5,7 +5,8 @@ description: Admin theme for contacts dashboard
 package: Contacts
 core: 8.x
 libraries:
-  - contacts_theme/global-styling
+  - contacts_theme/global
+
 regions:
   header: 'Header'
   breadcrumb: 'Breadcrumb'
