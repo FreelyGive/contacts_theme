@@ -1,6 +1,25 @@
 /* General styling */
 body {
   background-color: #F3F3F3;
+
+  /* Use the native font stack */
+  font-family:
+    /* Safari for OS X and iOS (San Francisco) */
+    -apple-system,
+    /* Chrome >= 56 for OS X (San Francisco), Windows, Linux and Android */
+    system-ui,
+    /* Chrome < 56 for OS X (San Francisco) */
+    BlinkMacSystemFont,
+    /* Windows */
+    "Segoe UI",
+    /* Android */
+    "Roboto",
+    /* Basic web fallback */
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+a, .link {
+  color: #5ec0d0;
 }
 
 select {
@@ -31,6 +50,10 @@ select {
 .layout-sidebar-first {
   border-top: 1.5rem solid #E1E1E1;
   background-color: #7B7B7B;
+  color: #fff;
+}
+.layout-sidebar-first a,
+.layout-sidebar-first .link {
   color: #fff;
 }
 .layout-sidebar-first > .block {
@@ -79,24 +102,12 @@ select {
   text-decoration: underline;
 }
 
-/* Contacts dashboard */
-.view-contacts-dashboard .view-content,
-.view-contacts-dashboard .view-empty {
-  background: #fff;
-  border: 1px solid #D5D5D5;
-}
-.view-contacts-dashboard .view-empty {
-  padding: 1em;
-}
-
 /* Tabs */
 .block-tabscontacts-dashboard,
 .ui-tabs {
-  margin-top: 1em !important;
   border: none;
-  padding: 0;
-  background-color: #fff;
-
+  margin-top: 1em !important;
+  padding: 0 !important;
   -webkit-box-shadow: 2px 2px 2px 0px #D5D5D5;
   box-shadow: 2px 2px 2px 0px #D5D5D5;
 }
@@ -106,19 +117,18 @@ ul.contacts-ajax-tabs,
   padding: 0;
   margin: 0 !important;
   background: #E1E1E1;
-
   -webkit-box-shadow: inset 2px 2px 2px 2px #D5D5D5;
   box-shadow: inset 2px 2px 2px 2px #D5D5D5;
 }
 .contacts-ajax-tabs li,
 .ui-tabs .ui-tabs-nav li {
   margin-right: 3px;
+  position: relative;
 }
 .contacts-ajax-tabs li a,
 .ui-tabs .ui-tabs-nav li a {
   color: #656565;
   padding: 0.8em 1em;
-
   /* Reset border radius */
   -webkit-border-radius: 0;
   border-radius: 0;
@@ -130,12 +140,27 @@ ul.contacts-ajax-tabs,
 .contacts-ajax-tabs li.is-active a,
 .ui-tabs .ui-tabs-nav li.ui-tabs-active a {
   background: #fff;
-  margin-top: -5px;
-  border-top: 5px solid #fff;
   color: #363636;
   font-weight: bold;
 }
+
 .contacts-tabs-content,
 .ui-tabs .ui-tabs-panel {
   padding: 1em;
+  background: #fff;
+}
+
+
+
+.branding-main .contacts-header-image {
+  float: left;
+  height: 110px;
+  background: #fff;
+  line-height: 100px;
+  border: 5px solid #fff;
+  margin: 0 1em -100px 0;
+  -webkit-box-shadow: 0 0 4px 1px #D5D5D5;
+  box-shadow: 0 0 4px 1px #D5D5D5;
+  position: relative;
+  top: .5em;
 }

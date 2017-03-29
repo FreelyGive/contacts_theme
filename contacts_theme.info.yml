@@ -22,5 +22,7 @@ libraries-override:
   contacts/dashboard.layout: false
 
 libraries-extend:
+  contacts/contact:
+    - contacts_theme/contact
   contacts/listings:
     - contacts_theme/listings

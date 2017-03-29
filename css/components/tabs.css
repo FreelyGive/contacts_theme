@@ -1,0 +1,28 @@
+.block-local-tasks-block {
+  align-self: flex-end;
+}
+.tabs.primary {
+  margin: 0;
+  position: relative;
+  bottom: -1em;
+}
+.tabs::before {
+  display: none !important;
+}
+.tabs.primary .tabs__tab {
+  border: none;
+  background: none;
+  color: inherit;
+  -webkit-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+.tabs.primary .tabs__tab:hover,
+.tabs.primary .tabs__tab:focus {
+  background-color: rgba(242, 242, 240, 0.7);
+}
+.tabs.primary .tabs__tab.is-active {
+  background-color: #F3F3F3 !important;
+}
+.tabs.primary .tabs__tab a {
+  color: inherit;
+}

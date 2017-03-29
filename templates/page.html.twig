@@ -1,46 +1,26 @@
-  <header class="layout-header clearfix flex-container flex-container-rows">
-    <div class="logo">
-      {% if logo %}
-        <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home" id="logo">
-          <img src="{{ logo }}" alt="{{ 'Home'|t }}" />
-        </a>
-      {% endif %}
-    </div>
-    <div class="branding-main flex-fill">
-      {% if title_img %}
-      <div class="opencrm-title-img">{{ title_img }}</div>
-      {% endif %}
-      {{ page.header }}
-      {% if action_links %}
-        <ul class="primary">
-          {% for item in action_links %}
-          <li>
-            {% if item.url %}
-              <a href="{{ item.url }}">{{ item.text }}</a>
-            {% else %}
-              {{ item.text }}
-            {% endif %}
-          </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    </div>
-  </header>
+{% include directory ~ '/templates/parts/header.html.twig' %}
+{%
+set classes = [
+'flex-fill',
+'flex-container',
+'flex-container-rows',
+]
+%}
+<main{{ attributes.addClass(classes).setAttribute('role', 'main') }}>
+  <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
-  <div class="flex-fill flex-container flex-container-rows">
+  <div class="layout-content flex-fill flex-container">
+    {{ page.breadcrumb }}
+
+    {{ page.help }}
+
+    {{ page.content }}
+  </div>
+N
+  {% if page.sidebar_first %}
     <aside class="layout-sidebar-first flex-container" role="complementary">
       {{ page.sidebar_first }}
     </aside>
+  {% endif %}
 
-    <div class="layout-content flex-fill flex-container" role="main">
-      <div class="visually-hidden"><a id="main-content" tabindex="-1"></a></div>
-      {{ page.breadcrumb }}
-      {% if page.help %}
-        <div class="help">
-          {{ page.help }}
-        </div>
-      {% endif %}
-      {{ page.pre_content }}
-      {{ page.content }}
-    </div>
-  </div>
+</main>

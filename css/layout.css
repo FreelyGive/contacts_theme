@@ -50,31 +50,41 @@ body {
 /* General left/right spacing */
 .logo,
 .layout-sidebar-first {
-  min-width: 200px;
-  max-width: 400px;
-  flex-grow: 1;
-  flex-basis: 0px;
+  -webkit-flex: 0 1 300px;
+  -ms-flex: 0 1 300px;
+  flex: 0 1 300px;
+  order: -1;
 }
 .branding-main,
 .layout-content {
-  min-width: 700px;
-  flex-grow: 10;
-  flex-basis: 700px;
+  -webkit-flex: 1  700px;
+  -ms-flex: 1 0 700px;
+  flex: 1 0 700px;
+  position: relative;
 }
 
 .branding-main {
-  padding: 1em;
+  padding: 1em 2em;
+  overflow: visible !important;
 }
-.layout-sidebar-first,
+.branding-main.flex-container > * {
+  overflow: visible !important;
+}
+.branding-main.flex-container > *:not(:first-child):not(.region--header) {
+  margin-left: 2em;
+}
+.layout-sidebar-first {
+  padding: 1em 1em 3em;
+  overflow-y: auto;
+}
 .layout-content {
-  padding: 1em;
+  padding: 1em 2em 2em;
   overflow-y: auto;
 }
 
 /* Header */
 .logo {
   max-height: 75px;
-  text-align: center;
 }
 
 /* Sidebar */
@@ -87,9 +97,14 @@ body {
   overflow-y: auto;
 }
 
-/* Contacts dashboard */
-.view-contacts-dashboard .view-content,
-.view-contacts-dashboard .view-empty {
-  min-height: 400px;
-  overflow-y: scroll;
+.view .view-header {
+  text-align: right;
+  margin-bottom: 0.5em;
+  font-size: 0.8em;
+}
+
+/* General styling for specific bits. */
+.view .pager {
+  font-size: .8em;
+  margin: 1em 0 0;
 }

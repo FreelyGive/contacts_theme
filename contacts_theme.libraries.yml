@@ -3,11 +3,26 @@ global-styling:
   css:
     base:
       css/layout.css: {}
+    component:
+      css/components/form.css: {}
+      css/components/tabs.css: {}
+    theme:
       css/style.css: {}
-      css/forms.css: {}
 
 # Styling for the listings.
 listings:
   css:
     theme:
       css/contacts/listings.css: {}
+
+# Styling for the contact page.
+contact:
+  css:
+    theme:
+      css/contacts/contact.css: {}
+
+# Styling for grouped local actions.
+action.group:
+  css:
+    state:
+      css/contacts/action-group.css: {}
