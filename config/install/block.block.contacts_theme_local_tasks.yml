@@ -5,8 +5,8 @@ dependencies:
     - contacts_theme
 id: contacts_theme_local_tasks
 theme: contacts_theme
-region: pre_content
-weight: -3
+region: header
+weight: -1
 provider: null
 plugin: local_tasks_block
 settings:
@@ -15,5 +15,5 @@ settings:
   provider: core
   label_display: '0'
   primary: true
-  secondary: true
+  secondary: false
 visibility: {  }

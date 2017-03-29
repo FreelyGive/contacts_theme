@@ -1,10 +1,11 @@
-global-styling:
+global:
   version: VERSION
   css:
     base:
       css/layout.css: {}
     component:
       css/components/form.css: {}
+      css/components/action-links.css: {}
       css/components/tabs.css: {}
     theme:
       css/style.css: {}

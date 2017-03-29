@@ -5,8 +5,8 @@ dependencies:
     - contacts_theme
 id: contacts_theme_local_actions
 theme: contacts_theme
-region: content
-weight: -4
+region: header
+weight: -2
 provider: null
 plugin: local_actions_block
 settings:

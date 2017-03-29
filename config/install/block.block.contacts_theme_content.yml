@@ -8,7 +8,7 @@ dependencies:
 id: contacts_theme_content
 theme: contacts_theme
 region: content
-weight: 0
+weight: -3
 provider: null
 plugin: system_main_block
 settings:

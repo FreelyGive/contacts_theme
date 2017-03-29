@@ -1,0 +1,27 @@
+.action-links {
+  margin: -1em 0 0;
+}
+.action-links li {
+  vertical-align: top;
+}
+.button-action {
+  background: #c2c2c2 !important;
+  border: none !important;
+  -webkit-border-radius: 0 !important;
+  border-radius: 0 !important;
+  font-weight: bold !important;
+  text-align: center;
+  display: inline-block;
+  white-space: nowrap;
+  text-shadow: none;
+}
+
+/* Specific buttons */
+.button-action-icon {
+  min-width: 2em;
+  text-align: center;
+}
+.button-action-icon:before {
+  padding: 0;
+  margin: 0;
+}
