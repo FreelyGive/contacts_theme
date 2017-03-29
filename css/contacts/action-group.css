@@ -1,0 +1,29 @@
+.action-links .action-group {
+  left: auto;
+  right: 0;
+}
+.action-group-control {
+  font-size: 2em;
+}
+.action-group-control:before {
+  content: "";
+  font-size: inherit;
+}
+.action-group-control.action-group-control-create {
+  background: #8DC63F !important;
+  background-image: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          color-stop(0.33, #8EC63F),
+          color-stop(1, #79AC37)
+  ) !important;
+  background-image: -webkit-linear-gradient(top, #8EC63F 33%, #79AC37 100%) !important;
+  background-image:    -moz-linear-gradient(top, #8EC63F 33%, #79AC37 100%) !important;
+  background-image:     -ms-linear-gradient(top, #8EC63F 33%, #79AC37 100%) !important;
+  background-image:      -o-linear-gradient(top, #8EC63F 33%, #79AC37 100%) !important;
+  background-image:         linear-gradient(top, #8EC63F 33%, #79AC37 100%) !important;
+}
+.action-group-control.action-group-control-create:before {
+  content: "+";
+}
