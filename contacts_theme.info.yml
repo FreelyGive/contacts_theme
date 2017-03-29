@@ -6,6 +6,7 @@ package: Contacts
 core: 8.x
 libraries:
   - contacts_theme/global-styling
+
 regions:
   header: 'Header'
   breadcrumb: 'Breadcrumb'
@@ -13,5 +14,13 @@ regions:
   pre_content: 'Pre-content'
   content: 'Content'
   sidebar_first: 'Sidebar'
+
 regions_hidden:
   - highlighted
+
+libraries-override:
+  contacts/dashboard.layout: false
+
+libraries-extend:
+  contacts/listings:
+    - contacts_theme/listings

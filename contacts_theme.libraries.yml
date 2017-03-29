@@ -5,3 +5,9 @@ global-styling:
       css/layout.css: {}
       css/style.css: {}
       css/forms.css: {}
+
+# Styling for the listings.
+listings:
+  css:
+    theme:
+      css/contacts/listings.css: {}
