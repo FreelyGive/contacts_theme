@@ -1,5 +1,5 @@
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - system
@@ -7,8 +7,8 @@ dependencies:
     - contacts_theme
 id: contacts_theme_messages
 theme: contacts_theme
-region: '-1'
-weight: 0
+region: pre_content
+weight: -2
 provider: null
 plugin: system_messages_block
 settings:
