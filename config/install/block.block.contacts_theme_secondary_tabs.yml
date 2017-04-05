@@ -3,17 +3,17 @@ status: true
 dependencies:
   theme:
     - contacts_theme
-id: contacts_theme_local_tasks
+id: contacts_theme_secondary_tabs
 theme: contacts_theme
-region: header
-weight: -1
+region: pre_content
+weight: -3
 provider: null
 plugin: local_tasks_block
 settings:
   id: local_tasks_block
-  label: Tabs
+  label: 'Secondary tabs'
   provider: core
   label_display: '0'
-  primary: true
-  secondary: false
+  primary: false
+  secondary: true
 visibility: {  }
