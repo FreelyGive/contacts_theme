@@ -23,6 +23,11 @@
   color: #888;
 }
 
+/* Listings rows */
+.contacts-row {
+  padding: .5em;
+}
+
 /* Search */
 .contacts-search-form .contacts-search > * {
   margin: 0 !important;

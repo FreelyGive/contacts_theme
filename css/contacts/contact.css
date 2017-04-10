@@ -1,6 +1,6 @@
 .contacts-with-header-image .contact-summary {
   padding-left: calc(110px + 1em);
-  min-height: 3em;
+  min-height: 4em;
   margin-top: -.5em;
 }
 
