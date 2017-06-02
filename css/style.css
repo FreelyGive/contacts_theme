@@ -273,7 +273,8 @@ body {
       flex-direction: column; }
 
 .layout-heading {
-  background: #eceeef; }
+  background: #eceeef;
+  position: relative; }
 
 .layout-main {
   display: -ms-flexbox;
@@ -1451,28 +1452,6 @@ tbody.collapse.show {
   bottom: 100%;
   margin-bottom: 0.125rem; }
 
-.layout-heading {
-  position: relative; }
-
-#block-contacts-theme-local-actions {
-  top: 0;
-  right: 0;
-  position: absolute;
-  margin-right: 1rem; }
-
-.action-group-wrapper,
-.action-group-wrapper li {
-  list-style: none; }
-
-.action-group-wrapper button {
-  font-size: 2em;
-  padding: 0.3rem 1.2rem;
-  border-radius: 0 0 0.25rem 0.25rem; }
-
-ul.action-group-links {
-  padding: inherit;
-  margin: inherit; }
-
 .btn-group,
 .btn-group-vertical {
   position: relative;
@@ -2296,6 +2275,12 @@ button.close {
   font-size: 90%;
   text-align: right;
   margin-bottom: 0.5rem; }
+
+#block-contacts-theme-local-actions {
+  top: 0;
+  right: 0;
+  position: absolute;
+  margin-right: 1rem; }
 
 .align-baseline {
   vertical-align: baseline !important; }
