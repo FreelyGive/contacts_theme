@@ -1,0 +1,13 @@
+@import "../variables";
+@import "../mixins";
+
+.contacts-tabs-content {
+  padding: $content-padding;
+  background: $nav-tabs-active-link-hover-bg;
+  border: $nav-tabs-border-width solid $nav-tabs-border-color;
+  border-top-width: 0;
+
+  @include flex-fill(y, 300px);
+
+  @include clearfix();
+}

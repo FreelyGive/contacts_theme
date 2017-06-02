@@ -1,0 +1,21 @@
+@import "../variables";
+@import "../mixins";
+
+.views-view-contacts-dashboard-indexed {
+  > .view-content {
+    border: $nav-tabs-border-width solid $table-border-color;
+    background: $white;
+    @include colour-reset;
+  }
+}
+
+.contacts-row {
+  border-color: $table-border-color;
+  padding: 0;
+
+  > * {
+    $spacing: map_get($spacers, 2);
+    padding: map_get($spacing, y) 0;
+    margin: 0 map_get($spacing, x);
+  }
+}

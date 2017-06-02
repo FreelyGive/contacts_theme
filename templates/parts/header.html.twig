@@ -1,12 +1,12 @@
-<header class="layout-header clearfix flex-container flex-container-rows">
-  <div class="logo">
+<header class="layout-header clearfix">
+  <div class="layout-logo">
     {% if logo %}
       <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home" id="logo">
-        <img src="{{ logo }}" alt="{{ 'Home'|t }}" />
+        <img src="{{ logo }}" alt="{{ 'Home'|t }}" class="img-fluid" />
       </a>
     {% endif %}
   </div>
-  <div class="branding-main flex-fill flex-container flex-container-rows">
+  <div class="layout-heading">
     {% if header_image %}
       <div class="contacts-header-image">{{ header_image }}</div>
     {% endif %}

@@ -1,0 +1,15 @@
+$brand-primary: #5ec0d0 !default;
+
+@import "../node_modules/bootstrap/scss/variables";
+
+$body-bg: $gray-lightest;
+$inverse-bg: $gray-light;
+
+$content-padding-parts: (
+  y: map_get(map_get($spacers, 3), y),
+  x: map_get(map_get($spacers, 3), x)
+);
+$content-padding: map_get($content-padding-parts, y) map_get($content-padding-parts, x);
+
+$inverse-link-color: $white !default;
+$inverse-link-hover-color: darken($inverse-link-color, 15%) !default;
