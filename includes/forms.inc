@@ -19,14 +19,24 @@ function contacts_theme_form_views_exposed_form_alter(&$form, FormStateInterface
   }
 }
 
-
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ *  Apply columns to the profile form.
+ */
 function contacts_theme_form_profile_form_alter(&$form, FormStateInterface $form_state) {
   if ($form_state->getFormObject()->getOperation() == 'crm_dashboard') {
     $form['#form_columns'] = TRUE;
   }
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ *  Apply columns to the user form.
+ */
 function contacts_theme_form_user_form_alter(&$form, FormStateInterface $form_state) {
+  // @todo: Add a CRM form mode for users.
   if ($form_state->getFormObject()->getOperation() == 'default') {
     $form['#form_columns'] = ['description' => FALSE];
   }

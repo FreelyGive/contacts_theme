@@ -26,19 +26,13 @@ function contacts_theme_form_propagate_columns(array $element, $column_settings 
 
     // Add our default settings.
     if (isset($element['#form_columns']['description']) && !$element['#form_columns']['description']) {
-      $element['#form_columns'] += array(
-        'label' => ['col-sm-4', 'col-xl-2'],
-        'input' => ['col-sm'],
-      );
-      $element['#form_columns']['description'] = ['col-sm-8', 'col-xl-10', 'offset-sm-4', 'offset-xl-2'];
+      $element['#form_columns']['description'] = ['col-sm-8', 'col-xl-6', 'offset-sm-4', 'offset-xl-2'];
     }
-    else {
-      $element['#form_columns'] += array(
-        'label' => ['col-sm-4', 'col-xl-2'],
-        'input' => ['col-sm-8', 'col-xl-6'],
-        'description' => ['col-sm-12', 'col-xl-4'],
-      );
-    }
+    $element['#form_columns'] += array(
+      'label' => ['col-sm-4', 'col-xl-2'],
+      'input' => ['col-sm-8', 'col-xl-6'],
+      'description' => ['col-sm-12', 'col-xl-4'],
+    );
   }
   elseif ($column_settings) {
     $element['#form_columns'] = $column_settings;
@@ -66,7 +60,7 @@ function contacts_theme_preprocess_form_element(&$variables) {
     'use_wrapper' => empty($variables['element']['#no_wrapper']),
     'form_group' => !empty($variables['element']['#form_group']),
     'type' => NULL,
-    'wrap_in_label' => in_array($variables['type'], ['radio', 'checkbox']) && $variables['title_display'] == 'after',
+    'wrap_in_label' => isset($variables['type']) && in_array($variables['type'], ['radio', 'checkbox']) && $variables['title_display'] == 'after',
   ];
 
   if ($variables['use_wrapper']) {
@@ -193,7 +187,7 @@ function contacts_theme_pre_render_actions(&$element) {
     foreach ($element['#form_columns']['label'] as $class) {
       $classes[] = str_replace('col-', 'offset-', $class);
     }
-    
+
     $element['#attributes'] += ['class' => []];
     $element['#attributes']['class'] = array_merge($element['#attributes']['class'], $classes);
   }
