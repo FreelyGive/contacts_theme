@@ -273,7 +273,8 @@ body {
       flex-direction: column; }
 
 .layout-heading {
-  background: #eceeef; }
+  background: #eceeef;
+  position: relative; }
 
 .layout-main {
   display: -ms-flexbox;
@@ -2274,6 +2275,12 @@ button.close {
   font-size: 90%;
   text-align: right;
   margin-bottom: 0.5rem; }
+
+#block-contacts-theme-local-actions {
+  top: 0;
+  right: 0;
+  position: absolute;
+  margin-right: 1rem; }
 
 .align-baseline {
   vertical-align: baseline !important; }

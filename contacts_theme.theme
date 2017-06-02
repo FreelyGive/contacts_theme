@@ -70,10 +70,52 @@ function contacts_theme_preprocess_block(&$variables) {
     ];
     foreach ($variables['content'] as $key => &$content) {
       if (in_array($key, $keys)) {
-        $content['button']['#value'] = '';
-        $content['button']['#attributes']['class'][] = 'button-action-icon';
+        $content['#attributes']['class'] = array('dropdown');
+        $content['#prefix'] = '<div class="action-group-wrapper dropdown">';
+        $content['#suffix'] = '</div>';
+        $drop_id = \Drupal\Component\Utility\Html::getUniqueId('dropdown-menu-button');
+        $content['button']['#attributes']['id'][] = $drop_id;
+        $content['button']['#attributes']['data-toggle'][] = 'dropdown';
+        $content['button']['#attributes']['aria-haspopup'][] = 'true';
+        $content['button']['#attributes']['aria-expanded'][] = 'false';
+        $content['button']['#attributes']['type'][] = 'button';
+        $content['button']['#attributes']['class'][] = 'btn';
+        $content['button']['#attributes']['class'][] = 'btn-lg';
+        $content['button']['#attributes']['class'][] = 'btn-primary';
+
+        $js_hide = array_search('js-hide', $content['group']['#attributes']['class']);
+        if ($js_hide) {
+          unset($content['group']['#attributes']['class'][$js_hide]);
+        }
+
+        $content['group']['#attributes']['class'][] = 'dropdown-menu';
+        $content['group']['#attributes']['class'][] = 'dropdown-menu-right';
+        $content['group']['#attributes']['aria-labelledby'][] = $drop_id;
+
+        $links = array();
+        foreach ($content['group']['links']['#links'] as $key => &$link) {
+          $link['attributes']['class'][] = 'dropdown-item';
+          $links[$key] = array(
+            '#type' => 'link',
+            '#attributes' => $link['attributes'],
+            '#title' => $link['title'],
+            '#url' => $link['url'],
+          );
+        }
+
+        // Move links out of unordered list #links.
+        if (!empty($links)) {
+          $content['group']['links'] = $links;
+        }
       }
     }
+
+    // Replace text with icon.
+    if (isset($variables['content']['contacts.contact_create_group'])) {
+      $variables['content']['contacts.contact_create_group']['button']['#value'] = '+';
+      $variables['content']['contacts.contact_create_group']['button']['#attributes']['class'][] = 'button-action-icon';
+    }
+
   }
   elseif ($variables['base_plugin_id'] == 'views_block') {
     if ($variables['elements']['#base_plugin_id'] == 'views_block') {
