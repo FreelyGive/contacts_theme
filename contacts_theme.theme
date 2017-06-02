@@ -211,3 +211,16 @@ function contacts_theme_preprocess_contacts_dash_tabs(&$variables) {
     }
   }
 }
+
+/**
+ * Implements hook_preprocess_hook().
+ *
+ * Add bootstrap classes for alerts.
+ */
+function contacts_theme_preprocess_status_messages(&$variables) {
+  $variables['type_classes'] = [
+    'error' => 'danger',
+    'warning' => 'warning',
+    'status' => 'info',
+  ];
+}
