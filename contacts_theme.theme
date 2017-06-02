@@ -70,8 +70,31 @@ function contacts_theme_preprocess_block(&$variables) {
     ];
     foreach ($variables['content'] as $key => &$content) {
       if (in_array($key, $keys)) {
-        $content['button']['#value'] = '';
+        $content['#attributes']['class'] = array('dropdown');
+        $content['#prefix'] = '<li class="action-group-wrapper dropdown">';
+        $content['button']['#value'] = '+';
+        $content['button']['#attributes']['id'][] = 'dropdownMenuButton';
+        $content['button']['#attributes']['data-toggle'][] = 'dropdown';
+        $content['button']['#attributes']['aria-haspopup'][] = 'true';
+        $content['button']['#attributes']['aria-expanded'][] = 'false';
+        $content['button']['#attributes']['type'][] = 'button';
+        $content['button']['#attributes']['class'][] = 'btn';
+        $content['button']['#attributes']['class'][] = 'btn-primary';
         $content['button']['#attributes']['class'][] = 'button-action-icon';
+
+        if (!empty($content['group']['links']['#heading'])) {
+          unset($content['group']['links']['#heading']);
+        }
+
+        unset($content['group']['#attributes']['class'][array_search('js-hide', $content['group']['#attributes']['class'])]);
+        $content['group']['#attributes']['class'][] = 'dropdown-menu';
+        $content['group']['#attributes']['class'][] = 'dropdown-menu-right';
+        $content['group']['#attributes']['aria-labelledby'][] = 'dropdownMenuButton';
+
+
+        foreach ($content['group']['links']['#links'] as &$link) {
+          $link['attributes']['class'][] = 'dropdown-item';
+        }
       }
     }
   }

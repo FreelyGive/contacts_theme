@@ -21,3 +21,5 @@ action.group:
   css:
     state:
       css/contacts/action-group.css: {}
+  js:
+    js/dropdown.js: {}
