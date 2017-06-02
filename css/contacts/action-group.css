@@ -27,3 +27,11 @@
 .action-group-control.action-group-control-create:before {
   content: "+";
 }
+
+.action-group-control.action-group-control-configure:before {
+  content: url(../../images/cog.png);
+  vertical-align: bottom;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+}
