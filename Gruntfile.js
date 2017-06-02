@@ -40,11 +40,21 @@ module.exports = function(grunt) {
         files: '**/*.scss',
         tasks: ['sass', 'autoprefixer']
       }
+    },
+    copy: {
+      bootstrap:
+        {
+          expand: true,
+          cwd: 'node_modules/bootstrap/js/dist',
+          src: 'dropdown.js',
+          dest: 'js'
+        }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.registerTask('default',['watch']);
-  grunt.registerTask('once',['sass', 'autoprefixer']);
+  grunt.registerTask('once',['sass', 'autoprefixer', 'copy']);
 }
