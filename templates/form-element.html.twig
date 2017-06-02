@@ -36,7 +36,7 @@
     {{ label }}
   {% endif %}
   {% if errors %}
-    <div class="form-item--error-message">
+    <div{{ error_attributes.addClass('form-control-feedback') }}>
       {{ errors }}
     </div>
   {% endif %}

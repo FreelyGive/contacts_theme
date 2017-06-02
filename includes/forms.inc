@@ -38,6 +38,6 @@ function contacts_theme_form_profile_form_alter(&$form, FormStateInterface $form
 function contacts_theme_form_user_form_alter(&$form, FormStateInterface $form_state) {
   // @todo: Add a CRM form mode for users.
   if ($form_state->getFormObject()->getOperation() == 'default') {
-    $form['#form_columns'] = ['description' => FALSE];
+    $form['#form_columns'] = TRUE;
   }
 }

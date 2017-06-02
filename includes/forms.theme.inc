@@ -7,6 +7,7 @@
 
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Template\Attribute;
 
 /**
  * Pre render callback to propagate form column settings.
@@ -25,14 +26,28 @@ function contacts_theme_form_propagate_columns(array $element, $column_settings 
     }
 
     // Add our default settings.
-    if (isset($element['#form_columns']['description']) && !$element['#form_columns']['description']) {
-      $element['#form_columns']['description'] = ['col-sm-8', 'col-xl-6', 'offset-sm-4', 'offset-xl-2'];
-    }
     $element['#form_columns'] += array(
-      'label' => ['col-sm-4', 'col-xl-2'],
-      'input' => ['col-sm-8', 'col-xl-6'],
-      'description' => ['col-sm-12', 'col-xl-4'],
+      'label' => ['col-sm-4', 'col-lg-3', 'col-xl-2'],
+      'input' => ['col-sm-8', 'col-lg-7', 'col-xl-6'],
+      'errors' => ['col-sm-8', 'col-lg-9', 'col-xl-4', 'offset-sm-4', 'offset-lg-3', 'offset-xl-0'],
+      'description' => ['col-sm-8', 'col-lg-9', 'col-xl-10', 'offset-sm-4', 'offset-lg-3', 'offset-xl-2'],
     );
+
+    // Default the offset classes to line up with the input.
+    if (!isset($element['#form_columns']['_offset'])) {
+      $element['#form_columns']['_offset'] = array_map(function($class){
+        return str_replace('col-', 'offset-', $class);
+      }, $element['#form_columns']['label']);
+    }
+
+    // If description or error are FALSE, we use the input/offset classes.
+    $classes = array_merge($element['#form_columns']['input'], $element['#form_columns']['_offset'], ['flex-last']);
+    if (!$element['#form_columns']['description']) {
+      $element['#form_columns']['description'] = $classes;
+    }
+    if (!$element['#form_columns']['errors']) {
+      $element['#form_columns']['errors'] = $classes;
+    }
   }
   elseif ($column_settings) {
     $element['#form_columns'] = $column_settings;
@@ -61,11 +76,18 @@ function contacts_theme_preprocess_form_element(&$variables) {
     'form_group' => !empty($variables['element']['#form_group']),
     'type' => NULL,
     'wrap_in_label' => isset($variables['type']) && in_array($variables['type'], ['radio', 'checkbox']) && $variables['title_display'] == 'after',
+    // Support for inline form errors.
+    'error_attributes' => new Attribute(),
   ];
 
   if ($variables['use_wrapper']) {
     if ($variables['form_group']) {
       $variables['attributes']['class'][] = 'form-group';
+    }
+
+    // Add error classes.
+    if (!empty($variables['element']['#errors'])) {
+      $variables['attributes']['class'][] = 'has-danger';
     }
 
     if (!empty($variables['element']['#form_columns']) && $variables['form_group']) {
@@ -84,9 +106,7 @@ function contacts_theme_preprocess_form_element(&$variables) {
       // Add in additional classes if the title isn't displayed before.
       $classes = $variables['element']['#form_columns']['input'];
       if ($variables['title_display'] != 'before') {
-        foreach ($variables['element']['#form_columns']['label'] as $class) {
-          $classes[] = str_replace('col-', 'offset-', $class);
-        }
+        $classes = array_merge($classes, $variables['element']['#form_columns']['_offset']);
       }
 
       // If wrapping, we need to add a title prefix/suffix.
@@ -102,10 +122,11 @@ function contacts_theme_preprocess_form_element(&$variables) {
         ]);
       }
 
+      // Add classes to the description and errors.
       if ($variables['description']) {
         $variables['description']['attributes']->addClass($variables['element']['#form_columns']['description']);
       }
-
+      $variables['error_attributes']->addClass($variables['element']['#form_columns']['errors']);
     }
   }
 
