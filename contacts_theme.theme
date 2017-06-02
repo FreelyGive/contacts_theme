@@ -24,6 +24,9 @@ function contacts_theme_theme_suggestions_alter(array &$suggestions, array $vari
   }
 }
 
+/**
+ * Implements hook_js_settings_alter().
+ */
 function contacts_theme_js_settings_alter(array &$settings, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
   if (in_array('contacts/tabs', $assets->getLibraries())) {
     $settings['contacts']['tabs']['activeClass'] = 'active';
@@ -132,6 +135,9 @@ function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
   }
 }
 
+/**
+ * Implements hook_preprocess_hook().
+ */
 function contacts_theme_preprocess_contacts_dash_summary(array $variables) {
   contacts_theme_header_image($variables['image']);
 }
@@ -198,6 +204,9 @@ function contacts_theme_views_pre_render(ViewExecutable $view) {
   $view->display_handler->setOption('css_class', $css_class);
 }
 
+/**
+ * Implements hook_preprocess_hook().
+ */
 function contacts_theme_preprocess_contacts_dash_tabs(&$variables) {
   $variables['attributes']['class'][] = 'nav';
   $variables['attributes']['class'][] = 'nav-tabs';
