@@ -23,7 +23,7 @@
 }
 
 .highlight {
-  background: $brand-primary;
+  @include colour-invert($brand-primary);
 
   .layout-sidebar-first > & {
     padding: $content-padding;

@@ -304,9 +304,9 @@ body {
   color: #eceeef;
   padding: 1rem 1rem;
   font-size: 0.875rem; }
-  .layout-sidebar-first a:not(.btn) {
+  .layout-sidebar-first a:not(.btn), .layout-sidebar-first .btn-link {
     color: #fff; }
-    .layout-sidebar-first a:not(.btn):focus, .layout-sidebar-first a:not(.btn):hover {
+    .layout-sidebar-first a:not(.btn):focus, .layout-sidebar-first a:not(.btn):hover, .layout-sidebar-first .btn-link:focus, .layout-sidebar-first .btn-link:hover {
       color: #d9d9d9; }
 
 @media (min-width: 992px) {
@@ -6035,7 +6035,12 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
           flex: 1 0 0;
       overflow-y: auto; } }
 .highlight {
-  background: #5ec0d0; }
+  background: #5ec0d0;
+  color: #eceeef; }
+  .highlight a:not(.btn), .highlight .btn-link {
+    color: #fff; }
+    .highlight a:not(.btn):focus, .highlight a:not(.btn):hover, .highlight .btn-link:focus, .highlight .btn-link:hover {
+      color: #d9d9d9; }
   .layout-sidebar-first > .highlight {
     padding: 1rem 1rem;
     margin: 0 -1rem 1rem; }

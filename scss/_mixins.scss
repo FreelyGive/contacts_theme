@@ -11,7 +11,7 @@
   background: $background;
   color: $inverse-color;
 
-  a:not(.btn) {
+  a:not(.btn), .btn-link {
     color: $inverse-link-color;
     @include hover-focus {
       color: $inverse-link-hover-color;
@@ -22,7 +22,7 @@
 @mixin colour-reset() {
   color: $body-color;
 
-  a:not(.btn) {
+  a:not(.btn), .btn-link {
     color: $link-color;
     @include hover-focus {
       color: $link-hover-color;

@@ -2,9 +2,9 @@
   border: 1px solid #eceeef;
   background: #fff;
   color: #292b2c; }
-  .views-view-contacts-dashboard-indexed > .view-content a:not(.btn) {
+  .views-view-contacts-dashboard-indexed > .view-content a:not(.btn), .views-view-contacts-dashboard-indexed > .view-content .btn-link {
     color: #5ec0d0; }
-    .views-view-contacts-dashboard-indexed > .view-content a:not(.btn):focus, .views-view-contacts-dashboard-indexed > .view-content a:not(.btn):hover {
+    .views-view-contacts-dashboard-indexed > .view-content a:not(.btn):focus, .views-view-contacts-dashboard-indexed > .view-content a:not(.btn):hover, .views-view-contacts-dashboard-indexed > .view-content .btn-link:focus, .views-view-contacts-dashboard-indexed > .view-content .btn-link:hover {
       color: #339daf; }
 
 .contacts-row {
