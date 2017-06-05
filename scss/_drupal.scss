@@ -11,3 +11,12 @@
   position: absolute;
   margin-right: map_get($content-padding-parts, x);
 }
+
+/* Fields */
+.field {
+  margin-bottom: $spacer-y;
+}
+.field-title {
+  margin-bottom: 0;
+  font-weight: bold;
+}

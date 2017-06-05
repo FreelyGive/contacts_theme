@@ -3342,6 +3342,14 @@ button.close {
   position: absolute;
   margin-right: 1rem; }
 
+/* Fields */
+.field {
+  margin-bottom: 1rem; }
+
+.field-title {
+  margin-bottom: 0;
+  font-weight: bold; }
+
 .align-baseline {
   vertical-align: baseline !important; }
 

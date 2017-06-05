@@ -6,11 +6,14 @@
  */
 
 use Drupal\Core\Render\Element;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\ViewExecutable;
 use Drupal\Core\Template\Attribute;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
 
+include 'includes/entity.theme.inc';
+include 'includes/fields.theme.inc';
 include 'includes/forms.theme.inc';
 include 'includes/forms.inc';
 include 'includes/widgets.inc';
@@ -159,6 +162,18 @@ function contacts_theme_preprocess_block(&$variables) {
     $variables['content']['#options']['attributes']['class'][] = 'btn';
     $variables['content']['#options']['attributes']['class'][] = 'btn-secondary';
   }
+  elseif ($variables['base_plugin_id'] == 'contacts_entity') {
+    // Show inline dashboard fields in columns.
+    $variables['content']['view']+= ['#columns' => TRUE];
+  }
+  elseif ($variables['plugin_id'] == 'contact_summary_tab') {
+    $variables['content']['#content']['left']['content']['view']['#columns'] =
+      $variables['content']['#content']['right']['content']['view']['#columns'] = [
+        'label' => ['col-md-6', 'col-xl-4'],
+        'content' => ['col-md'],
+        '_offset' => ['offset-md-6', 'offset-xl-4'],
+      ];
+  }
 }
 
 /**
@@ -273,4 +288,26 @@ function contacts_theme_preprocess_status_messages(&$variables) {
     'warning' => 'warning',
     'status' => 'info',
   ];
+}
+
+/**
+ * Implement hook_preprocess.
+ */
+function contacts_theme_preprocess(&$variables, $hook) {
+  static $entity_types;
+
+  // Prime our list of entity types.
+  if (!isset($entity_types)) {
+    $entity_types = array_keys(array_map(function(EntityTypeInterface $type) {
+      if (is_subclass_of($type->getClass(), FieldableEntityInterface::class)) {
+        return $type->id();
+      }
+      return FALSE;
+    }, \Drupal::entityTypeManager()->getDefinitions()), TRUE);
+  }
+
+  // If this is an entity type, pass on to our relevant preprocess.
+  if (in_array($hook, $entity_types)) {
+    _contacts_theme_preprocess_entity($variables, $hook);
+  }
 }
