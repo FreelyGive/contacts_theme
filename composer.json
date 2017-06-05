@@ -19,5 +19,12 @@
   "support": {
     "issues": "https://www.drupal.org/project/issues/contacts_theme",
     "source": "http://cgit.drupalcode.org/contacts_theme"
+  },
+  "extra": {
+    "patches": {
+      "drupal/core": {
+        "'#2883302: Allow themes to alter widget forms": "https://www.drupal.org/files/issues/2883302-allow_themes_to_alter_widget_forms.patch"
+      }
+    }
   }
 }
