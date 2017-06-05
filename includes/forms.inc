@@ -24,6 +24,7 @@ function contacts_theme_form_views_exposed_form_alter(&$form, FormStateInterface
     $form['actions']['reset']['#attributes']['class'][] = 'p-0';
 
     // Turn the submit into an add-on for the input.
+    $form['search']['#has_addons'] = TRUE;
     $form['search']['submit'] = $form['actions']['submit'];
     $form['search']['submit']['#weight'] = 1;
     unset($form['actions']['submit']);

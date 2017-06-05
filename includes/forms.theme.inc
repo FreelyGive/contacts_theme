@@ -154,34 +154,36 @@ function contacts_theme_preprocess_form_element(&$variables) {
     $variables['children'] = '';
   }
 
-  // Process add-ons.
-  $add_ons = Element::children($variables['element']);
-  if ($add_ons) {
-    $children = [
-      '_main' => [
-        '#markup' => $variables['children'],
-        '#weight' => 0,
-      ],
-    ];
-    foreach ($add_ons as $add_on) {
-      $children[$add_on] = $variables['element'][$add_on];
+  // Process any element that has declared it's children are addons.
+  if (!empty($variables['element']['#has_addons'])) {
+    $add_ons = Element::children($variables['element']);
+    if ($add_ons) {
+      $children = [
+        '_main' => [
+          '#markup' => $variables['children'],
+          '#weight' => 0,
+        ],
+      ];
+      foreach ($add_ons as $add_on) {
+        $children[$add_on] = $variables['element'][$add_on];
 
-      // Remove the form_element wrapper.
-      if (!empty($children[$add_on]['#theme_wrappers'])) {
-        $children[$add_on]['#theme_wrappers'] = array_diff($children[$add_on]['#theme_wrappers'], ['form_element']);
+        // Remove the form_element wrapper.
+        if (!empty($children[$add_on]['#theme_wrappers'])) {
+          $children[$add_on]['#theme_wrappers'] = array_diff($children[$add_on]['#theme_wrappers'], ['form_element']);
+        }
+
+        $add_on_type = $children[$add_on]['#type'] == 'submit' ? 'btn' : 'addon';
+        $children[$add_on]['#prefix'] = '<span class="input-group-' . $add_on_type . '">';
+        $children[$add_on]['#suffix'] = '</span>';
       }
 
-      $add_on_type = $children[$add_on]['#type'] == 'submit' ? 'btn' : 'addon';
-      $children[$add_on]['#prefix'] = '<span class="input-group-' . $add_on_type . '">';
-      $children[$add_on]['#suffix'] = '</span>';
+      // Wrap in the input group container.
+      $children['#prefix'] = '<div class="input-group">';
+      $children['#suffix'] = '</div>';
+
+      // Render, replacing the existing.
+      $variables['children'] = \Drupal::service('renderer')->render($children);
     }
-
-    // Wrap in the input group container.
-    $children['#prefix'] = '<div class="input-group">';
-    $children['#suffix'] = '</div>';
-
-    // Render, replacing the existing.
-    $variables['children'] = \Drupal::service('renderer')->render($children);
   }
 }
 
