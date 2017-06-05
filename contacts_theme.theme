@@ -37,9 +37,6 @@ function contacts_theme_js_settings_alter(array &$settings, \Drupal\Core\Asset\A
  * Implements hook_element_info_alter().
  */
 function contacts_theme_element_info_alter(array &$info) {
-  // Use a pre-render to propagate form columns.
-  $info['form']['#pre_render'][] = 'contacts_theme_form_propagate_columns';
-
   // Change the default date part order.
   $info['datelist']['#date_part_order'] = ['day', 'month', 'year', 'hour', 'minute'];
 

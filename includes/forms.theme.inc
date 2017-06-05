@@ -14,12 +14,24 @@ use Drupal\Core\Template\Attribute;
  *
  * @param array $element
  *   The element array.
+ * @param array|null $column_settings
+ *   @internal The column settings to propagate.
  *
  * @return array
  *   The adjusted element.
  */
-function contacts_theme_form_propagate_columns(array $element, $column_settings = FALSE) {
-  if (!empty($element['#form_columns'])) {
+function contacts_theme_form_propagate_columns(array $element, $column_settings = NULL) {
+  // If not set, we either propagate our given value or there is nothing to do.
+  if (!isset($element['#form_columns'])) {
+    if (isset($column_settings)) {
+      $element['#form_columns'] = $column_settings;
+    }
+    else {
+      return $element;
+    }
+  }
+  // Otherwise, process the form columns, merging in the defaults.
+  elseif (isset($element['#form_columns'])) {
     // Convert non arrays to an empty array.
     if (!is_array($element['#form_columns'])) {
       $element['#form_columns'] = array();
@@ -48,12 +60,6 @@ function contacts_theme_form_propagate_columns(array $element, $column_settings 
     if (!$element['#form_columns']['errors']) {
       $element['#form_columns']['errors'] = $classes;
     }
-  }
-  elseif ($column_settings) {
-    $element['#form_columns'] = $column_settings;
-  }
-  else {
-    return $element;
   }
 
   // Propagate to our children.
@@ -105,7 +111,11 @@ function contacts_theme_preprocess_form_element(&$variables) {
 
       // Add in additional classes if the title isn't displayed before.
       $classes = $variables['element']['#form_columns']['input'];
-      if ($variables['title_display'] != 'before') {
+      // If there is no label, assume child items provide labels.
+      if ($variables['title_display'] == 'none') {
+        $classes = ['col-12'];
+      }
+      elseif ($variables['title_display'] != 'before') {
         $classes = array_merge($classes, $variables['element']['#form_columns']['_offset']);
       }
 
