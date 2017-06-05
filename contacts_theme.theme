@@ -207,14 +207,16 @@ function contacts_theme_header_image(array $content = NULL) {
  * @see \template_preprocess_pager()
  */
 function contacts_theme_preprocess_pager(&$variables) {
-  foreach ($variables['items'] as $key => &$item) {
-    if ($key == 'pages') {
-      foreach ($item as &$page_item) {
-        $page_item['attributes'] = new Attribute(['class' => ['page-link']]);
+  if (isset($variables['items'])) {
+    foreach ($variables['items'] as $key => &$item) {
+      if ($key == 'pages') {
+        foreach ($item as &$page_item) {
+          $page_item['attributes'] = new Attribute(['class' => ['page-link']]);
+        }
       }
-    }
-    else {
-      $item['attributes'] = new Attribute(['class' => ['page-link']]);
+      else {
+        $item['attributes'] = new Attribute(['class' => ['page-link']]);
+      }
     }
   }
 }
