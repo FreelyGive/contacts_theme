@@ -1,5 +1,7 @@
 $brand-primary: #5ec0d0 !default;
 
+$app-breakpoint: lg;
+
 @import "../node_modules/bootstrap/scss/variables";
 
 $body-bg: $gray-lightest;

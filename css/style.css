@@ -272,9 +272,13 @@ body {
   -ms-flex-direction: column;
       flex-direction: column; }
 
+.layout-logo {
+  text-align: center; }
+
 .layout-heading {
   background: #eceeef;
-  position: relative; }
+  position: relative;
+  padding: 1rem 1rem; }
 
 .layout-main {
   display: -ms-flexbox;
@@ -282,7 +286,14 @@ body {
   -ms-flex-direction: column;
       flex-direction: column; }
 
+.layout-content {
+  -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+  padding: 1rem 1rem; }
+
 .layout-sidebar-first {
+  -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -290,13 +301,15 @@ body {
   -ms-flex-order: -1;
       order: -1;
   background: #636c72;
-  color: #eceeef; }
+  color: #eceeef;
+  padding: 1rem 1rem;
+  font-size: 0.875rem; }
   .layout-sidebar-first a:not(.btn) {
     color: #fff; }
     .layout-sidebar-first a:not(.btn):focus, .layout-sidebar-first a:not(.btn):hover {
       color: #d9d9d9; }
 
-@media (min-width: 576px) {
+@media (min-width: 992px) {
   .layout-header {
     display: -ms-flexbox;
     display: flex; }
@@ -307,8 +320,7 @@ body {
 
   .layout-heading {
     -ms-flex: 1 0 auto;
-        flex: 1 0 auto;
-    padding: 1rem 1rem; }
+        flex: 1 0 auto; }
 
   .layout-main {
     -ms-flex-direction: row;
@@ -322,17 +334,14 @@ body {
     display: flex;
     -ms-flex-direction: column;
         flex-direction: column;
-    -ms-flex: 1 0 700px;
-        flex: 1 0 700px;
-    overflow-y: auto;
-    padding: 1rem 1rem; }
+    -ms-flex: 1 0 0;
+        flex: 1 0 0;
+    overflow-y: auto; }
 
   .layout-sidebar-first {
     -ms-flex: 0 0 300px;
         flex: 0 0 300px;
-    overflow-y: auto;
-    padding: 1rem 1rem;
-    font-size: 0.875rem; } }
+    overflow-y: auto; } }
 html {
   -moz-box-sizing: border-box;
        box-sizing: border-box; }
@@ -6002,25 +6011,29 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
   .hidden-print {
     display: none !important; } }
 
-.flex-fill {
-  -ms-flex: 1 0 0;
-      flex: 1 0 0; }
+@media (min-width: 992px) {
+  .app-flex {
+    display: -ms-flexbox !important;
+    display: flex !important; }
 
-.flex-fill-scroll {
-  -ms-flex: 1 0 0;
-      flex: 1 0 0;
-  overflow-y: auto; }
+  .flex-fill {
+    -ms-flex: 1 0 0;
+        flex: 1 0 0; }
 
-.view-fill-scroll {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-      flex-direction: column; }
-  .view-fill-scroll, .view-fill-scroll > .view-content {
+  .flex-fill-scroll {
     -ms-flex: 1 0 0;
         flex: 1 0 0;
     overflow-y: auto; }
 
+  .view-fill-scroll {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column; }
+    .view-fill-scroll, .view-fill-scroll > .view-content {
+      -ms-flex: 1 0 0;
+          flex: 1 0 0;
+      overflow-y: auto; } }
 .highlight {
   background: #5ec0d0; }
   .layout-sidebar-first > .highlight {

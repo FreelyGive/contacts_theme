@@ -1,18 +1,24 @@
 @import "../node_modules/bootstrap/scss/utilities";
 
-.flex-fill {
-  @include flex-fill();
-}
+@include media-breakpoint-up($app-breakpoint) {
+  .app-flex {
+    display: flex !important;
+  }
 
-.flex-fill-scroll {
-  @include flex-fill(y);
-}
+  .flex-fill {
+    @include flex-fill();
+  }
 
-.view-fill-scroll {
-  display: flex;
-  flex-direction: column;
-  &, & > .view-content {
+  .flex-fill-scroll {
     @include flex-fill(y);
+  }
+
+  .view-fill-scroll {
+    display: flex;
+    flex-direction: column;
+    &, & > .view-content {
+      @include flex-fill(y);
+    }
   }
 }
 
