@@ -13,9 +13,20 @@ use Drupal\Core\Form\FormStateInterface;
 function contacts_theme_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if ($form_state->get('view')->id() == 'contacts_dashboard_indexed') {
     $form['#attributes']['class'][] = 'contacts-search-form';
+
+    // Hide the label for the search and use a placeholder.
     $form['search']['#title_display'] = 'invisible';
     $form['search']['#attributes']['placeholder'] = $form['#info']['filter-search_api_fulltext']['label'];
-    $form['actions']['reset']['#attributes']['class'][] = 'link';
+
+    // Make the reset look like a link.
+    $form['actions']['reset']['#attributes']['class'][] = 'btn';
+    $form['actions']['reset']['#attributes']['class'][] = 'btn-link';
+    $form['actions']['reset']['#attributes']['class'][] = 'p-0';
+
+    // Turn the submit into an add-on for the input.
+    $form['search']['submit'] = $form['actions']['submit'];
+    $form['search']['submit']['#weight'] = 1;
+    unset($form['actions']['submit']);
   }
 }
 
