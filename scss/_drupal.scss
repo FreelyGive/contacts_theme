@@ -5,13 +5,6 @@
   margin-bottom: map_get(map_get($spacers, 2), y);
 }
 
-#block-contacts-theme-local-actions {
-  top: 0;
-  right: 0;
-  position: absolute;
-  margin-right: map_get($content-padding-parts, x);
-}
-
 /* Fields */
 .field {
   margin-bottom: $spacer-y;

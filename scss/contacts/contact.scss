@@ -11,3 +11,8 @@
 
   @include clearfix();
 }
+
+.contact-summary {
+  padding-bottom: 0;
+  margin-bottom: $spacer-y;
+}

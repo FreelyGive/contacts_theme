@@ -11,4 +11,8 @@
     content: "";
     clear: both; }
 
+.contact-summary {
+  padding-bottom: 0;
+  margin-bottom: 1rem; }
+
 /*# sourceMappingURL=contact.css.map */

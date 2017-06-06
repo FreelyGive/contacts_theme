@@ -9,5 +9,9 @@
   .action-group-wrapper .action-group-icon.btn-sm {
     padding: -0.1875rem 0.0625rem;
     font-size: 1.3125rem; }
+@media (min-width: 768px) {
+  .action-group-wrapper > .btn, .action-group-wrapper > .action-group-icon > .btn {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0; } }
 
 /*# sourceMappingURL=action-group.css.map */

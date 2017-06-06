@@ -13,5 +13,11 @@ $content-padding-parts: (
 );
 $content-padding: map_get($content-padding-parts, y) map_get($content-padding-parts, x);
 
+// Header image is 100x100 px + 1px border + $thumbnail-padding.
+$header-image-size: (
+  y: unquote("102px + #{$thumbnail-padding * 2}"),
+  x: unquote("102px + #{$thumbnail-padding * 2}")
+);
+
 $inverse-link-color: $white !default;
 $inverse-link-hover-color: darken($inverse-link-color, 15%) !default;
