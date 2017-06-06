@@ -20,7 +20,7 @@ body {
 
   background: $gray-lighter;
   position: relative;
-  padding: $content-padding;
+  padding: map_get($content-padding-parts, y) map_get($content-padding-parts, x) 0;
 
   .contacts-header-image {
     text-align: center;
@@ -142,6 +142,8 @@ body {
 
   .layout-logo {
     flex: 0 0 300px;
+    align-self: center;
+
     img {
       max-height: ($font-size-h1 * $headings-line-height) + map_get($content-padding-parts, y);
     }
@@ -174,7 +176,6 @@ body {
     $heading-inner-height: ($font-size-h1 * $headings-line-height) + $headings-margin-bottom;
     .layout-heading {
       min-height: $heading-inner-height + map_get($content-padding-parts, y);
-      padding-bottom: 0;
     }
 
     .layout-content {
