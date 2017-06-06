@@ -5,36 +5,21 @@
  * Functions to support theming in the contacts_theme theme.
  */
 
-use Drupal\Core\Render\Element;
-use Drupal\views\ViewExecutable;
-use Drupal\Core\Template\Attribute;
-use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Asset\AttachedAssetsInterface;
 
-include 'includes/entity.theme.inc';
-include 'includes/fields.theme.inc';
+include 'includes/utils.inc';
 include 'includes/forms.theme.inc';
+include 'includes/page.theme.inc';
+include 'includes/media.theme.inc';
 include 'includes/forms.inc';
 include 'includes/widgets.inc';
-
-/**
- * Implements hook_theme_suggestions_alter().
- */
-function contacts_theme_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
-  if ($hook == 'page' && drupal_static('contacts_theme_dashboard')) {
-    $suggestions[] = $hook . '__contacts_dashboard';
-  }
-}
-
-/**
- * Implements hook_js_settings_alter().
- */
-function contacts_theme_js_settings_alter(array &$settings, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
-  if (in_array('contacts/tabs', $assets->getLibraries())) {
-    $settings['contacts']['tabs']['activeClass'] = 'active';
-  }
-}
+include 'includes/entity.theme.inc';
+include 'includes/fields.theme.inc';
+include 'includes/views.inc';
+include 'includes/blocks.theme.inc';
+include 'includes/contacts.theme.inc';
 
 /**
  * Implements hook_element_info_alter().
@@ -54,240 +39,21 @@ function contacts_theme_element_info_alter(array &$info) {
 }
 
 /**
- * Implements hook_preprocess_HOOK() for page.
- *
- * @todo: Replace with an SVG logo.
+ * Implements hook_theme_suggestions_alter().
  */
-function contacts_theme_preprocess_page(array &$variables) {
-  $path = drupal_get_path('theme', 'contacts_theme');
-  $logo = theme_get_setting('logo.url');
-  if ($logo == file_url_transform_relative(file_create_url($path . '/logo.svg'))) {
-    $variables['logo'] = file_url_transform_relative(file_create_url($path . '/logo.png'));
-  }
-
-  // See if we have a header image.
-  $variables['header_image'] = contacts_theme_header_image();
-  if ($variables['header_image']) {
-    $variables['attributes']['class'][] = 'with-header-image';
+function contacts_theme_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if ($hook == 'page' && drupal_static('contacts_theme_dashboard')) {
+    $suggestions[] = $hook . '__contacts_dashboard';
   }
 }
 
 /**
- * Implements hook_preprocess_HOOK() for block templates.
+ * Implements hook_js_settings_alter().
  */
-function contacts_theme_preprocess_block(&$variables) {
-  // Add classes to specific blocks for styling.
-  $classes = [
-    'views_exposed_filter_block:contacts_dashboard_indexed-full' => ['highlight'],
-    'contacts_back' => ['highlight'],
-  ];
-  if (isset($classes[$variables['plugin_id']])) {
-    if (!isset($variables['attributes']['class'])) {
-      $variables['attributes']['class'] = $classes[$variables['plugin_id']];
-    }
-    else {
-      $variables['attributes']['class'] = array_merge($variables['attributes']['class'], $classes[$variables['plugin_id']]);
-    }
+function contacts_theme_js_settings_alter(array &$settings, AttachedAssetsInterface $assets) {
+  if (in_array('contacts/tabs', $assets->getLibraries())) {
+    $settings['contacts']['tabs']['activeClass'] = 'active';
   }
-
-  if ($variables['plugin_id'] == 'local_actions_block') {
-    $keys = [
-      'contacts.contact_create_group',
-      'contacts.contact_configure_group',
-    ];
-    foreach ($variables['content'] as $key => &$content) {
-      if (in_array($key, $keys)) {
-        $content['#attributes']['class'] = array('dropdown');
-        $content['#prefix'] = '<div class="action-group-wrapper dropdown">';
-        $content['#suffix'] = '</div>';
-        $drop_id = \Drupal\Component\Utility\Html::getUniqueId('dropdown-menu-button');
-        $content['button']['#attributes']['id'][] = $drop_id;
-        $content['button']['#attributes']['data-toggle'][] = 'dropdown';
-        $content['button']['#attributes']['aria-haspopup'][] = 'true';
-        $content['button']['#attributes']['aria-expanded'][] = 'false';
-        $content['button']['#attributes']['type'][] = 'button';
-        $content['button']['#attributes']['class'][] = 'btn';
-        $content['button']['#attributes']['class'][] = 'btn-lg';
-        $content['button']['#attributes']['class'][] = 'btn-primary';
-
-        $js_hide = array_search('js-hide', $content['group']['#attributes']['class']);
-        if ($js_hide) {
-          unset($content['group']['#attributes']['class'][$js_hide]);
-        }
-
-        $content['group']['#attributes']['class'][] = 'dropdown-menu';
-        $content['group']['#attributes']['class'][] = 'dropdown-menu-right';
-        $content['group']['#attributes']['aria-labelledby'][] = $drop_id;
-
-        $links = array();
-        foreach ($content['group']['links']['#links'] as $key => &$link) {
-          $link['attributes']['class'][] = 'dropdown-item';
-          $links[$key] = array(
-            '#type' => 'link',
-            '#attributes' => $link['attributes'],
-            '#title' => $link['title'],
-            '#url' => $link['url'],
-          );
-        }
-
-        // Move links out of unordered list #links.
-        if (!empty($links)) {
-          $content['group']['links'] = $links;
-        }
-      }
-    }
-
-    // Replace text with icon.
-    if (isset($variables['content']['contacts.contact_create_group'])) {
-      $variables['content']['contacts.contact_create_group']['button']['#value'] = '+';
-      $variables['content']['contacts.contact_create_group']['button']['#attributes']['class'][] = 'button-action-icon';
-    }
-
-  }
-  elseif ($variables['base_plugin_id'] == 'views_block') {
-    if ($variables['elements']['#base_plugin_id'] == 'views_block') {
-      $view_classes = explode(' ', $variables['elements']['content']['#view']->display_handler->getOption('css_class'));
-      if (in_array('view-fill-scroll', $view_classes)) {
-        $variables['attributes']['class'][] = 'app-flex';
-        $variables['attributes']['class'][] = 'flex-fill-scroll';
-        unset($variables['content']['#theme_wrappers']);
-      }
-    }
-  }
-  elseif ($variables['plugin_id'] == 'contacts_back') {
-    $pos = array_search('button', $variables['content']['#options']['attributes']['class']);
-    if ($pos !== FALSE) {
-      unset($variables['content']['#options']['attributes']['class'][$pos]);
-    }
-    $variables['content']['#options']['attributes']['class'][] = 'btn';
-    $variables['content']['#options']['attributes']['class'][] = 'btn-secondary';
-  }
-  elseif ($variables['base_plugin_id'] == 'contacts_entity') {
-    // Show inline dashboard fields in columns.
-    $variables['content']['view'] += ['#columns' => TRUE];
-  }
-  elseif ($variables['plugin_id'] == 'contact_summary_tab') {
-    $variables['content']['#content']['left']['content']['view']['#columns'] =
-      $variables['content']['#content']['right']['content']['view']['#columns'] = [
-        'label' => ['col-md-6', 'col-xl-4'],
-        'content' => ['col-md'],
-        '_offset' => ['offset-md-6', 'offset-xl-4'],
-      ];
-  }
-}
-
-/**
- * Implements hook_preprocess_HOOK() for contacts_dashboard layout.
- */
-function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
-  $in_dashboard_page = &drupal_static('contacts_theme_dashboard');
-  $in_dashboard_page = TRUE;
-
-  foreach (Element::children($variables['content']) as $region) {
-    unset($variables['content'][$region]['#prefix']);
-    unset($variables['content'][$region]['#suffix']);
-  }
-}
-
-/**
- * Implements hook_preprocess_HOOK() for contacts_dash_summary.
- */
-function contacts_theme_preprocess_contacts_dash_summary(array $variables) {
-  contacts_theme_header_image($variables['image']);
-}
-
-/**
- * Get/set the header image.
- *
- * @param array|NULL $content
- *   The render array for the header image if setting.
- *
- * @return array|NULL
- *   The render array for the header image or NULL if there is none.
- */
-function contacts_theme_header_image(array $content = NULL) {
-  $image = &drupal_static('contacts_theme_header_image');
-  if ($content) {
-    $image = $content;
-  }
-  return $image;
-}
-
-/**
- * Implements hook_preprocess_HOOK() for pager.
- *
- * @see \template_preprocess_pager()
- */
-function contacts_theme_preprocess_pager(&$variables) {
-  if (isset($variables['items'])) {
-    foreach ($variables['items'] as $key => &$item) {
-      if ($key == 'pages') {
-        foreach ($item as &$page_item) {
-          $page_item['attributes'] = new Attribute(['class' => ['page-link']]);
-        }
-      }
-      else {
-        $item['attributes'] = new Attribute(['class' => ['page-link']]);
-      }
-    }
-  }
-}
-
-/**
- * Implements hook_views_pre_render().
- */
-function contacts_theme_views_pre_render(ViewExecutable $view) {
-  if ($view->id() == 'contacts_dashboard_indexed') {
-    $view->display_handler->setOption('css_class', 'view-fill-scroll');
-    if (isset($view->header['result'])) {
-      $view->header['result']->options['content'] = '<div class="view-result-header">' . $view->header['result']->options['content'] . '</div>';
-    }
-  }
-
-  $css_class = Html::getClass('views-view-' . $view->id()) . ' ' . $view->display_handler->getOption('css_class');
-  $view->display_handler->setOption('css_class', $css_class);
-}
-
-/**
- * Implements hook_preprocess_HOOK() for image_style.
- */
-function contacts_theme_preprocess_image_style(&$variables) {
-  if (substr($variables['style_name'], 0, 9) == 'contacts_') {
-    $variables['image']['#attributes']['class'][] = 'img-thumbnail';
-
-    // Remove the height/width as they conflict with the image padding/border.
-    unset($variables['image']['#width'], $variables['image']['#height']);
-  }
-}
-
-/**
- * Implements hook_preprocess_HOOK() for contacts_dash_tabs.
- */
-function contacts_theme_preprocess_contacts_dash_tabs(&$variables) {
-  $variables['attributes']['class'][] = 'nav';
-  $variables['attributes']['class'][] = 'nav-tabs';
-  foreach ($variables['tabs'] as &$tab) {
-    $tab['attributes']->addClass('nav-item');
-    $tab['link_attributes']->addClass('nav-link');
-    if ($tab['attributes']->hasClass('is-active')) {
-      $tab['attributes']->removeClass('is-active');
-      $tab['link_attributes']->addClass('active');
-      $tab['link_attributes']->removeClass('is-active');
-    }
-  }
-}
-
-/**
- * Implements hook_preprocess_HOOK() for status_messages.
- *
- * Add bootstrap classes for alerts.
- */
-function contacts_theme_preprocess_status_messages(&$variables) {
-  $variables['type_classes'] = [
-    'error' => 'danger',
-    'warning' => 'warning',
-    'status' => 'info',
-  ];
 }
 
 /**
@@ -309,17 +75,5 @@ function contacts_theme_preprocess(&$variables, $hook) {
   // If this is an entity type, pass on to our relevant preprocess.
   if (in_array($hook, $entity_types)) {
     _contacts_theme_preprocess_entity($variables, $hook);
-  }
-}
-
-/**
- * Implement hook_preprocess_HOOK() for menu_local_tasks.
- */
-function contacts_theme_preprocess_menu_local_task(&$variables) {
-  $variables['attributes']['class'][] = 'nav-item';
-  $variables['link']['#options']['attributes']['class'][] = 'nav-link';
-  $variables['link']['#options']['set_active_class'] = FALSE;
-  if (!empty($variables['is_active'])) {
-    $variables['link']['#options']['attributes']['class'][] = 'active';
   }
 }
