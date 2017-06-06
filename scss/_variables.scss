@@ -1,6 +1,10 @@
 $brand-primary: #5ec0d0 !default;
 
 $app-breakpoint: lg;
+$sidebar-widths: (
+  lg: 300px,
+  xl: 400px
+);
 
 @import "../node_modules/bootstrap/scss/variables";
 

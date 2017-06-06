@@ -141,7 +141,7 @@ body {
   }
 
   .layout-logo {
-    flex: 0 0 300px;
+    flex: 0 0 map_get($sidebar-widths, $app-breakpoint);
     align-self: center;
 
     img {
@@ -167,7 +167,7 @@ body {
   }
 
   .layout-sidebar-first {
-    flex: 0 0 300px;
+    flex: 0 0 map_get($sidebar-widths, $app-breakpoint);
     overflow-y: auto;
   }
 
@@ -185,6 +185,17 @@ body {
         margin-top: calc(#{$heading-inner-height} - (#{map_get($header-image-size, y)} + #{map_get($content-padding-parts, y)}));
         min-height: calc(#{map_get($header-image-size, x)} - #{$heading-inner-height});
         margin-left: calc(#{map_get($header-image-size, x)} + #{map_get($content-padding-parts, x)});
+      }
+    }
+  }
+}
+
+@each $breakpoint, $width in $sidebar-widths {
+  @if ($breakpoint != $app-breakpoint) {
+    @include media-breakpoint-up($breakpoint) {
+      .layout-logo,
+      .layout-sidebar-first {
+        flex-basis: $width;
       }
     }
   }

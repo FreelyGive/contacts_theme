@@ -428,6 +428,11 @@ body {
       margin-top: calc(3.25rem - (102px + 0.5rem + 1rem));
       min-height: calc(102px + 0.5rem - 3.25rem);
       margin-left: calc(102px + 0.5rem + 1rem); } }
+@media (min-width: 1200px) {
+  .layout-logo,
+  .layout-sidebar-first {
+    -ms-flex-preferred-size: 400px;
+        flex-basis: 400px; } }
 html {
   -moz-box-sizing: border-box;
        box-sizing: border-box; }
