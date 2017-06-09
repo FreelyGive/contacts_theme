@@ -1,0 +1,14 @@
+{#
+/**
+ * @file
+ * Theme override to remove markup around the system main block.
+ */
+#}
+<div{{ attributes }}>
+  {% if label %}
+    <h5{{ title_attributes }}>{{ label }}</h5>
+  {% endif %}
+  <div {{ content_attributes }}>
+    {{ content }}
+  </div>
+</div>

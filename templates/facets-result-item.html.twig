@@ -12,12 +12,11 @@
  * @ingroup themeable
  */
 #}
-{% if is_active %}
-  <span class="facet-item__status js-facet-deactivate">-</span>
-{% else %}
-  <span class="facet-item__status">+</span>
-{% endif %}
-<span class="facet-item__value">{{ value }}</span>
+<span>{{ value }}</span>
 {% if show_count %}
-  <span class="facet-item__count">({{ count }})</span>
+  {% if is_active %}
+    <span class="ml-auto align-self-center facet-item__count badge badge-pill badge-default">{{ count }}</span>
+  {% else %}
+    <span class="ml-auto align-self-center facet-item__count badge badge-pill badge-primary">{{ count }}</span>
+  {% endif %}
 {% endif %}

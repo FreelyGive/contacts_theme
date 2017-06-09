@@ -25,6 +25,47 @@ function contacts_theme_preprocess_block(&$variables) {
     }
   }
 
+  if ($variables['base_plugin_id'] == 'facet_block') {
+    $collapsed = TRUE;
+    if (in_array($variables['plugin_id'], array('facet_block:crm_roles', 'facet_block:crm_type'))) {
+      $collapsed = FALSE;
+    }
+    $facet_id = \Drupal\Component\Utility\Html::getUniqueId('facet-dropdown-button');
+    // Add properties to facet block title.
+    $variables['attributes']['class'][] = 'mb-4';
+    $variables['title_attributes']['class'][] = 'facet-toggle';
+    $variables['title_attributes']['data-target'][] = "#$facet_id";
+    $variables['title_attributes']['data-toggle'][] = 'collapse';
+    $variables['title_attributes']['aria-controls'][] = $facet_id;
+    // Add properties to facet block content wrapper.
+    $variables['content_attributes']['id'] = $facet_id;
+    $variables['content_attributes']['class'][] = 'collapse';
+
+    if ($collapsed) {
+      $variables['title_attributes']['aria-expanded'][] = 'false';
+      $variables['title_attributes']['class'][] = 'collapsed';
+      $variables['content_attributes']['aria-expanded'][] = 'false';
+    }
+    else {
+      $variables['title_attributes']['aria-expanded'][] = 'true';
+      $variables['content_attributes']['aria-expanded'][] = 'true';
+      $variables['content_attributes']['class'][] = 'show';
+
+    }
+
+    $content = &$variables['content'][0];
+    foreach ($content['#items'] as &$item) {
+      // Add properties to facet links.
+      $item['#attributes']['class'][] = 'facet-item';
+      $item['#attributes']['class'][] = 'facet-item-default';
+      $item['#attributes']['class'][] = 'd-flex';
+      // Add active class.
+      if (is_numeric(array_search('is-active', $item['#attributes']['class']))) {
+        $item['#attributes']['class'][] = 'active';
+      }
+    }
+  }
+
   if ($variables['plugin_id'] == 'local_actions_block') {
     $keys = [
       'contacts.contact_create_group',

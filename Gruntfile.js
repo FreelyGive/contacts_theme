@@ -46,7 +46,11 @@ module.exports = function(grunt) {
         {
           expand: true,
           cwd: 'node_modules/bootstrap/js/dist',
-          src: 'dropdown.js',
+          src: [
+            'util.js',
+            'dropdown.js',
+            'collapse.js'
+          ],
           dest: 'js'
         }
     }

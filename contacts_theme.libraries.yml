@@ -22,4 +22,6 @@ action.group:
     state:
       css/contacts/action-group.css: {}
   js:
+    js/util.js: {}
     js/dropdown.js: {}
+    js/collapse.js: {}

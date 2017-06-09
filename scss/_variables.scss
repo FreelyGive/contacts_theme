@@ -32,3 +32,25 @@ $header-image-size: (
 
 $inverse-link-color: $white !default;
 $inverse-link-hover-color: darken($inverse-link-color, 15%) !default;
+
+
+// Facets
+//
+// Facet contents.
+
+$facet-min-width:             $dropdown-min-width;
+$facet-padding-y:             $dropdown-padding-y;
+$facet-margin-top:            $dropdown-margin-top;
+$facet-bg:                    $dropdown-bg;
+$facet-border-color:          $dropdown-border-color;
+$facet-border-width:          $dropdown-border-width;
+$facet-divider-bg:            $dropdown-divider-bg;
+$facet-box-shadow:            $dropdown-box-shadow;
+$facet-link-color:            white !default;
+$facet-link-hover-color:      $dropdown-link-hover-color;
+$facet-link-hover-bg:         $dropdown-link-hover-bg;
+$facet-link-active-color:     $dropdown-link-active-color;
+$facet-link-active-bg:        $dropdown-link-active-bg;
+$facet-link-disabled-color:   $dropdown-link-disabled-color;
+$facet-item-padding-x:        $dropdown-item-padding-x;
+$facet-header-color:          $dropdown-header-color;
