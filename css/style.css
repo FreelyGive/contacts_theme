@@ -328,6 +328,24 @@ body {
     .layout-sidebar-first a:not(.btn):focus, .layout-sidebar-first a:not(.btn):hover, .layout-sidebar-first .btn-link:focus, .layout-sidebar-first .btn-link:hover {
       color: #d9d9d9; }
 
+.layout-sidebar-second {
+  -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-order: 2;
+      order: 2;
+  background: #636c72;
+  color: #eceeef;
+  padding: 1rem 1rem;
+  font-size: 0.875rem; }
+  .layout-sidebar-second a:not(.btn), .layout-sidebar-second .btn-link {
+    color: #fff; }
+    .layout-sidebar-second a:not(.btn):focus, .layout-sidebar-second a:not(.btn):hover, .layout-sidebar-second .btn-link:focus, .layout-sidebar-second .btn-link:hover {
+      color: #d9d9d9; }
+
 @media (min-width: 576px) and (max-width: 767px) {
   .layout-heading .header-spacer {
     display: block;
@@ -3564,6 +3582,13 @@ button.close {
 .field-title {
   margin-bottom: 0;
   font-weight: bold; }
+
+.drag-area {
+  min-height: 10px;
+  padding: 20px; }
+
+.drag-area.show {
+  border: 1px blue dotted; }
 
 .align-baseline {
   vertical-align: baseline !important; }

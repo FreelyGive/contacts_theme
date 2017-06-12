@@ -8,4 +8,6 @@ set classes = [
   <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
   {{ page.content }}
+
+  {% include directory ~ '/templates/parts/sidebar.html.twig' %}
 </main>
