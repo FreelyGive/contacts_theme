@@ -28,3 +28,5 @@ libraries-extend:
     - contacts_theme/listings
   contacts/action.group:
     - contacts_theme/action.group
+  contacts/tabs:
+    - contacts_theme/tabs

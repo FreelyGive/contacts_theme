@@ -23,3 +23,8 @@ action.group:
       css/contacts/action-group.css: {}
   js:
     js/dropdown.js: {}
+
+# AJAXed tabs with history (if supported).
+tabs:
+  js:
+    js/tabs.js: {}
