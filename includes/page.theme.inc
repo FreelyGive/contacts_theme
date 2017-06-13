@@ -58,7 +58,32 @@ function contacts_theme_preprocess_menu_local_task(&$variables) {
  */
 function contacts_theme_preprocess_pager(&$variables) {
   if (isset($variables['items'])) {
-    foreach ($variables['items'] as $key => &$item) {
+    $items = &$variables['items'];
+
+    // Ensure we always have first/prev/next/last so we're nicely centered.
+    $items += [
+      'first' => ['disabled' => TRUE],
+      'previous' => ['disabled' => TRUE],
+      'next' => ['disabled' => TRUE],
+      'last' => ['disabled' => TRUE],
+    ];
+
+    // Ensure our tags are always set.
+    $tags = $variables['pager']['#tags'];
+    if (isset($tags[0])) {
+      $items['first']['text'] = $tags[0];
+    }
+    if (isset($tags[1])) {
+      $items['previous']['text'] = $tags[1];
+    }
+    if (isset($tags[3])) {
+      $items['next']['text'] = $tags[3];
+    }
+    if (isset($tags[4])) {
+      $items['last']['text'] = $tags[4];
+    }
+
+    foreach ($items as $key => &$item) {
       if ($key == 'pages') {
         foreach ($item as &$page_item) {
           $page_item['attributes'] = new Attribute(['class' => ['page-link']]);
