@@ -66,11 +66,12 @@ body {
 }
 
 .layout-sidebar-second {
+  box-shadow: -3px 0 5px rgba(0,0,0,0.05);
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   order: 2;
-  @include colour-invert();
+  background-color: #fff;
   padding: $content-padding;
   font-size: $font-size-sm;
   -webkit-transition: margin 0.5s ease-in-out;

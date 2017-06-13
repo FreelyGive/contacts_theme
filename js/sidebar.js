@@ -1,6 +1,6 @@
 /**
  * @file
- * Contacts' enhancements to actions to allow dropdown grouping.
+ * Contacts' theme enhancements to allow a collapsible sidebar.
  */
 
 (function ($, Drupal) {
@@ -17,12 +17,8 @@
      */
     Drupal.behaviors.contactsThemeSideBar = {
         attach: function (context, settings) {
-            $('.action-group-control', context).on('click', function () {
-                var $this = $(this);
-                $('#' + $this.attr('data-action-group')).toggle();
-            });
-
             $(".action-group-drag-n-drop").click(function(e) {
+                console.log('click');
                 e.preventDefault();
                 var sidebar = jQuery(this).attr('data-target');
                 sidebar = $(sidebar);

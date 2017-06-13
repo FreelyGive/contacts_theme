@@ -22,12 +22,11 @@
 
     transition: transform 0.5s;
     transform: rotate(180deg);
-
-    &.collapsed {
-      transform: rotate(0deg);
-    }
   }
 
+  &.collapsed:after {
+    transform: rotate(0deg);
+  }
   // Prevent the focus on the facet toggle when closing facets.
   &:focus {
     outline: 0;

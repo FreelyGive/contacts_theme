@@ -5,6 +5,9 @@
 .drag-area.show {
   border: 3px lightblue dashed; }
 
+.list-group.collapse {
+  display: none; }
+
 .drag-area.show.highlighted {
   border: 3px blue dashed;
   background: beige; }

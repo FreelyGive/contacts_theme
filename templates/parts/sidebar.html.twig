@@ -5,40 +5,46 @@
   <br>
   <br>
 
-  {#<div class="block-facet--links mb-4">#}
-    {#<h5 class="facet-toggle collapsed" data-target="#facet-dropdown-button-test1" data-toggle="collapse" aria-controls="facet-dropdown-button" aria-expanded="false">Profiles</h5>#}
-    {#<div id="facet-dropdown-button-test1" class="collapse" aria-expanded="false">#}
-      {#<div rel="nofollow" data-drupal-facet-item-value="crm_org" class="facet-item facet-item-default d-flex">#}
-        {#<div id="drag3" class="draggable" ondragstart="drag(event)" ondragend="dragEnd(event)" draggable="true">#}
-          {#<span class="menu-content">Custom Profile 1</span>#}
-          {#<div class="page-content"><h2>Custom Profile 1</h2></div>#}
-        {#</div>#}
-      {#</div>#}
-      {#<div rel="nofollow" data-drupal-facet-item-value="crm_indiv" class="facet-item facet-item-default d-flex">#}
-        {#<div id="drag4" class="draggable" ondragstart="drag(event)" ondragend="dragEnd(event)" draggable="true">#}
-          {#<span class="menu-content">Custom Profile 2</span>#}
-          {#<div class="page-content"><h2>Custom Profile 2</h2></div>#}
-        {#</div>#}
-      {#</div>#}
-    {#</div>#}
-  {#</div>#}
-
-  <div class="block-facet--links mb-4">
-    <h5 class="facet-toggle collapsed" data-target="#facet-dropdown-button-test2" data-toggle="collapse" aria-controls="facet-dropdown-button" aria-expanded="false">Views</h5>
-    <div id="facet-dropdown-button-test2" class="collapse" aria-expanded="false">
-      <div rel="nofollow" data-drupal-facet-item-value="crm_org" class="facet-item facet-item-default d-flex">
+  <div class="card block-facet--links mb-4">
+    <h5 class="card-header facet-toggle collapsed" data-target="#facet-dropdown-button-test1" data-toggle="collapse" aria-controls="facet-dropdown-button" aria-expanded="false">Profiles</h5>
+    <ul id="facet-dropdown-button-test1" aria-expanded="false" class="collapse list-group list-group-flush ">
+      <div class="list-group-item">
+        <div id="drag3" class="draggable">
+          <span class="menu-content">Custom Profile 1</span>
+          <div class="page-content"><h2>Custom Profile 1</h2></div>
+        </div>
+      </div>
+      <div class="list-group-item">
+        <div id="drag4" class="draggable">
+          <span class="menu-content">Custom Profile 2</span>
+          <div class="page-content"><h2>Custom Profile 2</h2></div>
+        </div>
+      </div>
+      <div class="list-group-item">
         <div id="drag5" class="draggable">
+          <span class="menu-content">Custom Profile 3</span>
+          <div class="page-content"><h2>Custom Profile 3</h2></div>
+        </div>
+      </div>
+    </ul>
+  </div>
+
+  <div class="card block-facet--links mb-4">
+    <h5 class="card-header facet-toggle collapsed" data-target="#facet-dropdown-button-test2" data-toggle="collapse" aria-controls="facet-dropdown-button" aria-expanded="false">Views</h5>
+    <ul id="facet-dropdown-button-test2" aria-expanded="false" class="collapse list-group list-group-flush ">
+      <div class="list-group-item">
+        <div id="drag6" class="draggable">
           <span class="menu-content">Custom View 1</span>
           <div class="page-content"><h2>Custom View 1</h2></div>
         </div>
       </div>
-      <div rel="nofollow" data-drupal-facet-item-value="crm_indiv" class="facet-item facet-item-default d-flex">
-        <div id="drag6" class="draggable">
+      <div class="list-group-item">
+        <div id="drag7" class="draggable">
           <span class="menu-content">Custom View 2</span>
           <div class="page-content"><h2>Custom View 2</h2></div>
         </div>
       </div>
-    </div>
+    </ul>
   </div>
 
 </div>

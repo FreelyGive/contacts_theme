@@ -1,20 +1,12 @@
 /**
  * @file
- * Contacts' enhancements to actions to allow dropdown grouping.
+ * Contacts' theme enhancements to actions to allow drag and drop.
  */
 
 (function ($, Drupal) {
 
     'use strict';
 
-    /**
-     * Control dropdown action groups.
-     *
-     * @type {Drupal~behavior}
-     *
-     * @prop {Drupal~behaviorAttach} attach
-     *   Set our tabs up to use AJAX requests.
-     */
     Drupal.behaviors.contactsThemeDraggable = {
         attach: function (context, settings) {
             $(document).on('dragActive', function() {
@@ -29,15 +21,7 @@
                         ui.helper.find('h2').addClass('card-header');
                     }
                 });
-                // $('.layout-sidebar-second .draggable').draggable('enable');
-
-
             });
-
-            $(document).on('dragInactive', function() {
-                // $('.layout-sidebar-second .draggable').draggable('disable');
-            });
-
         }
     };
 
@@ -53,15 +37,16 @@
                         editLink.click(function (ev) {
                             ev.preventDefault();
                             var heading = $(this).parent().parent().prev(),
-                                field = '<input type="text" name="firstname" value="'+heading.text()+'">' +
+                                fields = '<input type="text" name="firstname" value="'+heading.text()+'" class="js-text-full text-full form-textfield form-control">' +
                                         '<input type="submit" value="Save" class="js-form-submit drag-save-title form-submit btn btn-primary">';
-                            heading.html(field);
+                            heading.replaceWith(fields);
 
                             $('.drag-save-title').click(function() {
-                                console.log('save');
+                                var heading = $(this).siblings("[name='firstname']"),
+                                    newHeading = heading.val();
+                                heading.replaceWith('<h2 class="card-header">'+newHeading+'</h2>');
+                                $(this).remove();
                             });
-
-                            // $(this).parents('.draggable').remove();
                         });
                     }
                 });
@@ -116,10 +101,10 @@
                 draggable.addClass('card');
                 draggableHeading.addClass('card-header');
                 draggableHeading.each(function() {
-                    var text = $(this).text(),
-                        i = text.indexOf('[');
+                    var text = $(this).children('a').text(),
+                        i = text.indexOf('Edit');
                     if (i >= 0) {
-                        $(this).text(text.substring(0, i));
+                        $(this).children('a').remove();
                     }
                 });
 
@@ -137,48 +122,5 @@
             });
         }
     };
-
-    /**
-     * Control dropdown action groups.
-     *
-     * @type {Drupal~behavior}
-     *
-     * @prop {Drupal~behaviorAttach} attach
-     *   Set our tabs up to use AJAX requests.
-     */
-    // Drupal.behaviors.contactsThemeDragNDrop = {
-    //     attach: function (context, settings) {
-    //         $(document).on('dragActive', function() {
-    //             var drags = $('.draggable');
-    //             drags.attr('draggable', 'true');
-    //
-    //             function addDelete() {
-    //                 $('.delete-draggable').each(function() {
-    //                     var deleteLink = $(this);
-    //                     if (!deleteLink.hasClass('processed')) {
-    //                         deleteLink.click(function(ev) {
-    //                             ev.preventDefault();
-    //                             $(this).parents('.draggable').remove();
-    //                         });
-    //                     }
-    //                 });
-    //             }
-    //
-    //             drags.each(function(i) {
-    //                 var markup = $('<div class="drag-meta"><a class="delete-draggable" href="#">Delete</a></div>')
-    //                 $(this).append(markup);
-    //                 addDelete();
-    //             })
-    //         });
-    //
-    //         $(document).on('dragInactive', function() {
-    //             var drags = $('.draggable');
-    //             drags.attr('draggable', 'false');
-    //             $('.drag-meta').remove();
-    //         });
-    //     }
-    // };
-    //
-    // console.log(Drupal);
 
 })(jQuery, Drupal);
