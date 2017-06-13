@@ -95,7 +95,7 @@ function contacts_theme_preprocess_block(&$variables) {
       unset($variables['content']['#options']['attributes']['class'][$pos]);
     }
     $variables['content']['#options']['attributes']['class'][] = 'btn';
-    $variables['content']['#options']['attributes']['class'][] = 'btn-secondary';
+    $variables['content']['#options']['attributes']['class'][] = 'btn-primary';
   }
   elseif ($variables['base_plugin_id'] == 'contacts_entity') {
     // Show inline dashboard fields in columns.
