@@ -309,7 +309,7 @@ body {
 .layout-content {
   -ms-flex: 0 0 auto;
       flex: 0 0 auto;
-  padding: 1.5rem 1.5rem; }
+  padding: 1.5rem; }
 
 .layout-sidebar-first {
   -ms-flex: 0 0 auto;
@@ -320,7 +320,7 @@ body {
       flex-direction: column;
   -ms-flex-order: -1;
       order: -1;
-  padding: 1.5rem 1.5rem;
+  padding: 1.5rem;
   font-size: 0.875rem;
   background: #636c72;
   color: #eceeef;
@@ -6144,7 +6144,7 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     .highlight a:not(.btn):focus, .highlight a:not(.btn):hover, .highlight .btn-link:focus, .highlight .btn-link:hover {
       color: #d9d9d9; }
   .layout-sidebar-first > .highlight {
-    padding: 1.5rem 1.5rem;
+    padding: 1.5rem;
     margin: 0 -1.5rem 1.5rem; }
     .layout-sidebar-first > .highlight:first-child, .layout-sidebar-first > .highlight + .highlight {
       margin-top: -1.5rem; }

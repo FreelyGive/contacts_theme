@@ -22,7 +22,7 @@ $content-padding-parts: (
   y: map_get(map_get($spacers, 3), y) * 1.5,
   x: map_get(map_get($spacers, 3), x) * 1.5
 );
-$content-padding: map_get($content-padding-parts, y) map_get($content-padding-parts, x);
+$content-padding: if(map_get($content-padding-parts, y) == map_get($content-padding-parts, x), map_get($content-padding-parts, y), map_get($content-padding-parts, y) map_get($content-padding-parts, x));
 
 // Header image is 100x100 px + 1px border + $thumbnail-padding.
 $header-image-size: (
