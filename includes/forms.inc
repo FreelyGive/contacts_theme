@@ -27,6 +27,8 @@ function contacts_theme_form_views_exposed_form_alter(&$form, FormStateInterface
     $form['search']['#has_addons'] = TRUE;
     $form['search']['submit'] = $form['actions']['submit'];
     $form['search']['submit']['#weight'] = 1;
+    $form['search']['submit']['#attributes']['class'][] = 'btn';
+    $form['search']['submit']['#attributes']['class'][] = 'btn-primary';
     unset($form['actions']['submit']);
   }
 }
