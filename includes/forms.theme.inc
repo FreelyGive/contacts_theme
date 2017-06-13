@@ -303,3 +303,29 @@ function contacts_theme_composite_pre_render($element) {
   }
   return $element;
 }
+
+/**
+ * Pre-render callback for containers to prevent rendering empty elements.
+ */
+function contacts_theme_pre_render_ignore_empty($element) {
+  // If already printed or access is FALSE, we don't need to do any more.
+  if (!empty($element['#printed']) || !contacts_theme_check_access($element)) {
+    return $element;
+  }
+
+  // Look for any accessible children.
+  $has_children = FALSE;
+  foreach (Element::children($element) as $key) {
+    if (contacts_theme_check_access($element[$key])) {
+      $has_children = TRUE;
+      break;
+    }
+  }
+
+  // Prevent rendering if there are no accessible children.
+  if (!$has_children) {
+    $element['#printed'] = TRUE;
+  }
+
+  return $element;
+}

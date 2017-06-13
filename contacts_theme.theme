@@ -34,8 +34,12 @@ function contacts_theme_element_info_alter(array &$info) {
   $info['checkboxes']['#pre_render'] = ['contacts_theme_composite_pre_render'];
   $info['checkboxes']['#theme_wrappers'][] = 'form_element';
 
-  // Add a preprocess for actions.
+  // Add preprocessors for actions.
   $info['actions']['#pre_render'][] = 'contacts_theme_pre_render_actions';
+  $info['actions']['#pre_render'][] = 'contacts_theme_pre_render_ignore_empty';
+
+  // Add a preprocess for container.
+  $info['container']['#pre_render'][] = 'contacts_theme_pre_render_ignore_empty';
 }
 
 /**
