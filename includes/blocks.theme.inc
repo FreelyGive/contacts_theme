@@ -99,7 +99,9 @@ function contacts_theme_preprocess_block(&$variables) {
   }
   elseif ($variables['base_plugin_id'] == 'contacts_entity') {
     // Show inline dashboard fields in columns.
-    $variables['content']['view'] += ['#columns' => TRUE];
+    if (isset($variables['content']['view'])) {
+      $variables['content']['view'] += ['#columns' => TRUE];
+    }
   }
   elseif ($variables['plugin_id'] == 'contact_summary_tab') {
     $variables['content']['#content']['left']['content']['view']['#columns'] =
