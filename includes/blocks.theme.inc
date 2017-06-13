@@ -25,7 +25,52 @@ function contacts_theme_preprocess_block(&$variables) {
     }
   }
 
-  if ($variables['plugin_id'] == 'local_actions_block') {
+  if ($variables['base_plugin_id'] == 'facet_block') {
+    $variables['#attached']['library'][] = 'contacts_theme/bootstrap.collapse';
+
+    $collapsed = !in_array($variables['plugin_id'], array('facet_block:crm_roles', 'facet_block:crm_type'));
+    $facet_id = Html::getUniqueId('facet-dropdown-button');
+
+    // Add some margin between facets.
+    $variables['attributes']['class'][] = 'mb-4';
+
+    // Add properties to facet block title.
+    $variables['title_attributes']['class'][] = 'facet-toggle';
+    $variables['title_attributes']['data-target'][] = "#{$facet_id}";
+    $variables['title_attributes']['data-toggle'][] = 'collapse';
+    $variables['title_attributes']['aria-controls'][] = $facet_id;
+
+    // Add properties to facet block content wrapper.
+    $variables['content_attributes']['id'] = $facet_id;
+    $variables['content_attributes']['class'][] = 'collapse';
+
+    // Set the default collapsed state.
+    if ($collapsed) {
+      $variables['title_attributes']['aria-expanded'][] = 'false';
+      $variables['title_attributes']['class'][] = 'collapsed';
+      $variables['content_attributes']['aria-expanded'][] = 'false';
+    }
+    else {
+      $variables['title_attributes']['aria-expanded'][] = 'true';
+      $variables['content_attributes']['aria-expanded'][] = 'true';
+      $variables['content_attributes']['class'][] = 'show';
+
+    }
+
+    // Add our facet classes.
+    $content = &$variables['content'][0];
+    foreach ($content['#items'] as &$item) {
+      $item['#attributes']['class'][] = 'facet-item';
+      $item['#attributes']['class'][] = 'facet-item-default';
+      $item['#attributes']['class'][] = 'd-flex';
+
+      // Add active class, if required.
+      if (in_array('is-active', $item['#attributes']['class'])) {
+        $item['#attributes']['class'][] = 'active';
+      }
+    }
+  }
+  elseif ($variables['plugin_id'] == 'local_actions_block') {
     $keys = [
       'contacts.contact_create_group',
       'contacts.contact_configure_group',

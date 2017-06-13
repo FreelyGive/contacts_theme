@@ -32,3 +32,16 @@ $header-image-size: (
 
 $inverse-link-color: $white !default;
 $inverse-link-hover-color: darken($inverse-link-color, 15%) !default;
+
+
+// Facets
+
+$facet-padding-y:             .5rem;
+$facet-link-color:            $white !default;
+$facet-link-hover-color:      darken($gray-dark, 5%) !default;
+$facet-link-hover-bg:         $gray-lightest !default;
+$facet-link-active-color:     $component-active-color !default;
+$facet-link-active-bg:        $component-active-bg !default;
+$facet-link-disabled-color:   $gray-light !default;
+$facet-item-padding-x:        1.5rem !default;
+$facet-header-color:          $gray-light !default;

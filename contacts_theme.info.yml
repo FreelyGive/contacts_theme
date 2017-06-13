@@ -20,6 +20,9 @@ regions_hidden:
 
 libraries-override:
   contacts/dashboard.layout: false
+  contacts/action.group:
+    js:
+      js/action-group.js: false
 
 libraries-extend:
   contacts/contact:
