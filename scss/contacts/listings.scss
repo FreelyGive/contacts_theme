@@ -4,8 +4,28 @@
 .views-view-contacts-dashboard-indexed {
   > .view-content {
     border: $nav-tabs-border-width solid $table-border-color;
+    @include border-radius();
     background: $white;
     @include colour-reset;
+
+    & + nav > .pagination {
+      margin-top: -1px;
+
+      @if $enable-rounded {
+        .page-item {
+          &:first-child {
+            .page-link {
+              border-top-left-radius: 0;
+            }
+          }
+          &:last-child {
+            .page-link {
+              border-top-right-radius: 0;
+            }
+          }
+        }
+      }
+    }
   }
 }
 

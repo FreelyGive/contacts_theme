@@ -10,6 +10,10 @@
   @include flex-fill(y, 300px);
 
   @include clearfix();
+
+  &:after {
+    padding-bottom: map_get($content-padding-parts, y);
+  }
 }
 
 .contact-summary {

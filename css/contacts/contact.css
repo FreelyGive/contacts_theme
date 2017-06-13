@@ -1,5 +1,5 @@
 .contacts-tabs-content {
-  padding: 1rem 1rem;
+  padding: 1.5rem 1.5rem;
   background: #fff;
   border: 1px solid #ddd;
   border-top-width: 0;
@@ -10,6 +10,8 @@
     display: block;
     content: "";
     clear: both; }
+  .contacts-tabs-content:after {
+    padding-bottom: 1.5rem; }
 
 .contact-summary {
   padding-bottom: 0;

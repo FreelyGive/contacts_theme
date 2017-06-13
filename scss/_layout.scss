@@ -1,3 +1,6 @@
+html {
+  font-size: 14px;
+}
 html,
 body {
   height: 100%;
@@ -19,8 +22,9 @@ body {
   flex-direction: column;
 
   background: $gray-lighter;
+
   position: relative;
-  padding: map_get($content-padding-parts, y) map_get($content-padding-parts, x) 0;
+  padding: map_get($content-padding-parts, y) map_get($content-padding-parts, x) map_get($content-padding-parts, y)/2;
 
   .contacts-header-image {
     text-align: center;
@@ -56,9 +60,10 @@ body {
   display: flex;
   flex-direction: column;
   order: -1;
-  @include colour-invert();
   padding: $content-padding;
   font-size: $font-size-sm;
+  @include colour-invert();
+  border-top: $spacer-y * 2 solid $gray-lighter;
 }
 
 @include media-breakpoint-only(sm) {
@@ -141,7 +146,7 @@ body {
   }
 
   .layout-logo {
-    flex: 0 0 map_get($sidebar-widths, $app-breakpoint);
+    flex: 0 0 $sidebar-width;
     align-self: center;
 
     img {
@@ -167,7 +172,7 @@ body {
   }
 
   .layout-sidebar-first {
-    flex: 0 0 map_get($sidebar-widths, $app-breakpoint);
+    flex: 0 0 $sidebar-width;
     overflow-y: auto;
   }
 
@@ -185,17 +190,6 @@ body {
         margin-top: calc(#{$heading-inner-height} - (#{map_get($header-image-size, y)} + #{map_get($content-padding-parts, y)}));
         min-height: calc(#{map_get($header-image-size, x)} - #{$heading-inner-height});
         margin-left: calc(#{map_get($header-image-size, x)} + #{map_get($content-padding-parts, x)});
-      }
-    }
-  }
-}
-
-@each $breakpoint, $width in $sidebar-widths {
-  @if ($breakpoint != $app-breakpoint) {
-    @include media-breakpoint-up($breakpoint) {
-      .layout-logo,
-      .layout-sidebar-first {
-        flex-basis: $width;
       }
     }
   }
