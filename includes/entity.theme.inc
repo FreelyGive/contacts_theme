@@ -42,4 +42,7 @@ function contacts_theme_preprocess_user(&$variables) {
   if ($variables['elements']['#view_mode'] == 'contacts_dashboard_row_small') {
     $variables['title_tag'] = 'h6';
   }
+  elseif ($variables['elements']['#view_mode'] == 'contacts_dashboard_row') {
+    $variables['title_tag'] = 'h4';
+  }
 }
