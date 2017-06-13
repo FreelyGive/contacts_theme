@@ -6,6 +6,8 @@
  */
 
 use Drupal\Component\Utility\Html;
+use Drupal\Component\Render\FormattableMarkup;
+use Drupal\contacts\Plugin\Block\ContactsEntity;
 
 /**
  * Implements hook_preprocess_HOOK() for block templates.
@@ -146,6 +148,43 @@ function contacts_theme_preprocess_block(&$variables) {
     // Show inline dashboard fields in columns.
     if (isset($variables['content']['view'])) {
       $variables['content']['view'] += ['#columns' => TRUE];
+    }
+
+    // If there is an edit link, adjust the markup.
+    if (isset($variables['content']['edit'])) {
+      $variables['content']['edit']['#options']['attributes']['class'][] = 'btn';
+      $variables['content']['edit']['#options']['attributes']['class'][] = 'btn-primary';
+      $variables['content']['edit']['#options']['attributes']['class'][] = 'mb-2';
+    }
+
+    // Re-write the label.
+    if (!empty($variables['label'])) {
+      if (isset($variables['elements']['#block'])) {
+        $block = $variables['elements']['#block'];
+      }
+      else {
+        $block = \Drupal::service('plugin.manager.block')
+          ->createInstance($variables['plugin_id'], $variables['configuration']);
+      }
+
+      /* @var \Drupal\contacts\Plugin\Block\ContactsEntity $block */
+      if ($link = $block->getEditLink(ContactsEntity::EDIT_LINK_TITLE)) {
+        $block->setConfigurationValue('edit_link', FALSE);
+        $attributes = $link->getUrl()->getOption('attributes');
+        $attributes['class'][] = 'btn';
+        $attributes['class'][] = 'btn-primary';
+        $attributes['class'][] = 'btn-sm';
+        $link->getUrl()->setOption('attributes', $attributes);
+        if ($label = $block->label()) {
+          $variables['label'] = new FormattableMarkup('@label @link', [
+            '@label' => $label,
+            '@link' => $link->toString(),
+          ]);
+        }
+        else {
+          $variables['label'] = $link->toString();
+        }
+      }
     }
   }
   elseif ($variables['plugin_id'] == 'contact_summary_tab') {
