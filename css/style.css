@@ -2607,7 +2607,8 @@ tbody.collapse.show {
 
 .facet-toggle {
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+  cursor: pointer; }
   .facet-toggle:after {
     display: inline-block;
     width: 0;
@@ -2620,32 +2621,23 @@ tbody.collapse.show {
     border-left: 0.3em solid transparent;
     -ms-flex-item-align: center;
         align-self: center;
-    /* Safari */
     transition: -webkit-transform 0.5s;
     transition: transform 0.5s;
-    /* IE 9 */
     -webkit-transform: rotate(180deg);
-    /* Chrome, Safari, Opera */
-    transform: rotate(180deg); }
-  .facet-toggle.collapsed:after {
-    /* IE 9 */
-    -webkit-transform: rotate(0deg);
-    /* Chrome, Safari, Opera */
-    transform: rotate(0deg); }
+            transform: rotate(180deg); }
+    .facet-toggle:after.collapsed {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg); }
   .facet-toggle:focus {
     outline: 0; }
 
 .facet-item {
   display: block;
-  width: 100%;
   padding: 3px 1.5rem;
   clear: both;
   font-weight: normal;
-  color: white !important;
-  text-align: inherit;
-  white-space: nowrap;
-  background: none;
-  border: 0; }
+  color: #fff !important;
+  white-space: nowrap; }
   .facet-item:focus, .facet-item:hover {
     text-decoration: none;
     background-color: #f7f7f9; }
@@ -2654,7 +2646,7 @@ tbody.collapse.show {
   .facet-item.active, .facet-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #5ec0d0; }
+    background-color: #5bc0de; }
   .facet-item.disabled, .facet-item:disabled {
     color: #636c72;
     cursor: not-allowed;
@@ -3243,7 +3235,7 @@ tbody.collapse.show {
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: 0; }
+  border-radius: 0.25rem; }
   .badge:empty {
     display: none; }
 
@@ -3267,9 +3259,9 @@ a.badge:focus, a.badge:hover {
     background-color: #4b5257; }
 
 .badge-primary {
-  background-color: #5ec0d0; }
+  background-color: #5bc0de; }
   .badge-primary[href]:focus, .badge-primary[href]:hover {
-    background-color: #39afc2; }
+    background-color: #31b0d5; }
 
 .badge-success {
   background-color: #5cb85c; }

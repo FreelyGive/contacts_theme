@@ -1,12 +1,13 @@
-// The facet wrapper (`<div>`)
+// The facet wrapper (`<div>`).
 .facet {
   position: relative;
 }
 
 .facet-toggle {
   display: flex;
+  cursor: pointer;
 
-  // Generate the caret automatically
+  // Generate the caret automatically.
   &:after {
     display: inline-block;
     width: 0;
@@ -19,39 +20,28 @@
     border-left: $caret-width solid transparent;
     align-self: center;
 
-    -webkit-transition: transform 0.5s; /* Safari */
     transition: transform 0.5s;
-    -ms-transform: rotate(180deg); /* IE 9 */
-    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
     transform: rotate(180deg);
+
+    &.collapsed {
+      transform: rotate(0deg);
+    }
   }
 
-  &.collapsed:after {
-    -ms-transform: rotate(0deg); /* IE 9 */
-    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
-    transform: rotate(0deg);
-  }
-
-  // Prevent the focus on the facet toggle when closing facets
+  // Prevent the focus on the facet toggle when closing facets.
   &:focus {
     outline: 0;
   }
 }
 
-// Links, buttons, and more within the facet menu
-//
-// `<button>`-specific styles are denoted with `// For <button>s`
+// Links and more within the facet menu.
 .facet-item {
   display: block;
-  width: 100%; // For `<button>`s
   padding: 3px $facet-item-padding-x;
   clear: both;
   font-weight: $font-weight-normal;
   color: $facet-link-color !important;
-  text-align: inherit; // For `<button>`s
-  white-space: nowrap; // prevent links from randomly breaking onto new lines
-  background: none; // For `<button>`s
-  border: 0; // For `<button>`s
+  white-space: nowrap; // prevent links from randomly breaking onto new lines.
 
   @include hover-focus {
     text-decoration: none;
@@ -74,27 +64,23 @@
     color: $facet-link-disabled-color;
     cursor: $cursor-disabled;
     background-color: transparent;
-    // Remove CSS gradients if they're enabled
-    @if $enable-gradients {
-      background-image: none;
-    }
   }
 }
 
-// Open state for the facet
+// Open state for the facet.
 .show {
-  // Remove the outline when :focus is triggered
+  // Remove the outline when :focus is triggered.
   > a {
     outline: 0;
   }
 }
 
-// facet section headers
+// Facet section headers.
 .facet-header {
   display: block;
   padding: $facet-padding-y $facet-item-padding-x;
-  margin-bottom: 0; // for use with heading elements
+  margin-bottom: 0;
   font-size: $font-size-sm;
   color: $facet-header-color;
-  white-space: nowrap; // as with > li > a
+  white-space: nowrap;
 }

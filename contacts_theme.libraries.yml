@@ -4,6 +4,23 @@ global:
     theme:
       css/style.css: {}
 
+# Bootstrap libraries.
+bootstrap.util:
+  js:
+    js/util.js: {}
+
+bootstrap.dropdown:
+  js:
+    js/dropdown.js: {}
+  dependencies:
+    - contacts_theme/bootstrap.util
+
+bootstrap.collapse:
+  js:
+    js/collapse.js: {}
+  dependencies:
+    - contacts_theme/collapse.util
+
 # Styling for the listings.
 listings:
   css:
@@ -21,7 +38,5 @@ action.group:
   css:
     state:
       css/contacts/action-group.css: {}
-  js:
-    js/util.js: {}
-    js/dropdown.js: {}
-    js/collapse.js: {}
+  dependencies:
+    - contacts_theme/bootstrap.dropdown
