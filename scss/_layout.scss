@@ -66,13 +66,15 @@ body {
 }
 
 .layout-sidebar-second {
-  flex: 0 0 auto;
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   order: 2;
   @include colour-invert();
   padding: $content-padding;
   font-size: $font-size-sm;
+  -webkit-transition: margin 0.5s ease-in-out;
+  transition: margin 0.5s ease-in-out;
 }
 
 @include media-breakpoint-only(sm) {
@@ -188,7 +190,7 @@ body {
   .layout-main {
     flex-direction: row;
     flex: 1 1 auto;
-    overflow-y: hidden;
+    overflow: hidden;
   }
 
   .layout-sidebar-first {
@@ -205,5 +207,33 @@ body {
   .layout-sidebar-first {
     flex: 0 0 $sidebar-width;
     overflow-y: auto;
+  }
+
+  .layout-sidebar-second {
+    flex: 0 0 $sidebar-width;
+    overflow-y: auto;
+
+
+    &.toggled {
+      margin-right: 0 - $sidebar-width;
+    }
+  }
+
+  /* Header image */
+  .with-header-image {
+    $heading-inner-height: ($font-size-h1 * $headings-line-height) + $headings-margin-bottom;
+    .layout-heading {
+      min-height: $heading-inner-height + map_get($content-padding-parts, y);
+    }
+
+    .layout-content {
+      padding-top: calc(#{map_get($header-image-size, x)} - #{$heading-inner-height - map_get($content-padding-parts, y)});
+
+      .wrap-header-image {
+        margin-top: calc(#{$heading-inner-height} - (#{map_get($header-image-size, y)} + #{map_get($content-padding-parts, y)}));
+        min-height: calc(#{map_get($header-image-size, x)} - #{$heading-inner-height});
+        margin-left: calc(#{map_get($header-image-size, x)} + #{map_get($content-padding-parts, x)});
+      }
+    }
   }
 }
