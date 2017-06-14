@@ -7,6 +7,50 @@
 
     'use strict';
 
+    console.log(Drupal);
+
+    Drupal.DnDAddEdit = function() {
+        $('.drag-area .edit-draggable').each(function () {
+            var editLink = $(this);
+            if (!editLink.hasClass('processed')) {
+                console.log('processed');
+                editLink.addClass('processed');
+                editLink.click(function (ev) {
+                    ev.preventDefault();
+                    var heading = $(this).siblings('input[name="card-title"]'),
+                        header = $(this).parent();
+                    console.log(header);
+
+                    if (header.hasClass('editing')) {
+                        header.removeClass('editing');
+                        heading.attr('disabled', true);
+                    }
+                    else {
+                        header.addClass('editing');
+                        heading.attr('disabled', false);
+                    }
+                });
+            }
+            else {
+                console.log('not')
+            }
+
+        });
+    };
+
+    Drupal.DnDAddDelete = function() {
+        $('.drag-area .delete-draggable').each(function () {
+            var deleteLink = $(this);
+            if (!deleteLink.hasClass('processed')) {
+                deleteLink.addClass('processed');
+                deleteLink.click(function (ev) {
+                    ev.preventDefault();
+                    $(this).parents('.draggable').remove();
+                });
+            }
+        });
+    };
+
     Drupal.behaviors.contactsThemeDraggable = {
         attach: function (context, settings) {
             $(document).on('dragActive', function() {
@@ -19,66 +63,78 @@
                         ui.helper.addClass('draggable-active');
                         ui.helper.addClass('card');
                         ui.helper.find('h2').addClass('card-header');
+                        Drupal.DnDAddEdit();
+                        Drupal.DnDAddDelete();
                     }
                 });
             });
         }
     };
 
-    Drupal.behaviors.contactsThemeDragMeta = {
+    Drupal.behaviors.contactsThemeDragTabs = {
         attach: function (context, settings) {
+            $(document).on('dragActive', function() {
+                $('.contacts-ajax-tabs').addClass('editing');
+                // $('.contacts-ajax-tabs .nav-link').each(function() {
+                    // $(this).addClass('working');
+                    // $(this).unbind();
+                    // $(this).click(function(ev) {
+                    //     ev.preventDefault();
+                    // });
 
+                // });
 
-            function addEdit() {
-                $('.edit-draggable').each(function () {
-                    var editLink = $(this);
-                    if (!editLink.hasClass('processed')) {
-                        editLink.addClass('processed');
-                        editLink.click(function (ev) {
-                            ev.preventDefault();
-                            var heading = $(this).parent().parent().prev(),
-                                fields = '<input type="text" name="firstname" value="'+heading.text()+'" class="js-text-full text-full form-textfield form-control">' +
-                                        '<input type="submit" value="Save" class="js-form-submit drag-save-title form-submit btn btn-primary">';
-                            heading.replaceWith(fields);
+                // $('.contacts-ajax-tabs').sortable({
+                //     revert: true,
+                //     placeholder: "nav-item nav-link tab-area-placeholder",
+                //     // connectWith: ".drag-area",
+                //     over: function( event, ui ) {
+                //         // $('.drag-area.highlighted').removeClass('highlighted');
+                //         // $(ui.placeholder).parents('.drag-area').addClass('highlighted');
+                //     },
+                //     stop: function( event, ui ) {
+                //         // $('.drag-area.highlighted').removeClass('highlighted');
+                //     }
+                // });
+            });
 
-                            $('.drag-save-title').click(function() {
-                                var heading = $(this).siblings("[name='firstname']"),
-                                    newHeading = heading.val();
-                                heading.replaceWith('<h2 class="card-header">'+newHeading+'</h2>');
-                                $(this).remove();
-                            });
-                        });
-                    }
-                });
-            }
+            $(document).on('dragInactive', function() {
+                $('.contacts-ajax-tabs').removeClass('editing');
+            });
 
-            function addDelete() {
-                $('.delete-draggable').each(function () {
-                    var deleteLink = $(this);
-                    if (!deleteLink.hasClass('processed')) {
-                        deleteLink.addClass('processed');
-                        deleteLink.click(function (ev) {
-                            ev.preventDefault();
-                            $(this).parents('.draggable').remove();
-                        });
-                    }
-                });
-            }
-
-            $('.draggable h2').each(function(i) {
-                var markup = $('<div class="drag-meta card-block">' +
-                    '<a class="card-link edit-draggable" href="#">Edit</a>' +
-                    '<a class="card-link delete-draggable" href="#">Delete</a>' +
-                    '</div>');
-                $(this).next().prepend(markup);
-                addEdit();
-                addDelete();
-            })
+            // $('.draggable .card-header').each(function(i) {
+            //     var markup = $('<a class="card-link edit-draggable" href="#">Edit</a>' +
+            //         '<a class="card-link delete-draggable" href="#">Delete</a>');
+            //     // $(this).next().prepend(markup);
+            //     $(this).append(markup);
+            //     Drupal.DnDAddEdit();
+            //     Drupal.DnDAddDelete();
+            // })
         }
     };
 
     Drupal.behaviors.contactsThemeSortable = {
         attach: function (context, settings) {
+            function replaceHeader(header) {
+                var text = $(header).children('a').text(),
+                    i = text.indexOf('Edit');
+                if (i >= 0) {
+                    $(header).children('a').remove();
+                }
+
+                var headerText = $(header).text(),
+                    markup = '<form class="form-inline card-header">' +
+                        '<input type="text" disabled class="form-control mb-2 mr-sm-2 mb-sm-0" name="card-title" value="'+headerText+'">' +
+                        '<label class="mr-sm-2 display-select" for="inlineFormCustomSelect">Display</label>' +
+                        '<select class="display-select custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">' +
+                        '<option selected value="1">Default</option>' +
+                        '<option value="2">Teaser</option>' +
+                        '<option value="3">Dashboard</option>' +
+                        '</select>' +
+                        '</form>';
+
+                $(header).replaceWith(markup);
+            }
             $(document).on('dragActive', function() {
                 var dragArea = $('.drag-area'),
                     draggable = $('.drag-area .draggable'),
@@ -99,26 +155,37 @@
                 dragArea.addClass('show');
                 draggable.addClass('draggable-active');
                 draggable.addClass('card');
-                draggableHeading.addClass('card-header');
+
                 draggableHeading.each(function() {
-                    var text = $(this).children('a').text(),
-                        i = text.indexOf('Edit');
-                    if (i >= 0) {
-                        $(this).children('a').remove();
-                    }
+                    replaceHeader(this);
                 });
 
+                $('.drag-area .draggable .card-header, .draggable .page-content .card-header').each(function(i) {
+                    if (!$(this).hasClass('links-added')) {
+                        $(this).addClass('links-added');
+                        var markup = $('<a class="ml-auto align-self-center card-link edit-draggable" href="#">&nbsp</a>' +
+                            '<a class="card-link delete-draggable" href="#">&nbsp</a>');
+                        $(this).append(markup);
+                        Drupal.DnDAddEdit();
+                        Drupal.DnDAddDelete();
+                    }
+                })
             });
 
             $(document).on('dragInactive', function() {
                 var dragArea = $('.drag-area'),
                     draggable = $('.drag-area .draggable'),
-                draggableHeading = $('.drag-area .draggable h2');
+                    draggableHeading = $('.drag-area .draggable .card-header');
                 dragArea.sortable('disable');
                 dragArea.removeClass('show');
                 draggable.removeClass('draggable-active');
                 draggable.removeClass('card');
                 draggableHeading.removeClass('card-header');
+                draggableHeading.each(function() {
+                   var headingText = $(this).children('input[name="card-title"]').val(),
+                       markup = '<h2>'+headingText+'</h2>';
+                    $(this).replaceWith(markup);
+                });
             });
         }
     };

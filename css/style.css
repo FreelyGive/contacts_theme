@@ -2260,23 +2260,23 @@ fieldset[disabled] a.btn {
     border-color: #419641; }
 
 .btn-secondary {
-  color: #292b2c;
-  background-color: #fff;
-  border-color: #ccc; }
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #5bc0de; }
   .btn-secondary:hover {
-    color: #292b2c;
-    background-color: #e6e6e6;
-    border-color: #adadad; }
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #2aabd2; }
   .btn-secondary:focus, .btn-secondary.focus {
-    box-shadow: 0 0 0 2px rgba(204, 204, 204, 0.5); }
+    box-shadow: 0 0 0 2px rgba(91, 192, 222, 0.5); }
   .btn-secondary.disabled, .btn-secondary:disabled {
-    background-color: #fff;
-    border-color: #ccc; }
+    background-color: #5bc0de;
+    border-color: #5bc0de; }
   .btn-secondary:active, .btn-secondary.active, .show > .btn-secondary.dropdown-toggle {
-    color: #292b2c;
-    background-color: #e6e6e6;
+    color: #fff;
+    background-color: #31b0d5;
     background-image: none;
-    border-color: #adadad; }
+    border-color: #2aabd2; }
 
 .btn-info {
   color: #fff;
@@ -2374,23 +2374,23 @@ fieldset[disabled] a.btn {
     border-color: #5cb85c; }
 
 .btn-outline-secondary {
-  color: #ccc;
+  color: #5bc0de;
   background-image: none;
   background-color: transparent;
-  border-color: #ccc; }
+  border-color: #5bc0de; }
   .btn-outline-secondary:hover {
     color: #fff;
-    background-color: #ccc;
-    border-color: #ccc; }
+    background-color: #5bc0de;
+    border-color: #5bc0de; }
   .btn-outline-secondary:focus, .btn-outline-secondary.focus {
-    box-shadow: 0 0 0 2px rgba(204, 204, 204, 0.5); }
+    box-shadow: 0 0 0 2px rgba(91, 192, 222, 0.5); }
   .btn-outline-secondary.disabled, .btn-outline-secondary:disabled {
-    color: #ccc;
+    color: #5bc0de;
     background-color: transparent; }
   .btn-outline-secondary:active, .btn-outline-secondary.active, .show > .btn-outline-secondary.dropdown-toggle {
     color: #fff;
-    background-color: #ccc;
-    border-color: #ccc; }
+    background-color: #5bc0de;
+    border-color: #5bc0de; }
 
 .btn-outline-info {
   color: #5bc0de;
@@ -3270,7 +3270,7 @@ tbody.collapse.show {
 
 .card-outline-secondary {
   background-color: transparent;
-  border-color: #ccc; }
+  border-color: #5bc0de; }
 
 .card-outline-info {
   background-color: transparent;

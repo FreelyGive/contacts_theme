@@ -5,12 +5,70 @@
 .drag-area.show {
   border: 3px lightblue dashed; }
 
+.button.action-group-drag-n-drop,
+.button.action-group-drag-n-drop:hover {
+  background-color: #636c72;
+  border-color: #636c72; }
+
+.contacts-ajax-tabs:not(.editing) .add-tab {
+  display: none; }
+.contacts-ajax-tabs .add-tab .nav-link {
+  background: lightblue;
+  color: #fff;
+  font-weight: bold; }
+.contacts-ajax-tabs.editing .nav-link:hover,
+.contacts-ajax-tabs.editing .nav-link {
+  border: 1px dashed lightblue;
+  margin: 0 5px;
+  border-bottom: 0; }
+  .contacts-ajax-tabs.editing .nav-link:hover:before,
+  .contacts-ajax-tabs.editing .nav-link:before {
+    content: '';
+    display: inline-block;
+    height: 20px;
+    width: 30px;
+    background: url(https://cdn4.iconfinder.com/data/icons/cursors-gestures/100/cursor_3-128.png) no-repeat;
+    background-size: 20px;
+    cursor: move;
+    margin-bottom: -5px; }
+  .contacts-ajax-tabs.editing .nav-link:hover:after,
+  .contacts-ajax-tabs.editing .nav-link:after {
+    content: '';
+    display: inline-block;
+    height: 20px;
+    width: 30px;
+    background: url(https://cdn1.iconfinder.com/data/icons/kuru-interface/100/cog_thin_convert-128.png) no-repeat 10px 0px;
+    background-size: 20px;
+    cursor: move;
+    margin-bottom: -5px; }
+.contacts-ajax-tabs .nav-item.add-tab .nav-link:before,
+.contacts-ajax-tabs .nav-item.add-tab .nav-link:after {
+  display: none; }
+.contacts-ajax-tabs .tab-area-placeholder {
+  width: 40px;
+  max-height: 35px;
+  line-height: 1.2em;
+  background-color: beige;
+  margin-bottom: 20px;
+  border-color: blue !important; }
+  .contacts-ajax-tabs .tab-area-placeholder:before, .contacts-ajax-tabs .tab-area-placeholder:after {
+    background-image: none !important; }
+
 .list-group.collapse {
   display: none; }
 
 .drag-area.show.highlighted {
   border: 3px blue dashed;
   background: beige; }
+
+.layout-sidebar-second .card {
+  margin-bottom: 20px; }
+
+.layout-sidebar-second .facet-toggle {
+  margin-bottom: 20px; }
+
+.layout-sidebar-second .add-button {
+  margin-bottom: 10px; }
 
 .layout-sidebar-second .draggable .page-content {
   display: none; }
@@ -21,15 +79,43 @@
 #local-action-group-contacts-dashboard-drag-n-drop {
   display: none !important; }
 
-.draggable:not(.draggable-active) .drag-meta {
-  display: none; }
-.draggable[draggable="true"] .menu-content:before, .draggable[draggable="true"] h2:before {
+.draggable .menu-content .card-header:before,
+.drag-area .draggable .card-header:before {
   content: '';
   display: inline-block;
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 30px;
+  background: url(https://cdn4.iconfinder.com/data/icons/cursors-gestures/100/cursor_3-128.png) no-repeat -2px -2px;
   background-size: 25px;
-  background-image: url(https://cdn4.iconfinder.com/data/icons/cursors-gestures/100/cursor_3-128.png); }
+  cursor: move; }
+
+.draggable:not(.draggable-active) .drag-meta {
+  display: none; }
+.draggable .display-select {
+  display: none; }
+.draggable .card-header.editing .display-select {
+  display: inherit; }
+.draggable .card-header input[disabled] {
+  max-width: 140px;
+  background: none;
+  border: 0;
+  font-weight: bold; }
+.draggable .delete-draggable,
+.draggable .edit-draggable {
+  background: url(https://cdn1.iconfinder.com/data/icons/kuru-interface/100/cog_thin_convert-128.png) no-repeat;
+  background-size: 20px;
+  height: 20px;
+  width: 20px; }
+.draggable .card-header.editing .edit-draggable {
+  background-image: url(https://cdn3.iconfinder.com/data/icons/lineo-media/100/floppy_disk-128.png); }
+.draggable .delete-draggable {
+  background-image: url(https://cdn2.iconfinder.com/data/icons/social-productivity-line-art-2/128/trash-128.png); }
+.draggable .menu-content .card-header:before {
+  height: 15px;
+  width: 25px;
+  background-position: 0px -2px;
+  background-size: 20px;
+  margin-bottom: -2px; }
 
 .drag-area-placeholder {
   height: 40px;
