@@ -22,6 +22,18 @@ include 'includes/blocks.theme.inc';
 include 'includes/contacts.theme.inc';
 
 /**
+ * Implements hook_theme().
+ */
+function contacts_theme_theme() {
+  return [
+    'contacts_dash_manage' => [
+      'variables' => ['types' => [], 'attributes' => []],
+      'template' => 'contacts-dash-manage',
+    ],
+  ];
+}
+
+/**
  * Implements hook_element_info_alter().
  */
 function contacts_theme_element_info_alter(array &$info) {

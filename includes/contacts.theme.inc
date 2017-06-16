@@ -25,6 +25,25 @@ function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
   if ($variables['content']['#page_variant']->getPage()->id() == 'contacts_dashboard') {
     $variables['sidebar_first_attributes']->addClass('flex-first');
   }
+
+  $variables['content']['manage'] = [
+    '#theme' => 'contacts_dash_manage',
+    '#types' => ['profile' => [
+      'label' => 'Profiles',
+      'items' => [],
+    ]],
+    '#attributes' => ['id' => 'collapseExample'],
+  ];
+
+  $types = \Drupal::getContainer()->get('entity_type.manager')->getStorage('profile_type')->loadMultiple();
+  foreach ($types as $id => $type) {
+    /* @var \Drupal\profile\Entity\ProfileType $type */
+    $variables['content']['manage']['#types']['profile']['items'][$id] = [
+      'id' => $id,
+      'label' => $type->label(),
+      'type' => substr($id, 4),
+    ];
+  }
 }
 
 /**

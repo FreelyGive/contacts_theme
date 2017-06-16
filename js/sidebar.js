@@ -17,19 +17,22 @@
      */
     Drupal.behaviors.contactsThemeSideBar = {
         attach: function (context, settings) {
-            $(".action-group-drag-n-drop").click(function(e) {
-                console.log('click');
-                e.preventDefault();
-                var sidebar = jQuery(this).attr('data-target');
-                sidebar = $(sidebar);
-                sidebar.toggleClass("toggled");
-                if (sidebar.hasClass('toggled')) {
-                    jQuery(document).trigger('dragInactive');
-                }
-                else {
-                    jQuery(document).trigger('dragActive');
-                }
-            });
+            var trigger = $(".action-group-drag-n-drop");
+            if (!trigger.hasClass('processed')) {
+                trigger.addClass('processed');
+                trigger.click(function(e) {
+                    e.preventDefault();
+                    var sidebar = jQuery(this).attr('data-target');
+                    sidebar = $(sidebar);
+                    sidebar.toggleClass("toggled");
+                    if (sidebar.hasClass('toggled')) {
+                        jQuery(document).trigger('dragInactive');
+                    }
+                    else {
+                        jQuery(document).trigger('dragActive');
+                    }
+                });
+            }
         }
     };
 

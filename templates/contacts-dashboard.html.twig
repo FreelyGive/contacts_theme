@@ -6,4 +6,7 @@
   <aside{{ sidebar_first_attributes.addClass('layout-sidebar-first')|without('role') }} role="complementary">
     {{ content.sidebar }}
   </aside>
+  <aside class="layout-sidebar-second toggled" role="complementary">
+    {{ content.manage }}
+  </aside>
 {% endif %}

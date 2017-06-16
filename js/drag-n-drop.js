@@ -7,21 +7,34 @@
 
     'use strict';
 
-    console.log(Drupal);
-
     Drupal.DnDAddEdit = function() {
         $('.drag-area .edit-draggable').each(function () {
             var editLink = $(this);
             if (!editLink.hasClass('processed')) {
-                console.log('processed');
                 editLink.addClass('processed');
                 editLink.click(function (ev) {
                     ev.preventDefault();
                     var heading = $(this).siblings('input[name="card-title"]'),
+                        display = $(this).siblings('select[name="card-display"]'),
                         header = $(this).parent();
-                    console.log(header);
 
                     if (header.hasClass('editing')) {
+                        var block = $(this).closest('.draggable'),
+                            id = block.attr('contacts_block_id'),
+                            tab = block.attr('contacts_block_tab'),
+                            postData = {
+                                label: heading.val(),
+                                display: display.val()
+                            },
+                            title = heading.val(),
+                            url = '/contacts_update_block/'+tab+'/'+id;
+                        console.log(url);
+                        console.log(postData);
+                        console.log(display);
+                        $.post(url, postData, function( data ) {
+                            console.log(data);
+                        });
+
                         header.removeClass('editing');
                         heading.attr('disabled', true);
                     }
@@ -31,10 +44,6 @@
                     }
                 });
             }
-            else {
-                console.log('not')
-            }
-
         });
     };
 
@@ -45,24 +54,94 @@
                 deleteLink.addClass('processed');
                 deleteLink.click(function (ev) {
                     ev.preventDefault();
-                    $(this).parents('.draggable').remove();
+                    var block = $(this).closest('.draggable'),
+                        id = block.attr('contacts_block_id'),
+                        tab = block.attr('contacts_block_tab'),
+                        url = '/contacts_remove_block/'+tab+'/'+id;
+                    console.log(url);
+                    $.get(url, function( data ) {
+                        console.log(data);
+                    });
+                    block.remove();
                 });
             }
         });
     };
+
+    Drupal.DnDAddBlock = function(block) {
+        console.log('add block');
+        var region = block.closest('.drag-area');
+        if (region.hasClass('dash-left')) {
+            region = 'left';
+        }
+        else {
+            region = 'right';
+        }
+            var id = block.attr('contacts_block_id'),
+                tab = block.attr('contacts_block_tab'),
+                url = '/contacts_add_block/'+tab+'/'+id+'/'+region+'/0',
+                postData = {
+                    profile_type: block.attr('contacts_profile_type'),
+                    profile_relationship: block.attr('contacts_profile_relationship')
+                };
+            console.log(url);
+            console.log(postData);
+            $.post(url, postData, function( data ) {
+                console.log(data);
+            });
+
+    };
+
+    Drupal.DnDUpdateRegion = function(region, sort) {
+        if ($(region).hasClass('dash-left')) {
+            region = 'left';
+        }
+        else {
+            region = 'right';
+        }
+        var arrayLength = sort.length;
+        for (var weight = 0; weight < arrayLength; weight++) {
+            var id = sort[weight];
+            var tab = $('[contacts_block_id='+id+']').attr('contacts_block_tab');
+            var url = '/contacts_move_block/'+tab+'/'+id+'/'+region+'/'+weight;
+            console.log(url);
+            $.get(url, function( data ) {
+                console.log(data);
+            });
+        }
+    };
+
+    Drupal.DnDUpdateTitle = function(region, sort) {
+        var arrayLength = sort.length;
+        for (var weight = 0; weight < arrayLength; weight++) {
+            var id = sort[weight];
+            var tab = $('[contacts_block_id='+id+']').attr('contacts_block_tab');
+            var url = '/contacts_move_block/'+tab+'/'+id+'/'+region+'/'+weight;
+            console.log(url);
+            $.get(url, function( data ) {
+                console.log(data);
+            });
+        }
+    };
+
 
     Drupal.behaviors.contactsThemeDraggable = {
         attach: function (context, settings) {
             $(document).on('dragActive', function() {
                 $('.layout-sidebar-second .draggable').draggable({
                     revert: "invalid",
-                    helper: "clone",
+                    // helper: "clone",
                     connectToSortable: ".drag-area",
                     stop: function( event, ui ) {
                         ui.helper.removeAttr('style');
                         ui.helper.addClass('draggable-active');
                         ui.helper.addClass('card');
+                        // @todo fix this... very flimsy.
+                        var tab = $('.nav-tabs a.active').attr('contacts_tab_id');
+                        console.log(tab);
+                        ui.helper.attr('contacts_block_tab', tab);
                         ui.helper.find('h2').addClass('card-header');
+                        Drupal.DnDAddBlock(ui.helper);
                         Drupal.DnDAddEdit();
                         Drupal.DnDAddDelete();
                     }
@@ -126,7 +205,7 @@
                     markup = '<form class="form-inline card-header">' +
                         '<input type="text" disabled class="form-control mb-2 mr-sm-2 mb-sm-0" name="card-title" value="'+headerText+'">' +
                         '<label class="mr-sm-2 display-select" for="inlineFormCustomSelect">Display</label>' +
-                        '<select class="display-select custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">' +
+                        '<select class="display-select custom-select mb-2 mr-sm-2 mb-sm-0" name="card-display">' +
                         '<option selected value="1">Default</option>' +
                         '<option value="2">Teaser</option>' +
                         '<option value="3">Dashboard</option>' +
@@ -143,11 +222,19 @@
                     revert: true,
                     placeholder: "drag-area-placeholder",
                     connectWith: ".drag-area",
+                    items: ".draggable",
                     over: function( event, ui ) {
                         $('.drag-area.highlighted').removeClass('highlighted');
                         $(ui.placeholder).parents('.drag-area').addClass('highlighted');
                     },
                     stop: function( event, ui ) {
+                        $(".drag-area").each(function() {
+                            var sortedIDs = $(this).sortable("toArray", {attribute: 'contacts_block_id'});
+                            if (sortedIDs.length) {
+                                Drupal.DnDUpdateRegion(this, sortedIDs);
+                            }
+                        });
+
                         $('.drag-area.highlighted').removeClass('highlighted');
                     }
                 });

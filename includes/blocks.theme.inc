@@ -129,10 +129,7 @@ function contacts_theme_preprocess_block(&$variables) {
       $content['#attributes']['class'] = array('dropdown');
       $content['#prefix'] = '<div class="action-group-wrapper dropdown">';
       $content['#suffix'] = '</div>';
-//      $content['button']['#attributes']['data-toggle'][] = 'collapse';
-      $content['button']['#attributes']['data-target'][] = '#collapseExample';
-//      $content['button']['#attributes']['aria-controls'][] = 'collapseExample';
-//      $content['button']['#attributes']['aria-expanded'][] = 'false';
+      $content['button']['#attributes']['data-target'][] = '.layout-sidebar-second';
       $content['button']['#attributes']['type'][] = 'button';
       $content['button']['#attributes']['class'][] = 'btn';
       $content['button']['#attributes']['class'][] = 'btn-lg';
@@ -142,9 +139,6 @@ function contacts_theme_preprocess_block(&$variables) {
       if ($js_hide) {
         unset($content['group']['#attributes']['class'][$js_hide]);
       }
-
-//      $content['group']['#attributes']['class'][] = 'dropdown-menu';
-//      $content['group']['#attributes']['class'][] = 'dropdown-menu-right';
 
       $links = array();
       foreach ($content['group']['links']['#links'] as $key => &$link) {
@@ -156,14 +150,12 @@ function contacts_theme_preprocess_block(&$variables) {
           '#url' => $link['url'],
         );
       }
-//
+
       // Move links out of unordered list #links.
       if (!empty($links)) {
         $content['group']['links'] = $links;
       }
 
-//      $content['button']['#value'] = '<i class="glyph-icon icon-linecons-cog icon-spin"></i>';
-//      $content['button']['#value'] = '<img width="20" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-gear-outline-128.png">';
       $content['button']['#value'] = '<img width="20" src="https://cdn3.iconfinder.com/data/icons/token/128/Gear.png">';
     }
 
