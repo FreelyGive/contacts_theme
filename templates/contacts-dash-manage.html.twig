@@ -1,38 +1,44 @@
 {% if types %}
-<div>
-  Drag and Drop elements to the page.
-</div>
-<br>
-<br>
-<div{{ attributes }}>
-  {%- for key, type in types -%}
-  <h5 class="facet-toggle collapsed" data-target="#facet-dropdown-button-{{ key }}" data-toggle="collapse" aria-controls="facet-dropdown-button" aria-expanded="false">{{ type.label }}</h5>
-  <div id="facet-dropdown-button-{{ key }}" aria-expanded="false" class="collapse">
-    <a href="/admin/config/people/profiles/types" target="_blank" class="add-button btn btn-block btn-sm btn-secondary">Add {{ key }}</a>
-    {%- for id, item in type.items -%}
-      <div class="card">
-        <div contacts_block_id="contacts_entity_{{ key }}_{{ item.type }}" contacts_profile_type="{{ id }}" contacts_profile_relationship="{{ key }}_{{ item.type }}" class="draggable">
-          <div class="menu-content">
-            <div class="card-header">{{ item.label }} {{ key }}</div>
-            <div class="card-block">
-              <div class="card-text">Profile for {{ item.label }}</div>
-              <a href="/admin/config/people/profiles/types/manage/{{ id }}/fields" target="_blank" class="card-link">Manage Fields</a>
+  <aside class="layout-sidebar-second toggled" role="complementary">
+    <div>
+      Drag and Drop elements to the page.
+    </div>
+    <br>
+    <br>
+    <div{{ attributes }}>
+      {%- for key, type in types -%}
+        <h5 class="facet-toggle collapsed" data-target="#facet-dropdown-button-{{ key }}" data-toggle="collapse" aria-controls="facet-dropdown-button" aria-expanded="false">{{ type.label }}</h5>
+        <div id="facet-dropdown-button-{{ key }}" aria-expanded="false" class="collapse">
+          {% if type.items is empty %}
+            <div class="card-block">No {{ key }} types are available. You may already have placed them on the page.</div>
+          {% endif %}
+          <a href="/admin/config/people/profiles/types" target="_blank" class="add-button btn btn-block btn-sm btn-secondary">Add {{ key }}</a>
+          {%- for id, item in type.items -%}
+            <div class="card">
+              <div contacts_block_id="contacts_entity_{{ key }}_{{ item.type }}" contacts_profile_type="{{ id }}" contacts_profile_relationship="{{ key }}_{{ item.type }}" class="draggable">
+                <div class="menu-content">
+                  <div class="card-header">{{ item.label }} {{ key }}</div>
+                  <div class="card-block">
+                    <div class="card-text">Profile for {{ item.label }}</div>
+                    <a href="/admin/config/people/profiles/types/manage/{{ id }}/fields" target="_blank" class="card-link">Manage Fields</a>
+                  </div>
+                </div>
+                <div class="page-content">
+                  <form class="form-inline card-header">
+                    <input type="text" disabled="" class="form-control mb-2 mr-sm-2 mb-sm-0" name="card-title" value="{{ item.label }}">
+                    <label class="mr-sm-2 display-select" for="inlineFormCustomSelect">Display</label>
+                    <select class="display-select custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect"><option selected="" value="1">Default</option><option value="2">Teaser</option><option value="3">Dashboard</option></select>
+                  </form>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="page-content">
-            <form class="form-inline card-header">
-              <input type="text" disabled="" class="form-control mb-2 mr-sm-2 mb-sm-0" name="card-title" value="{{ item.label }}">
-              <label class="mr-sm-2 display-select" for="inlineFormCustomSelect">Display</label>
-              <select class="display-select custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect"><option selected="" value="1">Default</option><option value="2">Teaser</option><option value="3">Dashboard</option></select>
-            </form>
-          </div>
+          {%- endfor -%}
         </div>
-      </div>
-    {%- endfor -%}
-  </div>
-  {%- endfor -%}
-  <a href="#" class="btn btn-primary btn-block">Exit Manage Mode</a>
-</div>
+      {%- endfor -%}
+      <a href="#" class="btn btn-primary btn-block">Exit Manage Mode</a>
+    </div>
+  </aside>
 {% endif %}
+
 
 

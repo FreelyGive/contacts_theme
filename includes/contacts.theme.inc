@@ -26,23 +26,64 @@ function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
     $variables['sidebar_first_attributes']->addClass('flex-first');
   }
 
-  $variables['content']['manage'] = [
-    '#theme' => 'contacts_dash_manage',
-    '#types' => ['profile' => [
-      'label' => 'Profiles',
-      'items' => [],
-    ]],
-    '#attributes' => ['id' => 'collapseExample'],
-  ];
+  /* @var Drupal\Core\Routing\CurrentRouteMatch $route_match */
+  $route_match = \Drupal::getContainer()->get('current_route_match');
+  $user = $route_match->getRawParameter('user');
+  $subpage = $route_match->getRawParameter('subpage');
 
-  $types = \Drupal::getContainer()->get('entity_type.manager')->getStorage('profile_type')->loadMultiple();
-  foreach ($types as $id => $type) {
-    /* @var \Drupal\profile\Entity\ProfileType $type */
-    $variables['content']['manage']['#types']['profile']['items'][$id] = [
-      'id' => $id,
-      'label' => $type->label(),
-      'type' => substr($id, 4),
+  if ($user && $subpage) {
+    /* @var Drupal\Core\Entity\EntityTypeManager $entity_type_manager */
+    $entity_type_manager = \Drupal::getContainer()->get('entity_type.manager');
+    /* @var Drupal\contacts\ContactsTabManager $tab_manager */
+    $tab_manager = \Drupal::getContainer()->get('contacts.tab_manager');
+
+    $user = $entity_type_manager->getStorage('user')->load($user);
+    $tab = $tab_manager->getTabByPath($user, $subpage);
+
+    $contexts = [];
+    foreach ($tab->getRelationships() as $relationship) {
+      $parts = explode(':', $relationship['id']);
+
+      if ($parts[0] == 'typed_data_entity_relationship') {
+        $contexts[$relationship['name']] = $parts[3];
+      }
+    }
+
+    $placed_blocks = [];
+    foreach ($tab->getBlocks() as $key => $placed_block) {
+      if ($placed_block['id'] = 'contacts_entity:profile' && !empty($placed_block['context_mapping']['entity'])) {
+        $placed_blocks[$key] = $contexts[$placed_block['context_mapping']['entity']];
+      }
+    }
+
+    $variables['content']['manage'] = [
+      '#theme' => 'contacts_dash_manage',
+      '#types' => ['profile' => [
+        'label' => 'Profiles',
+        'items' => [],
+      ]],
+      '#attributes' => ['id' => 'collapseExample'],
     ];
+
+    $types = $entity_type_manager->getStorage('profile_type')->loadMultiple();
+    foreach ($types as $id => $type) {
+      // Skip if missing relationship.
+      if (!in_array('profile_' . $id, $contexts)) {
+        continue;
+      }
+
+      // Skip if already placed.
+      if (in_array('profile_' . $id, $placed_blocks)) {
+        continue;
+      }
+
+      /* @var \Drupal\profile\Entity\ProfileType $type */
+      $variables['content']['manage']['#types']['profile']['items'][$id] = [
+        'id' => $id,
+        'label' => $type->label(),
+        'type' => substr($id, 4),
+      ];
+    }
   }
 }
 
