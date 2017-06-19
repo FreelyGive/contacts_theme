@@ -21,6 +21,13 @@ bootstrap.collapse:
   dependencies:
     - contacts_theme/collapse.util
 
+# Extension for the tabs.
+tabs:
+  js:
+    js/tabs.js: {}
+  dependencies:
+    - core/drupal.debounce
+
 # Styling for the listings.
 listings:
   css:

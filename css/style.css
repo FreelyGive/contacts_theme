@@ -3135,6 +3135,24 @@ tbody.collapse.show {
   .nav-tabs-primary .nav-item.show .nav-link {
     background-color: #f7f7f9; }
 
+.nav-tabs {
+  position: relative; }
+  .nav-tabs .nav-link {
+    min-height: 100%; }
+
+.scroll-prev, .scroll-next {
+  width: 1rem;
+  background: rgba(0, 0, 0, 0.25);
+  position: absolute;
+  cursor: pointer; }
+  .scroll-prev span, .scroll-next span {
+    position: absolute;
+    top: 50%;
+    margin-top: -50%;
+    left: 0;
+    right: 0;
+    text-align: center; }
+
 .breadcrumb {
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;

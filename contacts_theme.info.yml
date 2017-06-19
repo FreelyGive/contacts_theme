@@ -26,6 +26,8 @@ libraries-override:
       js/action-group.js: false
 
 libraries-extend:
+  contacts/tabs:
+    - contacts_theme/tabs
   contacts/listings:
     - contacts_theme/listings
   contacts/action.group:

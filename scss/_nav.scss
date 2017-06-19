@@ -16,3 +16,27 @@
     background-color: $body-bg;
   }
 }
+
+.nav-tabs {
+  position: relative;
+
+  .nav-link {
+    min-height: 100%;
+  }
+}
+
+.scroll-prev, .scroll-next {
+  width: 1rem;
+  background: rgba(0, 0, 0, .25);
+  position: absolute;
+  cursor: pointer;
+
+  span {
+    position: absolute;
+    top: 50%;
+    margin-top: -50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+}
