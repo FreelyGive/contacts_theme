@@ -39,10 +39,10 @@ function contacts_theme_form_propagate_columns(array $element, $column_settings 
 
     // Add our default settings.
     $element['#form_columns'] += array(
-      'label' => ['col-sm-4', 'col-lg-3', 'col-xl-2'],
-      'input' => ['col-sm-8', 'col-lg-7', 'col-xl-6'],
-      'errors' => ['col-sm-8', 'col-lg-9', 'col-xl-4', 'offset-sm-4', 'offset-lg-3', 'offset-xl-0'],
-      'description' => ['col-sm-8', 'col-lg-9', 'col-xl-10', 'offset-sm-4', 'offset-lg-3', 'offset-xl-2'],
+      'label' => ['col-sm-5', 'col-md-4', 'col-lg-4', 'col-xl-3'],
+      'input' => ['col-sm-7', 'col-md-7', 'col-lg-8', 'col-xl-6'],
+      'errors' => ['col-md-8', 'col-lg-8', 'col-xl-4', 'offset-md-4', 'offset-lg-3', 'offset-xl-0'],
+      'description' => ['col-md-8', 'col-lg-8', 'col-xl-9', 'offset-md-4', 'offset-lg-4', 'offset-xl-3'],
     );
 
     // Default the offset classes to line up with the input.

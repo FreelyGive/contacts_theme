@@ -59,7 +59,6 @@ body {
   flex: 0 0 auto;
   display: flex;
   flex-direction: column;
-  order: -1;
   padding: $content-padding;
   font-size: $font-size-sm;
   @include colour-invert();
@@ -109,6 +108,24 @@ body {
     .with-header-image & {
       min-height: calc(#{map_get($header-image-size, y)} + #{map_get($content-padding-parts, y) * 2});
       .region-header {
+        margin-left: calc(#{map_get($header-image-size, x)} + #{map_get($content-padding-parts, x)});
+      }
+    }
+  }
+
+  /* Header image */
+  .with-header-image {
+    $heading-inner-height: ($font-size-h1 * $headings-line-height) + $headings-margin-bottom;
+    .layout-heading {
+      min-height: $heading-inner-height + map_get($content-padding-parts, y);
+    }
+
+    .layout-content {
+      padding-top: calc(#{map_get($header-image-size, x)} - #{$heading-inner-height - map_get($content-padding-parts, y)});
+
+      .wrap-header-image {
+        margin-top: calc(#{$heading-inner-height} - (#{map_get($header-image-size, y)} + #{map_get($content-padding-parts, y)}));
+        min-height: calc(#{map_get($header-image-size, x)} - #{$heading-inner-height});
         margin-left: calc(#{map_get($header-image-size, x)} + #{map_get($content-padding-parts, x)});
       }
     }
@@ -164,6 +181,10 @@ body {
     overflow-y: hidden;
   }
 
+  .layout-sidebar-first {
+    order: -1;
+  }
+
   .layout-content {
     display: flex;
     flex-direction: column;
@@ -174,23 +195,5 @@ body {
   .layout-sidebar-first {
     flex: 0 0 $sidebar-width;
     overflow-y: auto;
-  }
-
-  /* Header image */
-  .with-header-image {
-    $heading-inner-height: ($font-size-h1 * $headings-line-height) + $headings-margin-bottom;
-    .layout-heading {
-      min-height: $heading-inner-height + map_get($content-padding-parts, y);
-    }
-
-    .layout-content {
-      padding-top: calc(#{map_get($header-image-size, x)} - #{$heading-inner-height - map_get($content-padding-parts, y)});
-
-      .wrap-header-image {
-        margin-top: calc(#{$heading-inner-height} - (#{map_get($header-image-size, y)} + #{map_get($content-padding-parts, y)}));
-        min-height: calc(#{map_get($header-image-size, x)} - #{$heading-inner-height});
-        margin-left: calc(#{map_get($header-image-size, x)} + #{map_get($content-padding-parts, x)});
-      }
-    }
   }
 }

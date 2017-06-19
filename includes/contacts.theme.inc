@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Render\Element;
+use Drupal\Core\Template\Attribute;
 
 /**
  * Implements hook_preprocess_HOOK() for contacts_dashboard layout.
@@ -17,6 +18,12 @@ function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
   foreach (Element::children($variables['content']) as $region) {
     unset($variables['content'][$region]['#prefix']);
     unset($variables['content'][$region]['#suffix']);
+  }
+
+  $variables['content_attributes'] = new Attribute();
+  $variables['sidebar_first_attributes'] = new Attribute();
+  if ($variables['content']['#page_variant']->getPage()->id() == 'contacts_dashboard') {
+    $variables['sidebar_first_attributes']->addClass('flex-first');
   }
 }
 

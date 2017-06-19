@@ -27,6 +27,10 @@ function contacts_theme_preprocess_block(&$variables) {
     }
   }
 
+  if (isset($variables['attributes']['class']) && in_array('contacts-dash-block', $variables['attributes']['class'])) {
+    $variables['title_attributes']['class'][] = 'mb-4';
+  }
+
   if ($variables['base_plugin_id'] == 'facet_block') {
     $variables['#attached']['library'][] = 'contacts_theme/bootstrap.collapse';
 
@@ -154,7 +158,8 @@ function contacts_theme_preprocess_block(&$variables) {
     if (isset($variables['content']['edit'])) {
       $variables['content']['edit']['#options']['attributes']['class'][] = 'btn';
       $variables['content']['edit']['#options']['attributes']['class'][] = 'btn-primary';
-      $variables['content']['edit']['#options']['attributes']['class'][] = 'mb-2';
+      $variables['content']['edit']['#prefix'] = '<div class="contacts-dash-edit">';
+      $variables['content']['edit']['#suffix'] = '</div>';
     }
 
     // Re-write the label.
@@ -174,6 +179,7 @@ function contacts_theme_preprocess_block(&$variables) {
         $attributes['class'][] = 'btn';
         $attributes['class'][] = 'btn-primary';
         $attributes['class'][] = 'btn-sm';
+        $attributes['class'][] = 'float-right';
         $link->getUrl()->setOption('attributes', $attributes);
         if ($label = $block->label()) {
           $variables['label'] = new FormattableMarkup('@label @link', [
@@ -188,11 +194,29 @@ function contacts_theme_preprocess_block(&$variables) {
     }
   }
   elseif ($variables['plugin_id'] == 'contact_summary_tab') {
-    $variables['content']['#content']['left']['content']['view']['#columns'] =
-    $variables['content']['#content']['right']['content']['view']['#columns'] = [
-      'label' => ['col-md-6', 'col-xl-4'],
-      'content' => ['col-md'],
-      '_offset' => ['offset-md-6', 'offset-xl-4'],
-    ];
+    foreach ($variables['content']['#content'] as &$blocks) {
+      foreach ($blocks as &$block) {
+        $block['#attributes']['class'][] = 'contacts-dash-block';
+
+        if ($block['#base_plugin_id'] == 'contacts_entity') {
+          if (isset($block['content']['view'])) {
+            $block['content']['view']['#columns'] = [
+              'label' => ['col-md-6', 'col-xl-5'],
+              'content' => ['col-md'],
+              '_offset' => ['offset-md-6', 'offset-xl-4'],
+            ];
+          }
+          if (isset($block['content']['form'])) {
+            $block['content']['form']['#form_columns'] = [
+              'label' => ['col-md-6', 'col-xl-5'],
+              'input' => ['col-md-6', 'col-xl-7'],
+              'errors' => ['col-md-12'],
+              'description' => ['col-md-12'],
+            ];
+            $block['content']['form']['#pre_render'][] = 'contacts_theme_form_propagate_columns';
+          }
+        }
+      }
+    }
   }
 }
