@@ -17,7 +17,7 @@
      */
     Drupal.behaviors.contactsThemeSideBar = {
         attach: function (context, settings) {
-            var trigger = $(".action-group-drag-n-drop");
+            var trigger = $(".trigger-manage");
             if (!trigger.hasClass('processed')) {
                 trigger.addClass('processed');
                 trigger.click(function(e) {

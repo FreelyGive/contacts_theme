@@ -5,10 +5,13 @@
 .drag-area.show {
   border: 3px lightblue dashed; }
 
-.button.action-group-drag-n-drop,
-.button.action-group-drag-n-drop:hover {
+.btn.dnd-manage,
+.btn.dnd-manage:hover {
   background-color: #636c72;
-  border-color: #636c72; }
+  border-color: #636c72;
+  position: absolute;
+  left: -65px;
+  box-shadow: none !important; }
 
 .contacts-ajax-tabs:not(.editing) .add-tab {
   display: none; }
@@ -61,23 +64,24 @@
   border: 3px blue dashed;
   background: beige; }
 
-.layout-sidebar-second .card {
-  margin-bottom: 20px; }
-
-.layout-sidebar-second .facet-toggle {
-  margin-bottom: 20px; }
-
-.layout-sidebar-second .add-button {
-  margin-bottom: 10px; }
-
-.layout-sidebar-second .draggable .page-content {
+body .layout-sidebar-second {
   display: none; }
+  @media (min-width: 992px) {
+    body .layout-sidebar-second {
+      display: inherit; } }
+  body .layout-sidebar-second .card {
+    margin-bottom: 20px; }
+  body .layout-sidebar-second .facet-toggle {
+    margin-bottom: 20px; }
+  body .layout-sidebar-second .add-button {
+    margin-bottom: 10px; }
+  body .layout-sidebar-second .draggable .page-content {
+    display: none; }
+  body .layout-sidebar-second .draggable .delete-draggable {
+    display: none; }
 
 .layout-content .draggable .menu-content {
   display: none; }
-
-#local-action-group-contacts-dashboard-drag-n-drop {
-  display: none !important; }
 
 .draggable .menu-content .card-header:before,
 .drag-area .draggable .card-header:before {
@@ -138,8 +142,5 @@
     overflow: hidden; }
     .draggable-active .field div, .draggable-active .field span, .draggable-active .field h6 {
       display: none; }
-
-.layout-sidebar-second .draggable .delete-draggable {
-  display: none; }
 
 /*# sourceMappingURL=drag-n-drop.css.map */

@@ -26,6 +26,54 @@ function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
     $variables['sidebar_first_attributes']->addClass('flex-first');
   }
 
+  // Add the manage sidebar.
+  if (!empty($variables['content']['#page_variant']) && $variables['content']['#page_variant']->getOriginalId() == 'contacts_dashboard_contact-panels_variant-0') {
+    $variables['content']['manage'] = [
+      '#theme' => 'contacts_dash_manage',
+      '#content' => contacts_theme_dashboard_manage_sidebar_content(),
+      '#attached' => ['library' => 'contacts_theme/drag_n_drop'],
+    ];
+  }
+}
+
+/**
+ * Builds a render array for the dashboard management sidebar.
+ */
+function contacts_theme_dashboard_manage_sidebar_content() {
+  $content = [];
+
+  $content['message'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'p',
+    '#value' => 'Drag and Drop elements to the page.',
+  ];
+  $content['types'] = [
+    '#type' => 'container'
+  ];
+  $content['types']['profiles'] = [
+    '#type' => 'container'
+  ];
+  $content['types']['profiles']['title'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'h5',
+    '#value' => 'Profiles',
+    '#attributes' => [
+      'class' => ['facet-toggle', 'collapsed'],
+      'data-target' => "#facet-dropdown-button-profile",
+      'data-toggle' => 'collapse',
+      'aria-controls' => 'facet-dropdown-button',
+      'aria-expanded' => FALSE,
+    ],
+  ];
+  $content['types']['profiles']['content'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'id' => "facet-dropdown-button-profile",
+      'aria-expanded' => FALSE,
+      'class' => ['collapse'],
+    ],
+  ];
+
   /* @var Drupal\Core\Routing\CurrentRouteMatch $route_match */
   $route_match = \Drupal::getContainer()->get('current_route_match');
   $user = $route_match->getRawParameter('user');
@@ -37,6 +85,7 @@ function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
     /* @var Drupal\contacts\ContactsTabManager $tab_manager */
     $tab_manager = \Drupal::getContainer()->get('contacts.tab_manager');
 
+    /* @var Drupal\user\UserInterface $user */
     $user = $entity_type_manager->getStorage('user')->load($user);
     $tab = $tab_manager->getTabByPath($user, $subpage);
 
@@ -56,15 +105,6 @@ function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
       }
     }
 
-    $variables['content']['manage'] = [
-      '#theme' => 'contacts_dash_manage',
-      '#types' => ['profile' => [
-        'label' => 'Profiles',
-        'items' => [],
-      ]],
-      '#attributes' => ['id' => 'collapseExample'],
-    ];
-
     $types = $entity_type_manager->getStorage('profile_type')->loadMultiple();
     foreach ($types as $id => $type) {
       // Skip if missing relationship.
@@ -77,14 +117,33 @@ function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
         continue;
       }
 
-      /* @var \Drupal\profile\Entity\ProfileType $type */
-      $variables['content']['manage']['#types']['profile']['items'][$id] = [
-        'id' => $id,
-        'label' => $type->label(),
-        'type' => substr($id, 4),
+      $key = substr($id, 4);
+      $content['types']['profiles']['content'][$id] = [
+        '#theme' => 'contacts_dnd_card',
+        '#key' => $key,
+        '#entity' => 'profile',
+        '#bundle' => $id,
+        '#label' => $type->label(),
+        '#description' => "Profile for $key",
+        '#link' => [
+          'text' => 'Manage Fields',
+          'url' => "/admin/config/people/profiles/types/manage/$id/fields",
+        ],
       ];
     }
   }
+
+  $content['toggle'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'button',
+    '#value' => 'Exit Manage Mode',
+    '#attributes' => [
+      'class' => ['trigger-manage', 'btn', 'btn-primary', 'btn-block'],
+      'data-target' => '.layout-sidebar-second',
+    ],
+  ];
+
+  return $content;
 }
 
 /**

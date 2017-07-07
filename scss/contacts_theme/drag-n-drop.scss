@@ -1,3 +1,7 @@
+@import "../variables";
+@import "../mixins";
+
+
 .drag-area {
   min-height: 10px;
   padding: 20px;
@@ -7,10 +11,13 @@
   border: 3px lightblue dashed;
 }
 
-.button.action-group-drag-n-drop,
-.button.action-group-drag-n-drop:hover {
+.btn.dnd-manage,
+.btn.dnd-manage:hover {
   background-color: #636c72;
   border-color: #636c72;
+  position: absolute;
+  left: -65px;
+  box-shadow: none !important;
 }
 
 .contacts-ajax-tabs {
@@ -85,29 +92,37 @@
   border: 3px blue dashed;
   background: beige;
 }
-
-.layout-sidebar-second .card {
-  margin-bottom: 20px;
-}
-
-.layout-sidebar-second .facet-toggle {
-  margin-bottom: 20px;
-}
-
-.layout-sidebar-second .add-button {
-  margin-bottom: 10px;
-}
-
-.layout-sidebar-second .draggable .page-content {
+body .layout-sidebar-second {
   display: none;
+
+  @include media-breakpoint-up(lg) {
+    display: inherit;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+
+  .facet-toggle {
+    margin-bottom: 20px;
+  }
+
+  .add-button {
+    margin-bottom: 10px;
+  }
+
+  .draggable .page-content {
+    display: none;
+  }
+
+  .draggable .delete-draggable {
+    display: none;
+  }
 }
+
 
 .layout-content .draggable .menu-content {
   display: none;
-}
-
-#local-action-group-contacts-dashboard-drag-n-drop {
-  display: none !important;
 }
 
 .draggable .menu-content .card-header:before,
@@ -197,8 +212,4 @@
     }
   }
 
-}
-
-.layout-sidebar-second .draggable .delete-draggable {
-  display: none;
 }

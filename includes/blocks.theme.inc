@@ -123,42 +123,6 @@ function contacts_theme_preprocess_block(&$variables) {
       }
     }
 
-    if (!empty($variables['content']['contacts.dashboard_drag_n_drop'])) {
-      $variables['#attached']['library'][] = 'contacts_theme/drag_n_drop';
-      $content = &$variables['content']['contacts.dashboard_drag_n_drop'];
-      $content['#attributes']['class'] = array('dropdown');
-      $content['#prefix'] = '<div class="action-group-wrapper dropdown">';
-      $content['#suffix'] = '</div>';
-      $content['button']['#attributes']['data-target'][] = '.layout-sidebar-second';
-      $content['button']['#attributes']['type'][] = 'button';
-      $content['button']['#attributes']['class'][] = 'btn';
-      $content['button']['#attributes']['class'][] = 'btn-lg';
-      $content['button']['#attributes']['class'][] = 'btn-primary';
-
-      $js_hide = array_search('js-hide', $content['group']['#attributes']['class']);
-      if ($js_hide) {
-        unset($content['group']['#attributes']['class'][$js_hide]);
-      }
-
-      $links = array();
-      foreach ($content['group']['links']['#links'] as $key => &$link) {
-        $link['attributes']['class'][] = 'dropdown-item';
-        $links[$key] = array(
-          '#type' => 'link',
-          '#attributes' => $link['attributes'],
-          '#title' => $link['title'],
-          '#url' => $link['url'],
-        );
-      }
-
-      // Move links out of unordered list #links.
-      if (!empty($links)) {
-        $content['group']['links'] = $links;
-      }
-
-      $content['button']['#value'] = '<img width="20" src="https://cdn3.iconfinder.com/data/icons/token/128/Gear.png">';
-    }
-
     // Replace text with icon.
     if (isset($variables['content']['contacts.contact_create_group'])) {
       $variables['content']['contacts.contact_create_group']['button']['#value'] = '+';
