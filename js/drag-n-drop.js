@@ -133,17 +133,17 @@
                     // helper: "clone",
                     connectToSortable: ".drag-area",
                     stop: function( event, ui ) {
-                        ui.helper.removeAttr('style');
-                        ui.helper.addClass('draggable-active');
-                        ui.helper.addClass('card');
+                        // ui.helper.removeAttr('style');
+                        // ui.helper.addClass('draggable-active');
+                        // ui.helper.addClass('card');
                         // @todo fix this... very flimsy.
-                        var tab = $('.nav-tabs a.active').attr('contacts_tab_id');
-                        console.log(tab);
-                        ui.helper.attr('contacts_block_tab', tab);
-                        ui.helper.find('h2').addClass('card-header');
-                        Drupal.DnDAddBlock(ui.helper);
-                        Drupal.DnDAddEdit();
-                        Drupal.DnDAddDelete();
+                        // var tab = $('.nav-tabs a.active').attr('data-contacts-tab-id');
+                        // console.log(tab);
+                        // ui.helper.attr('contacts_block_tab', tab);
+                        // ui.helper.find('h2').addClass('card-header');
+                        // Drupal.DnDAddBlock(ui.helper);
+                        // Drupal.DnDAddEdit();
+                        // Drupal.DnDAddDelete();
                     }
                 });
             });
@@ -243,26 +243,29 @@
                 draggable.addClass('draggable-active');
                 draggable.addClass('card');
 
-                draggableHeading.each(function() {
-                    replaceHeader(this);
-                });
+                // draggableHeading.each(function() {
+                //     replaceHeader(this);
+                // });
 
-                $('.drag-area .draggable .card-header, .draggable .page-content .card-header').each(function(i) {
-                    if (!$(this).hasClass('links-added')) {
-                        $(this).addClass('links-added');
-                        var markup = $('<a class="ml-auto align-self-center card-link edit-draggable" href="#">&nbsp</a>' +
-                            '<a class="card-link delete-draggable" href="#">&nbsp</a>');
-                        $(this).append(markup);
-                        Drupal.DnDAddEdit();
-                        Drupal.DnDAddDelete();
-                    }
-                })
+                // $('.drag-area .draggable .card-header, .draggable .page-content .card-header').each(function(i) {
+                    // if (!$(this).hasClass('links-added')) {
+                    //     $(this).addClass('links-added');
+                    //     var markup = $('<a class="ml-auto align-self-center card-link edit-draggable" href="#">&nbsp</a>' +
+                    //         '<a class="card-link delete-draggable" href="#">&nbsp</a>');
+                    //     $(this).append(markup);
+                    //     Drupal.DnDAddEdit();
+                    //     Drupal.DnDAddDelete();
+                    // }
+                // })
             });
 
             $(document).on('dragInactive', function() {
                 var dragArea = $('.drag-area'),
                     draggable = $('.drag-area .draggable'),
                     draggableHeading = $('.drag-area .draggable .card-header');
+                if (!dragArea.hasClass('ui-sortable')) {
+                    return;
+                }
                 dragArea.sortable('disable');
                 dragArea.removeClass('show');
                 draggable.removeClass('draggable-active');
@@ -274,6 +277,22 @@
                     $(this).replaceWith(markup);
                 });
             });
+        }
+    };
+
+    Drupal.behaviors.contactsThemeDnDInit = {
+        attach: function (context, settings) {
+            var trigger = $(".trigger-manage");
+            var sidebar = $(trigger.attr('data-target'));
+
+            if (settings.dragMode) {
+                sidebar.removeClass("toggled");
+                $(document).trigger('dragActive');
+            }
+            else {
+                sidebar.addClass("toggled");
+                $(document).trigger('dragInactive');
+            }
         }
     };
 

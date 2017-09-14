@@ -33,6 +33,17 @@ function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
       '#content' => contacts_theme_dashboard_manage_sidebar_content(),
       '#attached' => ['library' => 'contacts_theme/drag_n_drop'],
     ];
+
+    $route_matcher = \Drupal::routeMatch();
+    $user = $route_matcher->getParameter('user');
+    if ($user) {
+      $variables['content']['manage']['#user'] = $user->id();
+    }
+
+    $subpage = $route_matcher->getParameter('subpage');
+    if ($subpage) {
+      $variables['content']['manage']['#subpage'] = $subpage;
+    }
   }
 }
 
