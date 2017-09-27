@@ -63,7 +63,7 @@
                     $.get(url, function( data ) {
                         console.log(data);
                     });
-                    block.remove();
+                    $('.nav-tabs a.active').click();
                 });
             }
         });
@@ -137,10 +137,7 @@
                         // ui.helper.attr('data-dnd-contacts-block-tab', tab);
                         // Drupal.DnDAddBlock(ui.helper);
 
-
-
                         console.log('drag stop');
-
                     }
                 });
             });
