@@ -51,7 +51,12 @@ function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
  * Builds a render array for the dashboard management sidebar.
  */
 function contacts_theme_dashboard_manage_sidebar_content() {
-  $content = [];
+  $content = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['sidebar-manage-content'],
+    ],
+  ];
 
   $content['message'] = [
     '#type' => 'html_tag',
@@ -111,7 +116,7 @@ function contacts_theme_dashboard_manage_sidebar_content() {
 
     $placed_blocks = [];
     foreach ($tab->getBlocks() as $key => $placed_block) {
-      if ($placed_block['id'] = 'contacts_entity:profile' && !empty($placed_block['context_mapping']['entity'])) {
+      if ($placed_block['id'] == 'contacts_entity:profile' && !empty($placed_block['context_mapping']['entity'])) {
         $placed_blocks[$key] = $contexts[$placed_block['context_mapping']['entity']];
       }
     }

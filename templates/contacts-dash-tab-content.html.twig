@@ -1,9 +1,9 @@
 {{ content.messages }}
 <div {{ attributes.addClass('row') }}>
-  <div {{ region_attributes.addClass('dash-left').addClass('col-md-6') }}>
+  <div {{ region_attributes.addClass('col-md-6').addClass('dash-left') }}>
     {{ content.left }}
   </div>
-  <div {{ region_attributes.addClass('dash-right').addClass('col-md-6') }}>
+  <div {{ region_attributes.removeClass('dash-left').addClass('dash-right') }}>
     {{ content.right }}
   </div>
 </div>
