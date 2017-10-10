@@ -66,13 +66,14 @@ body {
 }
 
 .layout-sidebar-second {
+  position:relative;
+  overflow:visible;
   box-shadow: -3px 0 5px rgba(0,0,0,0.05);
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   order: 2;
   background-color: #fff;
-  padding: $content-padding;
   font-size: $font-size-sm;
   -webkit-transition: margin 0.5s ease-in-out;
   transition: margin 0.5s ease-in-out;
@@ -173,6 +174,7 @@ body {
 @include media-breakpoint-up($app-breakpoint) {
   .layout-header {
     display: flex;
+    flex-shrink: 0;
   }
 
   .layout-logo {
@@ -212,8 +214,6 @@ body {
 
   .layout-sidebar-second {
     flex: 0 0 $sidebar-width;
-    overflow-y: auto;
-
 
     &.toggled {
       margin-right: 0 - $sidebar-width;

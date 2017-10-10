@@ -1,9 +1,20 @@
-{{ content.messages }}
-<div {{ attributes.addClass('row') }}>
-  <div {{ region_attributes.addClass('col-md-6').addClass('dash-left') }}>
-    {{ content.left }}
+{{ messages }}
+
+{% if manage_mode %}
+  <div class="card">
+    <div class="card-block">
+      {% if header.hats %}
+        <div class="card-text small">
+          This tab only shows for users with the following hats:&nbsp;
+          {{ header.hats }}
+        </div>
+      {% endif %}
+      <div class="card-text small">
+        <a target="_blank" href="/admin/structure/contact-tabs/{{ tab }}/edit">Tab Settings</a>
+      </div>
+    </div>
   </div>
-  <div {{ region_attributes.removeClass('dash-left').addClass('dash-right') }}>
-    {{ content.right }}
-  </div>
-</div>
+  <br>
+{% endif %}
+
+{{ content }}

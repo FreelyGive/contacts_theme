@@ -7,74 +7,18 @@
 
     'use strict';
 
-    Drupal.DnDAddEdit = function() {
-        return;
-        $('.drag-area .edit-draggable').each(function () {
-            var editLink = $(this);
-            if (!editLink.hasClass('processed')) {
-                editLink.addClass('processed');
-                editLink.click(function (ev) {
-                    ev.preventDefault();
-                    var heading = $(this).siblings('input[name="card-title"]'),
-                        display = $(this).siblings('select[name="card-display"]'),
-                        header = $(this).parent();
-
-                    if (header.hasClass('editing')) {
-                        var block = $(this).closest('.draggable'),
-                            id = block.attr('data-dnd-contacts-block-id'),
-                            tab = block.attr('data-dnd-contacts-block-tab'),
-                            postData = {
-                                label: heading.val(),
-                                display: display.val()
-                            },
-                            title = heading.val(),
-                            url = '/admin/contacts-ajax/update-layout';
-                        console.log(url);
-                        console.log(postData);
-                        console.log(display);
-                        $.post(url, postData, function( data ) {
-                            console.log(data);
-                        });
-
-                        header.removeClass('editing');
-                        heading.attr('disabled', true);
-                    }
-                    else {
-                        header.addClass('editing');
-                        heading.attr('disabled', false);
-                    }
-                });
-            }
-        });
-    };
-
-    Drupal.DnDAddDelete = function() {
-        $('.drag-area .delete-draggable').each(function () {
-            var deleteLink = $(this);
-            if (!deleteLink.hasClass('processed')) {
-                deleteLink.addClass('processed');
-                deleteLink.click(function (ev) {
-                    ev.preventDefault();
-                    var block = $(this).closest('.draggable'),
-                        id = block.attr('data-dnd-contacts-block-id'),
-                        tab = block.attr('data-dnd-contacts-block-tab'),
-                        url = '/contacts_remove_block/'+tab+'/'+id;
-                    console.log(url);
-                    $.get(url, function( data ) {
-                        console.log(data);
-                    });
-                    $('.nav-tabs a.active').click();
-                });
-            }
-        });
-    };
-
     Drupal.DnDBuildRegion = function(tab, region, sort) {
-        if ($(region).hasClass('dash-left')) {
+        if ($(region).hasClass('dash-top')) {
+            region = 'top';
+        }
+        else if ($(region).hasClass('dash-left')) {
             region = 'left';
         }
-        else {
+        else if ($(region).hasClass('dash-right')) {
             region = 'right';
+        }
+        else {
+            region = 'bottom';
         }
         var data = {
             'tab': tab,
@@ -88,8 +32,9 @@
             // @todo check that profile type and relationship are available.
             var block_data = {
                 id: sort[weight],
-                profile_type: el.attr('data-dnd-contacts-profile-type'),
-                profile_relationship: el.attr('data-dnd-contacts-profile-relationship')
+                entity_type: el.attr('data-dnd-contacts-entity-type'),
+                entity_bundle: el.attr('data-dnd-contacts-entity-bundle'),
+                entity_relationship: el.attr('data-dnd-contacts-entity-relationship')
             };
             console.log(block_data);
             data.blocks.push(block_data);
@@ -109,21 +54,6 @@
             $('.nav-tabs a.active').click();
         });
     };
-
-    Drupal.DnDUpdateTitle = function(region, sort) {
-        return;
-        var arrayLength = sort.length;
-        for (var weight = 0; weight < arrayLength; weight++) {
-            var id = sort[weight];
-            var tab = $('[data-dnd-contacts-block-id='+id+']').attr('data-dnd-contacts-block-tab');
-            var url = '/contacts_move_block/'+tab+'/'+id+'/'+region+'/'+weight;
-            console.log(url);
-            $.get(url, function( data ) {
-                console.log(data);
-            });
-        }
-    };
-
 
     Drupal.behaviors.contactsThemeDraggable = {
         attach: function (context, settings) {
@@ -147,6 +77,7 @@
     Drupal.behaviors.contactsThemeDragTabs = {
         attach: function (context, settings) {
             $(document).on('dragActive', function() {
+                // Use this to make the tabs draggable!!
                 $('.contacts-ajax-tabs').addClass('editing');
                 // $('.contacts-ajax-tabs .nav-link').each(function() {
                     // $(this).addClass('working');
@@ -180,8 +111,6 @@
             //         '<a class="card-link delete-draggable" href="#">Delete</a>');
             //     // $(this).next().prepend(markup);
             //     $(this).append(markup);
-                Drupal.DnDAddEdit();
-                Drupal.DnDAddDelete();
             })
         }
     };
@@ -256,8 +185,6 @@
                     //     var markup = $('<a class="ml-auto align-self-center card-link edit-draggable" href="#">&nbsp</a>' +
                     //         '<a class="card-link delete-draggable" href="#">&nbsp</a>');
                     //     $(this).append(markup);
-                    //     Drupal.DnDAddEdit();
-                    //     Drupal.DnDAddDelete();
                     // }
                 // })
             });
@@ -296,6 +223,9 @@
                 sidebar.addClass("toggled");
                 $(document).trigger('dragInactive');
             }
+
+            var manageButton = $('.dnd-manage');
+            manageButton.html('<i class="fa fa-cog fa-lg" aria-hidden="true"></i>');
         }
     };
 
