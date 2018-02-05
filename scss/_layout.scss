@@ -17,6 +17,11 @@ body {
   text-align: center;
 }
 
+.dialog-off-canvas-main-canvas {
+  display: flex;
+  flex-direction: column;
+}
+
 .layout-heading {
   display: flex;
   flex-direction: column;
@@ -169,6 +174,10 @@ body {
     img {
       max-height: ($font-size-h1 * $headings-line-height) + map_get($content-padding-parts, y);
     }
+  }
+
+  .dialog-off-canvas-main-canvas {
+    flex: 1 1 auto;
   }
 
   .layout-heading {
