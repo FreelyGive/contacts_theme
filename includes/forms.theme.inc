@@ -245,7 +245,7 @@ function contacts_theme_preprocess_input(&$variables) {
 /**
  * Pre render callback for the actions element.
  */
-function contacts_theme_pre_render_actions(&$element) {
+function contacts_theme_pre_render_actions($element) {
   // Align actions with the main column.
   if (!empty($element['#form_columns'])) {
     $element['#prefix'] = '<div class="row">';
