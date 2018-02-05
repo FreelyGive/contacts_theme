@@ -22,3 +22,16 @@ function contacts_theme_views_pre_render(ViewExecutable $view) {
   $css_class = Html::getClass('views-view-' . $view->id()) . ' ' . $view->display_handler->getOption('css_class');
   $view->display_handler->setOption('css_class', $css_class);
 }
+
+/**
+ * Implements hook_preprocess_views_view_table().
+ */
+function contacts_theme_preprocess_views_view_table(&$variables) {
+  $variables['attributes']['class'][] = 'table';
+  $variables['attributes']['class'][] = 'table-hover';
+
+  $row_class_special = isset($options['row_class_special']) ? $options['row_class_special'] : TRUE;
+  if ($row_class_special) {
+    $variables['attributes']['class'][] = 'table-striped';
+  }
+}

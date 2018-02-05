@@ -1,0 +1,18 @@
+{% set classes = [] %}
+{% if not hide_button %}
+  {% set classes = [ 'btn', 'btn-outline-secondary', 'btn-sm'] %}
+{% endif %}
+{% set circle_classes = [ 'fa', 'fa-circle', 'fa-stack-2x' ] %}
+{% set icon_classes = [ 'fa', 'fa-lg', 'mr-1', 'fa-stack-1x' ] %}
+{% set circle_attribute =  create_attribute({'class': circle_classes}) %}
+{% set icon_attribute =  create_attribute({'class': icon_classes}) %}
+
+<span {{ attributes.addClass(classes).setAttribute('title', label) }}>
+  <span class="fa-stack">
+  <i {{ circle_attribute.setAttribute('style', "color:#{color}") }} aria-hidden="true"></i>
+  <i {{ icon_attribute.addClass(icon).setAttribute('style', "color:white") }} aria-hidden="true"></i>
+  </span>
+  {% if not hide_label %}
+    {{ label }}
+  {%  endif %}
+</span>
