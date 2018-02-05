@@ -1,14 +1,25 @@
 global:
   version: VERSION
   css:
-    base:
-      css/layout.css: {}
-    component:
-      css/components/form.css: {}
-      css/components/action-links.css: {}
-      css/components/tabs.css: {}
     theme:
       css/style.css: {}
+
+# Bootstrap libraries.
+bootstrap.util:
+  js:
+    js/util.js: {}
+
+bootstrap.dropdown:
+  js:
+    js/dropdown.js: {}
+  dependencies:
+    - contacts_theme/bootstrap.util
+
+bootstrap.collapse:
+  js:
+    js/collapse.js: {}
+  dependencies:
+    - contacts_theme/collapse.util
 
 # Styling for the listings.
 listings:
@@ -27,3 +38,5 @@ action.group:
   css:
     state:
       css/contacts/action-group.css: {}
+  dependencies:
+    - contacts_theme/bootstrap.dropdown

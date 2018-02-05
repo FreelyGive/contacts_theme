@@ -5,11 +5,45 @@
  * Functions to support theming in the contacts_theme theme.
  */
 
-use Drupal\Core\Render\Element;
-use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Asset\AttachedAssetsInterface;
+
+include 'includes/utils.inc';
+include 'includes/forms.theme.inc';
+include 'includes/page.theme.inc';
+include 'includes/media.theme.inc';
+include 'includes/forms.inc';
+include 'includes/widgets.inc';
+include 'includes/entity.theme.inc';
+include 'includes/fields.theme.inc';
+include 'includes/views.inc';
+include 'includes/blocks.theme.inc';
+include 'includes/contacts.theme.inc';
 
 /**
- * Implements hook_theme_suggestions_HOOK().
+ * Implements hook_element_info_alter().
+ */
+function contacts_theme_element_info_alter(array &$info) {
+  // Change the default date part order.
+  $info['datelist']['#date_part_order'] = ['day', 'month', 'year', 'hour', 'minute'];
+
+  // Prevent the composite fieldset.
+  $info['radios']['#pre_render'] = ['contacts_theme_composite_pre_render'];
+  $info['radios']['#theme_wrappers'][] = 'form_element';
+  $info['checkboxes']['#pre_render'] = ['contacts_theme_composite_pre_render'];
+  $info['checkboxes']['#theme_wrappers'][] = 'form_element';
+
+  // Add preprocessors for actions.
+  $info['actions']['#pre_render'][] = 'contacts_theme_pre_render_actions';
+  $info['actions']['#pre_render'][] = 'contacts_theme_pre_render_ignore_empty';
+
+  // Add a preprocess for container.
+  $info['container']['#pre_render'][] = 'contacts_theme_pre_render_ignore_empty';
+}
+
+/**
+ * Implements hook_theme_suggestions_alter().
  */
 function contacts_theme_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
   if ($hook == 'page' && drupal_static('contacts_theme_dashboard')) {
@@ -18,123 +52,32 @@ function contacts_theme_theme_suggestions_alter(array &$suggestions, array $vari
 }
 
 /**
- * Implements hook_preprocess_HOOK() for html.html.twig.
+ * Implements hook_js_settings_alter().
  */
-function contacts_theme_preprocess_html(array &$variables) {
-  /* Add class to html tag */
-  $variables['attributes']['class'][] = 'flex-container';
-}
-
-/**
- * Implements hook_preprocess_page() for page.html.twig.
- *
- * @todo: Replace with an SVG logo.
- */
-function contacts_theme_preprocess_page(array &$variables) {
-  $path = drupal_get_path('theme', 'contacts_theme');
-  $logo = theme_get_setting('logo.url');
-  if ($logo == file_url_transform_relative(file_create_url($path . '/logo.svg'))) {
-    $variables['logo'] = file_url_transform_relative(file_create_url($path . '/logo.png'));
-  }
-
-  // See if we have a header image.
-  $variables['header_image'] = contacts_theme_header_image();
-  if ($variables['header_image']) {
-    $variables['attributes']['class'][] = 'contacts-with-header-image';
+function contacts_theme_js_settings_alter(array &$settings, AttachedAssetsInterface $assets) {
+  if (in_array('contacts/tabs', $assets->getLibraries())) {
+    $settings['contacts']['tabs']['activeClass'] = 'active';
   }
 }
 
 /**
- * Implements hook_preprocess_HOOK() for block templates.
+ * Implement hook_preprocess().
  */
-function contacts_theme_preprocess_block(&$variables) {
-  // Add classes to specific blocks for styling.
-  $classes = [
-    'views_exposed_filter_block:contacts_dashboard_indexed-full' => ['highlight'],
-    'contacts_back' => ['highlight'],
-    'views_block:contacts_dashboard_indexed-simple' => [
-      'flex-container',
-      'flex-fill',
-      'flex-child-container',
-      'flex-child-fill',
-    ],
-    'views_block:contacts_dashboard_indexed-full' => [
-      'flex-container',
-      'flex-fill',
-      'flex-child-container',
-      'flex-child-fill',
-    ],
-    'tabs:contacts_dashboard' => [
-      'flex-container',
-      'flex-fill',
-    ],
-  ];
-  if (isset($classes[$variables['plugin_id']])) {
-    if (!isset($variables['attributes']['class'])) {
-      $variables['attributes']['class'] = $classes[$variables['plugin_id']];
-    }
-    else {
-      $variables['attributes']['class'] = array_merge($variables['attributes']['class'], $classes[$variables['plugin_id']]);
-    }
-  }
+function contacts_theme_preprocess(&$variables, $hook) {
+  static $entity_types;
 
-  if ($variables['plugin_id'] == 'local_actions_block') {
-    $keys = [
-      'contacts.contact_create_group',
-      'contacts.contact_configure_group',
-    ];
-    foreach ($variables['content'] as $key => &$content) {
-      if (in_array($key, $keys)) {
-        $content['button']['#value'] = '';
-        $content['button']['#attributes']['class'][] = 'button-action-icon';
+  // Prime our list of entity types.
+  if (!isset($entity_types)) {
+    $entity_types = array_keys(array_map(function(EntityTypeInterface $type) {
+      if (is_subclass_of($type->getClass(), FieldableEntityInterface::class)) {
+        return $type->id();
       }
-    }
+      return FALSE;
+    }, \Drupal::entityTypeManager()->getDefinitions()), TRUE);
   }
-}
 
-/**
- * Implements hook_preprocess_HOOK() for the contacts_dashboard layout.
- */
-function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
-  $in_dashboard_page = &drupal_static('contacts_theme_dashboard');
-  $in_dashboard_page = TRUE;
-
-  foreach (Element::children($variables['content']) as $region) {
-    unset($variables['content'][$region]['#prefix']);
-    unset($variables['content'][$region]['#suffix']);
-  }
-}
-
-function contacts_theme_preprocess_contacts_dash_summary(array $variables) {
-  contacts_theme_header_image($variables['image']);
-}
-
-/**
- * Get/set the header image.
- *
- * @param array|NULL $content
- *   The render array for the header image if setting.
- *
- * @return array|NULL
- *   The render array for the header image or NULL if there is none.
- */
-function contacts_theme_header_image(array $content = NULL) {
-  $image = &drupal_static('contacts_theme_header_image');
-  if ($content) {
-    $image = $content;
-  }
-  return $image;
-}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function contacts_theme_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_state->get('view')->id() == 'contacts_dashboard_indexed') {
-    $form['#attributes']['class'][] = 'contacts-search-form';
-    $form['search']['#title_display'] = 'invisible';
-    $form['search']['#attributes']['placeholder'] = $form['#info']['filter-search_api_fulltext']['label'];
-    $form['search']['#wrapper_attributes']['class'][] = 'flex-fill';
-    $form['actions']['reset']['#attributes']['class'][] = 'link';
+  // If this is an entity type, pass on to our relevant preprocess.
+  if (in_array($hook, $entity_types)) {
+    _contacts_theme_preprocess_entity($variables, $hook);
   }
 }

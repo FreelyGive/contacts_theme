@@ -1,31 +1,9 @@
-{#
-/**
- * @file
- * Default theme implementation for the contacts dashboard.
- *
- * Available variables:
- * - content: The content for this layout, including sidebar and content.
- * - attributes: HTML attributes for the layout <div>.
- *
- * @ingroup themeable
- */
-#}
-{%
-set classes = [
-  'flex-fill',
-  'flex-container',
-  'flex-container-rows',
-]
-%}
-
 {% if content %}
-  <div{{ attributes.addClass(classes) }}>
-    <div class="layout-content flex-fill flex-container">
-      {{ content.content }}
-    </div>
-
-    <aside class="layout-sidebar-first flex-container" role="complementary">
-      {{ content.sidebar }}
-    </aside>
+  <div{{ content_attributes.addClass('layout-content') }}>
+    {{ content.content }}
   </div>
+
+  <aside{{ sidebar_first_attributes.addClass('layout-sidebar-first')|without('role') }} role="complementary">
+    {{ content.sidebar }}
+  </aside>
 {% endif %}

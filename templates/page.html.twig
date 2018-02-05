@@ -1,24 +1,21 @@
 {% include directory ~ '/templates/parts/header.html.twig' %}
-{%
-set classes = [
-'flex-fill',
-'flex-container',
-'flex-container-rows',
-]
-%}
 <main{{ attributes.addClass(classes).setAttribute('role', 'main') }}>
   <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
-  <div class="layout-content flex-fill flex-container">
+  <div class="layout-content">
     {{ page.breadcrumb }}
 
     {{ page.help }}
 
     {{ page.content }}
   </div>
-N
+  {%
+  set classes = [
+    'layout-main',
+  ]
+  %}
   {% if page.sidebar_first %}
-    <aside class="layout-sidebar-first flex-container" role="complementary">
+    <aside class="layout-sidebar-firs" role="complementary">
       {{ page.sidebar_first }}
     </aside>
   {% endif %}

@@ -1,0 +1,15 @@
+.view-result-header {
+  color: $figure-caption-color;
+  font-size: $figure-caption-font-size;
+  text-align: right;
+  margin-bottom: map_get(map_get($spacers, 2), y);
+}
+
+/* Fields */
+.field {
+  margin-bottom: $spacer-y;
+}
+.field-title {
+  margin-bottom: 0;
+  font-weight: bold;
+}

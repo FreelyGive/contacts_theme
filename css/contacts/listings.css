@@ -1,61 +1,24 @@
-.view-contacts-dashboard-indexed .view-content,
-.view-contacts-dashboard-indexed .view-empty {
-  min-height: 400px;
-  overflow-y: scroll;
+.views-view-contacts-dashboard-indexed > .view-content {
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
   background: #fff;
-  color: #333;
-  border: 1px solid #D5D5D5;
-}
-.view-contacts-dashboard-indexed .view-empty {
-  padding: 1em;
-}
-.layout-sidebar-first .view-contacts-dashboard-indexed {
-  margin-top: 1em !important;
-}
-.layout-sidebar-first .view-contacts-dashboard-indexed .view-content {
-  color: #000;
-}
-.view-contacts-dashboard-indexed .view-content a,
-.view-contacts-dashboard-indexed .view-content .link {
-  color: #5ec0d0;
-}
-.view-contacts-dashboard-indexed .view-content .description {
-  color: #888;
-}
+  color: #292b2c; }
+  .views-view-contacts-dashboard-indexed > .view-content a:not(.btn), .views-view-contacts-dashboard-indexed > .view-content .btn-link {
+    color: #5bc0de; }
+    .views-view-contacts-dashboard-indexed > .view-content a:not(.btn):focus, .views-view-contacts-dashboard-indexed > .view-content a:not(.btn):hover, .views-view-contacts-dashboard-indexed > .view-content .btn-link:focus, .views-view-contacts-dashboard-indexed > .view-content .btn-link:hover {
+      color: #28a1c5; }
+  .views-view-contacts-dashboard-indexed > .view-content + nav > .pagination {
+    margin-top: -1px; }
+    .views-view-contacts-dashboard-indexed > .view-content + nav > .pagination .page-item:first-child .page-link {
+      border-top-left-radius: 0; }
+    .views-view-contacts-dashboard-indexed > .view-content + nav > .pagination .page-item:last-child .page-link {
+      border-top-right-radius: 0; }
 
-/* Listings rows */
 .contacts-row {
-  padding: .5em;
-}
+  border-color: #ddd;
+  padding: 0; }
+  .contacts-row > * {
+    padding: 0.5rem 0;
+    margin: 0 0.5rem; }
 
-/* Search */
-.contacts-search-form .contacts-search > * {
-  margin: 0 !important;
-}
-.contacts-search-form .contacts-search .form-text {
-  width: 100%;
-  padding: 1em;
-  line-height: 1.2;
-}
-.contacts-search-form .contacts-search .contact-submit-wrapper {
-  position: relative;
-}
-.contacts-search-form .contacts-search .contact-submit-wrapper:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAADr0lEQVRIie2WTUxcVRTH/zNTuPe+ey79oMwAVTrOYFvaxKULF5qYVgUWNU3Y6caFG124MZnopCExMePCDXXBAkzVBdHUBUhiWJKYwCRuVKyRBBhgZIAE8jrM8N588VzMve3rqGWm6q4nOcnMfSfnd8955/7fBZ7YE/ufLKA9CCAE4IT2kHbz/D8BBXd2duLlcnmsUqnMe9pqtdpPpVLpq62trVcBML2B4L8BBwCEyuXymHeMua47Ozk52avBpuLWYaVS6cuGxL/mcrnP19fXxxzHuet/ViqVfkmlUn0AuK62aWgAQMhxnI987bs3Ozv7hlLqEhENGE8mk1cPDw9/M3GFQuF7AKc0tOlKA3Nzc+GjoyPbwCYmJl4nostENMCUusgY62eM9TOlLoyMjDzvhy4sLNwAcBL19gabAYZs237bJMhkMreI6AoRDTDG4kKIpy3L6rEsq0cI8RTn/JmZmZk3Tfz29vYkEXUBkM20NgCgrVAofGwSfHDz5jUiGuCcxyzL6gFwGoDSfkpKGeGcR13XzXqe5+Xz+bQQ4pyusr0ZILNtO2WARHSZdXQ8a1lWr05ihuKETqiklJFisbhogJzzKJTq1LGPbGsQAN/f3//EAJPJ5FXOeVQpdRaAwMPDEET9XZ2uVCqbPmBMt9XS8Y8Gbm5uvmuAq6urn3HOzwM4o3fsb1EAQPvy8vKwid/Y2PiCMRYnonDTwEQiEavVavc8z/Oq1Wp+ampqWFdoEtyXuunp6UitVls3wPHx8RutAAOmRWtra6P+c7iysvIeHpyxNgBte3t718rl8s9+AUin0x+2CmxDfRC6d3d3v/Unq1arG47j/OC67neNIL9ls9nbUspuAIQmjkYIgIBSnUKIvkwmc6tareb/KbnneZ7jOH80rtm2/Q3qR+hY1TFVEhGFOefR0dHRl5eWllL5fD7tOM5d13WzxWJxMZvN3k4mk68MDQ29eHBw8HsjNJfLfYqHVedvoQG9Iwagg4jCQog+xlh/o5ZqvyKlfG5wcPClRmixWFzU7/JY1fFDCUp1WpbVK4To45zHGGNxxliccx67/1+pC8PXr79g2/aPBjg/P/9Oq6oT0oEWgA4AZ4ioS0oZkVJGiChMRF16rZtzfl4pdenrO3feej+ReI0pdbEVoIGaa0U76gNg6RZJ/ds46UE7p6vu55xHpZQR1HW3KaAf7If73ay1oS59J5VSZ4korMXC6O9j3QSO25TphMCDDhixb+rb+DhQ/83uL7e6PwFL62QCgl1NkwAAAABJRU5ErkJggg==) no-repeat center center;
-  pointer-events: none;
-  z-index: 10;
-}
-.contacts-search-form .contacts-search .form-submit {
-  text-indent: -999em;
-  height: 100%;
-  padding: 0 1.6em !important;
-}
-.contacts-search-form .form-actions {
-  margin-bottom: 0;
-}
+/*# sourceMappingURL=listings.css.map */

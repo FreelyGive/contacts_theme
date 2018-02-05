@@ -1,6 +1,6 @@
 name: Contacts Admin Theme
 type: theme
-base theme: seven
+# base theme: seven
 description: Admin theme for contacts dashboard
 package: Contacts
 core: 8.x
@@ -20,10 +20,12 @@ regions_hidden:
 
 libraries-override:
   contacts/dashboard.layout: false
+  contacts/contact: contacts_theme/contact
+  contacts/action.group:
+    js:
+      js/action-group.js: false
 
 libraries-extend:
-  contacts/contact:
-    - contacts_theme/contact
   contacts/listings:
     - contacts_theme/listings
   contacts/action.group:
