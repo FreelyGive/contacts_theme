@@ -1,20 +1,26 @@
-{#{{ dump() }}#}
-
 <div {{ attributes.addClass('row') }}>
   {%  if content.top %}
-    <div {{ region_attributes.addClass('col-12').addClass('dash-top') }}>
-      {{ content.top }}
+    <div class="col-12">
+      <div {{ region_attributes.top.setAttribute('data-contacts-manage-region-id', 'top') }}>
+        {{ content.top }}
+      </div>
     </div>
   {% endif %}
-  <div {{ region_attributes.removeClass('col-12').addClass('col-md-6').removeClass('dash-top').addClass('dash-left') }}>
-    {{ content.left }}
+  <div class="col-md-6">
+    <div {{ region_attributes.left.setAttribute('data-contacts-manage-region-id', 'left') }}>
+      {{ content.left }}
+    </div>
   </div>
-  <div {{ region_attributes.removeClass('dash-left').addClass('dash-right') }}>
-    {{ content.right }}
+  <div class="col-md-6">
+    <div {{ region_attributes.right.setAttribute('data-contacts-manage-region-id', 'right') }}>
+      {{ content.right }}
+    </div>
   </div>
   {%  if content.bottom %}
-    <div {{ region_attributes.removeClass('col-md-6').addClass('col-12').removeClass('dash-right').addClass('dash-bottom') }}>
-      {{ content.bottom }}
+    <div class="col-12">
+      <div {{ region_attributes.bottom.setAttribute('data-contacts-manage-region-id', 'bottom') }}>
+        {{ content.bottom }}
+      </div>
     </div>
   {% endif %}
 </div>

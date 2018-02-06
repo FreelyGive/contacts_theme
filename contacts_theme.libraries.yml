@@ -45,9 +45,3 @@ drag_n_drop:
   css:
     state:
       css/contacts_theme/drag-n-drop.css: {}
-  js:
-    js/drag-n-drop.js: {}
-  dependencies:
-    - core/jquery.ui.sortable
-    - core/jquery.ui.draggable
-    - contacts_theme/bootstrap.collapse

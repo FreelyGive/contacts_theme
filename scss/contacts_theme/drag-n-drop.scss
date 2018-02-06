@@ -1,16 +1,10 @@
 @import "../variables";
 @import "../mixins";
 
-#sidebar-manage-content {
-  overflow-y: scroll;
-}
-
 .drag-area {
-  min-height: 10px;
+  min-height: 20px;
   padding: 20px;
-}
-
-.drag-area.show {
+  margin: 10px 0;
   border: 3px lightblue dashed;
 }
 
@@ -50,7 +44,6 @@
     display: none;
   }
 
-
   .tab-area-placeholder {
     width: 40px;
     max-height: 35px;
@@ -74,39 +67,8 @@
   border: 3px blue dashed;
   background: beige;
 }
-body .layout-sidebar-second {
-  display: none;
-
-  @include media-breakpoint-up(lg) {
-    display: inherit;
-  }
-
-  .card {
-    margin-bottom: 20px;
-  }
-
-  .facet-toggle {
-    margin-bottom: 20px;
-  }
-
-  .add-button {
-    margin-bottom: 10px;
-  }
-
-  .draggable .page-content {
-    display: none;
-  }
-}
-
-.draggable .card-header .fa-arrows {
-  cursor: move;
-}
 
 .draggable {
-  &:not(.draggable-active) .drag-meta {
-    display: none;
-  }
-
   .display-select {
     display:none;
   }
