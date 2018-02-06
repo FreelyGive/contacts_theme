@@ -2,6 +2,8 @@
 @import "../mixins";
 
 .action-group-wrapper {
+  display: inline;
+
   .action-group-icon {
     @include border-top-radius(0);
     $font-size: $font-size-base * 1.5;

@@ -25,6 +25,8 @@ function contacts_theme_preprocess_contacts_dashboard(array &$variables) {
   if ($variables['content']['#page_variant']->getPage()->id() == 'contacts_dashboard') {
     $variables['sidebar_first_attributes']->addClass('flex-first');
   }
+
+  $variables['#attached']['library'][] = 'contacts_theme/drag_n_drop';
 }
 
 /**

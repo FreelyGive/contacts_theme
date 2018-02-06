@@ -40,3 +40,8 @@ action.group:
       css/contacts/action-group.css: {}
   dependencies:
     - contacts_theme/bootstrap.dropdown
+
+drag_n_drop:
+  css:
+    state:
+      css/contacts_theme/drag-n-drop.css: {}
