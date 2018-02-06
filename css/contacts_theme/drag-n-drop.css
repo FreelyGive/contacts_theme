@@ -1,5 +1,5 @@
 .drag-area {
-  min-height: 20px;
+  min-height: 100px;
   padding: 20px;
   margin: 10px 0;
   border: 3px lightblue dashed; }
@@ -43,6 +43,8 @@
   border: 3px blue dashed;
   background: beige; }
 
+.draggable.card {
+  margin-bottom: 20px; }
 .draggable .display-select {
   display: none; }
 .draggable .card-header.editing .display-select {
