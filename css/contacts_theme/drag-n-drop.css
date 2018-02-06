@@ -1,11 +1,7 @@
-#sidebar-manage-content {
-  overflow-y: scroll; }
-
 .drag-area {
-  min-height: 10px;
-  padding: 20px; }
-
-.drag-area.show {
+  min-height: 20px;
+  padding: 20px;
+  margin: 10px 0;
   border: 3px lightblue dashed; }
 
 .btn.dnd-manage,
@@ -47,25 +43,6 @@
   border: 3px blue dashed;
   background: beige; }
 
-body .layout-sidebar-second {
-  display: none; }
-  @media (min-width: 992px) {
-    body .layout-sidebar-second {
-      display: inherit; } }
-  body .layout-sidebar-second .card {
-    margin-bottom: 20px; }
-  body .layout-sidebar-second .facet-toggle {
-    margin-bottom: 20px; }
-  body .layout-sidebar-second .add-button {
-    margin-bottom: 10px; }
-  body .layout-sidebar-second .draggable .page-content {
-    display: none; }
-
-.draggable .card-header .fa-arrows {
-  cursor: move; }
-
-.draggable:not(.draggable-active) .drag-meta {
-  display: none; }
 .draggable .display-select {
   display: none; }
 .draggable .card-header.editing .display-select {
