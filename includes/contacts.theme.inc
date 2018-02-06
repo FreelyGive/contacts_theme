@@ -7,7 +7,6 @@
 
 use Drupal\Core\Render\Element;
 use Drupal\Core\Template\Attribute;
-use Drupal\Core\Entity\EntityTypeManager;
 
 /**
  * Implements hook_preprocess_HOOK() for contacts_dashboard layout.
