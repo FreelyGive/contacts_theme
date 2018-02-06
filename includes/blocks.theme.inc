@@ -173,7 +173,8 @@ function contacts_theme_preprocess_block(&$variables) {
       }
 
       /* @var \Drupal\contacts\Plugin\Block\ContactsEntity $block */
-      if ($link = $block->getEditLink(ContactsEntity::EDIT_LINK_TITLE)) {
+      if ($link = $variables['content']['#title_edit'] ?? FALSE) {
+        /* @var \Drupal\Core\Link $link */
         $block->setConfigurationValue('edit_link', FALSE);
         $attributes = $link->getUrl()->getOption('attributes');
         $attributes['class'][] = 'btn';

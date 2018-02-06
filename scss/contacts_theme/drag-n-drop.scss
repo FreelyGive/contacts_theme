@@ -2,7 +2,7 @@
 @import "../mixins";
 
 .drag-area {
-  min-height: 20px;
+  min-height: 100px;
   padding: 20px;
   margin: 10px 0;
   border: 3px lightblue dashed;
@@ -69,6 +69,11 @@
 }
 
 .draggable {
+
+  &.card {
+    margin-bottom: 20px;
+  }
+
   .display-select {
     display:none;
   }
