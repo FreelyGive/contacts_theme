@@ -30,13 +30,11 @@
     font-weight: bold;
   }
 
-  &.editing {
-    .nav-link:hover,
-    .nav-link {
-      border: 1px dashed lightblue;
-      margin: 0 5px;
-      border-bottom: 0;
-    }
+  .nav-link.manage-tab:hover,
+  .nav-link.manage-tab {
+    border: 1px dashed lightblue;
+    margin: 0 5px;
+    border-bottom: none;
   }
 
   .nav-item.add-tab .nav-link:before,
@@ -48,10 +46,8 @@
     width: 40px;
     max-height: 35px;
     line-height: 1.2em;
-    background-color: beige;
-    margin-bottom: 20px;
-    border-color: blue !important;
-    
+    background-color: #ccc;
+
     &:before,
     &:after {
       background-image: none !important;

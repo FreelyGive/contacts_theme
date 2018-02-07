@@ -18,11 +18,11 @@
   background: lightblue;
   color: #fff;
   font-weight: bold; }
-.contacts-ajax-tabs.editing .nav-link:hover,
-.contacts-ajax-tabs.editing .nav-link {
+.contacts-ajax-tabs .nav-link.manage-tab:hover,
+.contacts-ajax-tabs .nav-link.manage-tab {
   border: 1px dashed lightblue;
   margin: 0 5px;
-  border-bottom: 0; }
+  border-bottom: none; }
 .contacts-ajax-tabs .nav-item.add-tab .nav-link:before,
 .contacts-ajax-tabs .nav-item.add-tab .nav-link:after {
   display: none; }
@@ -30,9 +30,7 @@
   width: 40px;
   max-height: 35px;
   line-height: 1.2em;
-  background-color: beige;
-  margin-bottom: 20px;
-  border-color: blue !important; }
+  background-color: #ccc; }
   .contacts-ajax-tabs .tab-area-placeholder:before, .contacts-ajax-tabs .tab-area-placeholder:after {
     background-image: none !important; }
 
