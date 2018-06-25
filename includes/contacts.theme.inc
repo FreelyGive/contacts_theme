@@ -52,3 +52,37 @@ function contacts_theme_preprocess_contacts_dash_tabs(&$variables) {
     }
   }
 }
+
+/**
+ * Pre-render callback for contact_tab_content manage links.
+ */
+function contacts_theme_pre_render_contact_tab_manage_links($element) {
+  if ($element['content']) {
+    foreach (Element::children($element['content']) as $region) {
+      if (!empty($element['content'][$region][0]['link'])) {
+        // Add icon to button.
+        $title = [
+          '#type' => 'container',
+          'icon' => [
+            '#type' => 'open_iconic',
+            '#size' => '10',
+            '#icon' => 'plus',
+            '#color' => 'transparent',
+            '#attributes' => ['class' => ['mr-2']],
+          ],
+          'title' => [
+            '#markup' => $element['content'][$region][0]['link']['#title']
+          ],
+        ];
+
+        $element['content'][$region][0]['link']['#title'] = $title;
+        $element['content'][$region][0]['link']['#attributes']['class'][] = 'btn';
+        $element['content'][$region][0]['link']['#attributes']['class'][] = 'btn-primary';
+        $element['content'][$region][0]['link']['#attributes']['class'][] = 'btn-sm';
+        $element['content'][$region][0]['link']['#attributes']['class'][] = 'mb-3';
+      }
+    }
+  }
+
+  return $element;
+}
