@@ -13,3 +13,12 @@
   margin-bottom: 0;
   font-weight: bold;
 }
+
+// Ensure dialog buttons don't have a box shadow as it still shows even when
+// they are hidden.
+.ui-dialog .form-actions {
+   input[type=submit],
+   a.button {
+     box-shadow: none !important;
+   }
+}
