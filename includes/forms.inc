@@ -5,7 +5,26 @@
  * Form alters for Contacts Theme.
  */
 
+use Drupal\Core\Form\ConfirmFormInterface;
 use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function contacts_theme_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Check if this is a confirm form and we are putting this in a modal.
+  if ($form_state->getFormObject() instanceof ConfirmFormInterface) {
+    if (\Drupal::request()->query->get('_wrapper_format') == 'drupal_modal') {
+      $form['_title'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'h5',
+        '#value' => $form['#title'],
+        '#weight' => -99,
+      ];
+      $form['#title'] = '';
+    }
+  }
+}
 
 /**
  * Implements hook_form_FORM_ID_alter().

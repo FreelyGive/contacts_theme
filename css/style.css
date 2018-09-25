@@ -3811,6 +3811,10 @@ button.close {
   margin-bottom: 0;
   font-weight: bold; }
 
+.ui-dialog .form-actions input[type=submit],
+.ui-dialog .form-actions a.button {
+  box-shadow: none !important; }
+
 .align-baseline {
   vertical-align: baseline !important; }
 
