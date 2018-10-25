@@ -132,7 +132,7 @@ function contacts_theme_preprocess_block(&$variables) {
   }
   elseif ($variables['base_plugin_id'] == 'views_block') {
     if ($variables['elements']['#base_plugin_id'] == 'views_block') {
-      $view_classes = explode(' ', $variables['elements']['content']['#view']->display_handler->getOption('css_class'));
+      $view_classes = isset($variables['elements']['content']['#view']) ? explode(' ', $variables['elements']['content']['#view']->display_handler->getOption('css_class')) : [];
       if (in_array('view-fill-scroll', $view_classes)) {
         $variables['attributes']['class'][] = 'app-flex';
         $variables['attributes']['class'][] = 'flex-fill-scroll';

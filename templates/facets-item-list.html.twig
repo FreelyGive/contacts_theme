@@ -10,9 +10,11 @@
   {%- endif -%}
 
   {%- if items -%}
+    <{{ list_type }}{{ attributes.addClass('list-unstyled') }}>
     {%- for item in items -%}
-      {{ item.value }}
+      <li>{{ item.value }}</li>
     {%- endfor -%}
+    </{{ list_type }}>
   {%- else -%}
     {{- empty -}}
   {%- endif -%}
