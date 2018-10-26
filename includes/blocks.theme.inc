@@ -132,11 +132,13 @@ function contacts_theme_preprocess_block(&$variables) {
   }
   elseif ($variables['base_plugin_id'] == 'views_block') {
     if ($variables['elements']['#base_plugin_id'] == 'views_block') {
-      $view_classes = isset($variables['elements']['content']['#view']) ? explode(' ', $variables['elements']['content']['#view']->display_handler->getOption('css_class')) : [];
-      if (in_array('view-fill-scroll', $view_classes)) {
-        $variables['attributes']['class'][] = 'app-flex';
-        $variables['attributes']['class'][] = 'flex-fill-scroll';
-        unset($variables['content']['#theme_wrappers']);
+      if (!empty($variables['elements']['content']['#view']->display_handler)) {
+        $view_classes = isset($variables['elements']['content']['#view']) ? explode(' ', $variables['elements']['content']['#view']->display_handler->getOption('css_class')) : [];
+        if (in_array('view-fill-scroll', $view_classes)) {
+          $variables['attributes']['class'][] = 'app-flex';
+          $variables['attributes']['class'][] = 'flex-fill-scroll';
+          unset($variables['content']['#theme_wrappers']);
+        }
       }
     }
   }
